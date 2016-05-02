@@ -35,7 +35,7 @@ public class BidPanel extends Panel{
 	@Override
 	public void initComponets() {
 		this.currentBidderId = new JTextPane();
-		this.generateTextPane(this.currentBidderId, "Last bidder: "+"data base info", 0.3);
+		this.generateTextPane(this.currentBidderId, "L", 0.3);
 		
 		this.ownerId = new JTextPane();
 		this.generateTextPane(this.ownerId, "Product owner: "+"data base info", 0.3);
