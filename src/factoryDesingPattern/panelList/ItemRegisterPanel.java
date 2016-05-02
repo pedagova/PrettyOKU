@@ -1,59 +1,99 @@
 package factoryDesingPattern.panelList;
 
-import javax.swing.JProgressBar;
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Font;
 
-public class ItemRegisterPanel extends JFrame {
-	/**
-	 * 
-	 */
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+import factoryDesingPattern.Panel;
+import utils.Utils;
+
+public class ItemRegisterPanel extends Panel {
 	private static final long serialVersionUID = 1L;
-	JProgressBar current;
-	JTextArea out;
-	
-	JButton find;
-	Thread runner;
-	int num = 0;
 
-	private JPanel panel = new JPanel();
-	private JTextArea text = new JTextArea();
-	
-	public ItemRegisterPanel() {
-		super("Progress");
+	private static final double COMPONENT_DIMENSION_Y = 0.03;
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel pane = new JPanel();
-		pane.setLayout(new FlowLayout());
-		current = new JProgressBar(0, 100);
-		current.setValue(0);
-		current.setStringPainted(true);
-		pane.add(current);
-		setContentPane(pane);
+	private JTextPane name;
+	private JTextField nameRequest;
+	private JTextPane description;
+	private JScrollPane descriptionRequest;
+	private JTextPane price;
+	private JTextField priceRequest;
+
+	private JButton createAccount;
+	private JPanel auxPanel;
+
+	public ItemRegisterPanel(Dimension dimension) {
+		super.setPreferredSize(dimension);
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setBorder(new TitledBorder(new EtchedBorder(), "ITEM REGISTER", 1, 1, new Font("", 9, 28)));
+		this.initComponets();
+		this.initGUI();
 	}
 
-	public void iterate() {
-		while (num < 2000) {
-			current.setValue(num);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
-			num += Math.random()*25;
-			if(this.current.getValue()==100){
-				this.text.setText("Process complete, your new pass is: " + "5sd4s31df31fsd21s3");
-				this.panel.add(this.text);
-				this.panel.setVisible(true);
-				this.panel.setPreferredSize(new Dimension(500,500));
-				this.add(this.panel);
-			}
-		}
+	@Override
+	public void initComponets() {
+		this.name = new JTextPane();
+		this.generateTextPane(this.name, "Item name", COMPONENT_DIMENSION_Y);
+
+		this.nameRequest = new JTextField();
+		this.generateTextField(this.nameRequest, "tap the item name", COMPONENT_DIMENSION_Y);
+
+		this.description = new JTextPane();
+		this.generateTextPane(this.description, "Item description", COMPONENT_DIMENSION_Y);
+		
+		this.descriptionRequest = new JScrollPane(new JTextArea(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.descriptionRequest.setPreferredSize(Utils.adjustDimension(1, 0.4, this.getPreferredSize()));
+
+		this.price = new JTextPane();
+		this.generateTextPane(this.price, "Item price", COMPONENT_DIMENSION_Y);
+
+		this.priceRequest = new JTextField();
+		this.priceRequest.setPreferredSize(Utils.adjustDimension(1, COMPONENT_DIMENSION_Y, this.getPreferredSize()));
+
+		this.createAccount = new JButton("Add the item");
+
+		this.auxPanel = new JPanel();
+		this.auxPanel.setLayout(new BoxLayout(this.auxPanel, BoxLayout.X_AXIS));
+		this.auxPanel.setPreferredSize(Utils.adjustDimension(1, 0.05, this.getPreferredSize()));
+		this.auxPanel.setVisible(true);
+		this.descriptionRequest.setVisible(true);
+
 	}
 
-	public static void main(String[] arguments) {
-		ItemRegisterPanel frame = new ItemRegisterPanel();
+	@Override
+	public void initGUI() {
+		this.add(this.name);
+		this.add(this.nameRequest);
+
+		this.add(this.description);
+		this.add(this.descriptionRequest);
+		this.add(this.price);
+		this.add(this.priceRequest);
+		this.add(Box.createRigidArea(Utils.adjustDimension(1, 0.05, this.getPreferredSize())));
+		this.auxPanel.add(Box.createHorizontalGlue());
+		this.auxPanel.add(this.createAccount);
+		this.add(this.auxPanel);
+
+	}
+
+	public static void main(String[] arg) {
+		JFrame frame = new JFrame();
+		frame.setPreferredSize(Utils.reSize(0.35, 0.4));
 		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.add(new ItemRegisterPanel(Utils.reSize(0.35, 0.4)));
 		frame.setVisible(true);
-		frame.iterate();
 	}
 }
