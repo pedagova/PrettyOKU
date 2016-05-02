@@ -5,7 +5,6 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.border.EtchedBorder;
 
 import utils.Utils;
 

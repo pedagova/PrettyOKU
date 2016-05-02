@@ -9,8 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 
-import factoryDesingPattern.Panel;
-
 public class ForgotPassPanel extends JFrame{
 
 	/**
