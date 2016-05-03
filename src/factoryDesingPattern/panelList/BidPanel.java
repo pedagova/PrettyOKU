@@ -10,10 +10,12 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import dataAccessObjectDesingPattern.Dao;
 import factoryDesingPattern.Panel;
+import model.AppObserver;
 import utils.Utils;
 
-public class BidPanel extends Panel {
+public class BidPanel extends Panel{
 
 	/**
 	 * 
@@ -71,5 +73,4 @@ public class BidPanel extends Panel {
 		frame.add(new BidPanel(Utils.reSize(0.2, 0.3)));
 		frame.setVisible(true);
 	}
-
 }

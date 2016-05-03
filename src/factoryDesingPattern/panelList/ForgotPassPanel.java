@@ -8,8 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
-public class ForgotPassPanel extends JFrame{
+import dataAccessObjectDesingPattern.Dao;
+import model.AppObserver;
+
+public class ForgotPassPanel extends JFrame implements AppObserver
+{
 
 	/**
 	 * 
@@ -61,5 +66,46 @@ public class ForgotPassPanel extends JFrame{
 		frame.pack();
 		frame.setVisible(true);
 		frame.iterate();
+	}
+
+	@Override
+	public void onAppStart() {
+		return;		
+	}
+
+	@Override
+	public void opAppEnd() {
+		return;
+		
+	}
+
+	@Override
+	public void onUserLogIn() {
+		return;
+		
+	}
+
+	@Override
+	public void onUserLogOut() {
+		return;
+		
+	}
+
+	@Override
+	public void onBddUpdate(String comand, Dao act) {
+		SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+		        handleOnBddUpdate(comand, act);
+		    }
+		});
+	}
+	
+	void handleOnBddUpdate(String comand, Dao act){
+		
+	}
+	
+	@Override
+	public void onBddRequest(String comand, String id) {
+				
 	}
 }

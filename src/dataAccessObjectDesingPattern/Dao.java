@@ -2,8 +2,8 @@ package dataAccessObjectDesingPattern;
 
 import java.util.List;
 
-public interface ItemDao extends Dao{
-
+public interface Dao {
+	
 	public List<Item> getAll();
 	
 	public void update();
