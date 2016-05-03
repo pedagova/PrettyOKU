@@ -30,6 +30,11 @@ public class ItemRegisterPanel extends Panel {
 	private JTextPane price;
 	private JTextField priceRequest;
 
+	//Pedir datos al controlador sobre usuario actual
+	private String itemId;
+	private String itemOwner;
+	private String itemLastBidder;
+	
 	private JButton createAccount;
 	private JPanel auxPanel;
 

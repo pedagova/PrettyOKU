@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -22,11 +23,11 @@ public class LoginPanel extends Panel{
 
 	private JTextPane name;
 	
-	private JTextArea pass;
+	private JTextPane pass;
 	
-	private JTextArea requestName;
+	private JTextField requestName;
 	
-	private JTextArea requestPass;
+	private JTextField requestPass;
 	
 	private JButton accept;
 	
@@ -37,7 +38,7 @@ public class LoginPanel extends Panel{
 	private JButton createUser;
 	
 	public LoginPanel(Dimension dimension){
-		this.setLayout(new GridLayout(3,2));
+		this.setLayout(new GridLayout(4,1));
 		this.setPreferredSize(dimension);
 		this.setBorder(new TitledBorder(new EtchedBorder(), "USER LOGIN", 1, 1, new Font("", 9, 28)));
 		this.initComponets();
@@ -46,10 +47,13 @@ public class LoginPanel extends Panel{
 	@Override
 	public void initComponets() {
 		this.name = new JTextPane();
-		this.pass = new JTextArea("Your pass");
-		this.pass.setEditable(false);
-		this.requestName = new JTextArea();
-		this.requestPass = new JTextArea();
+		this.generateTextPane(this.name, "Your name", 0.3);
+		this.pass = new JTextPane();
+		this.generateTextPane(this.pass, "Your pass", 0.3);
+		this.requestName = new JTextField();
+		this.generateTextField(this.requestName, "", 0.3);
+		this.requestPass = new JTextField();
+		this.generateTextField(this.requestPass, "", 0.3);
 		this.accept = new JButton("Accept");
 		this.cancel  =new JButton("Cancel");
 		this.changePass = new JButton("Forgot password");
@@ -70,8 +74,8 @@ public class LoginPanel extends Panel{
 	
 	public static void main(String[] arg){
 		JFrame frame = new JFrame();
-		frame.setPreferredSize(new Dimension(500,500));
-		frame.add(new LoginPanel(new Dimension(400,400)));
+		frame.setPreferredSize(new Dimension(500,200));
+		frame.add(new LoginPanel(new Dimension(400,100)));
 		frame.setVisible(true);
 		frame.pack();
 	}

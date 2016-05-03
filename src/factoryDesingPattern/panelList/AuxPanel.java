@@ -4,7 +4,9 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-public class AuxPanel extends JPanel{
+import factoryDesingPattern.Panel;
+
+public class AuxPanel extends Panel{
 
 	/**
 	 * 
@@ -14,5 +16,17 @@ public class AuxPanel extends JPanel{
 	public AuxPanel(Dimension dimension){
 		this.setPreferredSize(dimension);
 		this.setVisible(true);
+	}
+
+	@Override
+	public void initComponets() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initGUI() {
+		// TODO Auto-generated method stub
+		
 	}
 }
