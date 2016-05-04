@@ -21,7 +21,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import dataAccessObjectDesingPattern.Dao;
 import dataBaseConection.clientREST;
 import factoryDesingPattern.Panel;
 import utils.Utils;
@@ -82,7 +81,7 @@ public class ItemRegisterPanel extends Panel{
 			public void actionPerformed(ActionEvent e) {
 				// Instancia ddbb
 				clientREST ddbb = new clientREST();
-				JSONObject ob = ddbb.connectionDDBB("POST", "getProduct", "id= 9");
+				JSONObject ob = ddbb.connectionDDBB("POST", "insertProduct", "description=Prueba descripcion&img=Prueba imagen&id_owner=1&id_category=3");
 				try {
 					System.out.println(ob.getJSONArray("result"));
 				} catch (JSONException e1) {

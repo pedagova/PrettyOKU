@@ -10,10 +10,9 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
-import dataAccessObjectDesingPattern.Dao;
 import model.AppObserver;
 
-public class ForgotPassPanel extends JFrame implements AppObserver
+public class ForgotPassPanel extends JFrame /*implements AppObserver*/
 {
 
 	/**
@@ -68,7 +67,7 @@ public class ForgotPassPanel extends JFrame implements AppObserver
 		frame.iterate();
 	}
 
-	@Override
+	/*@Override
 	public void onAppStart() {
 		return;		
 	}
@@ -107,5 +106,5 @@ public class ForgotPassPanel extends JFrame implements AppObserver
 	@Override
 	public void onBddRequest(String comand, String id) {
 				
-	}
+	}*/
 }

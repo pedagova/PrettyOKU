@@ -42,7 +42,7 @@ public class clientREST {
 
 	public JSONObject connectionDDBB (String MethodTYPE,String MethodURL,String Param) {
 	  try {
-		URL url = new URL("http://www.jesusjavega.es/is/servidor/services/ .php/" + MethodURL);
+		URL url = new URL("http://www.jesusjavega.es/is/servidor/services/productsService.php/" + MethodURL);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		
 		if(MethodTYPE == "POST"){

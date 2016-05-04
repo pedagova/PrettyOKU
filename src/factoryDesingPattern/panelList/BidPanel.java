@@ -4,15 +4,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import dataAccessObjectDesingPattern.Dao;
 import factoryDesingPattern.Panel;
-import model.AppObserver;
+
 import utils.Utils;
 
 public class BidPanel extends Panel{

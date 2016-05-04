@@ -2,6 +2,7 @@
 package utils;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -65,4 +66,10 @@ public class Utils {
 	}
 	
 	// poner concatenadores de texto para base de datos
+	
+	public static void main(String args[]){
+		BufferedImage bImage = new BufferedImage(200,200,1);
+		
+		System.out.println(Utils.decodeImage(bImage, "jpg"));
+	}
 }
