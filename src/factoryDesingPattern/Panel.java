@@ -2,6 +2,7 @@ package factoryDesingPattern;
 
 import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -26,13 +27,21 @@ public abstract class Panel extends JPanel{
 		component.setEditable(false);
 		component.setFont(new Font(data, 10, 28));
 		component.setVisible(true);
-		component.setPreferredSize(Utils.adjustDimension(1, dimension, this.getPreferredSize()));
+		component.setPreferredSize(Utils.adjustDimension(0.9, dimension, this.getPreferredSize()));
 	}
 
 	protected void generateTextField(JTextField component, String data, double dimension) {
 		component.setVisible(true);
 		component.setText(data);
-		component.setPreferredSize(Utils.adjustDimension(1, dimension, this.getPreferredSize()));
+		component.setPreferredSize(Utils.adjustDimension(0.9, dimension, this.getPreferredSize()));
+	}
+	
+	protected void generateButton(JButton component, String data, double dimension) {
+		component.setBackground(null);
+		component.setText(data);
+		component.setFont(new Font(data, 10, 14));
+		component.setVisible(true);
+		component.setPreferredSize(Utils.adjustDimension(0.9, dimension, this.getPreferredSize()));
 	}
 	
 }

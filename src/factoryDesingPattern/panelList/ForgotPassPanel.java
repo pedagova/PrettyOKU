@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import model.AppObserver;
 
@@ -61,50 +62,15 @@ public class ForgotPassPanel extends JFrame /*implements AppObserver*/
 	}
 
 	public static void main(String[] arguments) {
+		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
+		try {
+			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
+		} catch (Exception e) {
+			System.err.print("Error at Look And Feel");
+		}
 		ForgotPassPanel frame = new ForgotPassPanel();
 		frame.pack();
 		frame.setVisible(true);
 		frame.iterate();
 	}
-
-	/*@Override
-	public void onAppStart() {
-		return;		
-	}
-
-	@Override
-	public void opAppEnd() {
-		return;
-		
-	}
-
-	@Override
-	public void onUserLogIn() {
-		return;
-		
-	}
-
-	@Override
-	public void onUserLogOut() {
-		return;
-		
-	}
-
-	@Override
-	public void onBddUpdate(String comand, Dao act) {
-		SwingUtilities.invokeLater(new Runnable() {
-		    public void run() {
-		        handleOnBddUpdate(comand, act);
-		    }
-		});
-	}
-	
-	void handleOnBddUpdate(String comand, Dao act){
-		
-	}
-	
-	@Override
-	public void onBddRequest(String comand, String id) {
-				
-	}*/
 }

@@ -9,13 +9,13 @@ import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
 import Decoder.BASE64Encoder;
+import ch.randelshofer.quaqua.ext.base64.Base64;
 
 public class Utils {
 
@@ -34,7 +34,7 @@ public class Utils {
 	 * @param chain
 	 * @return
 	 */
-	/*public static BufferedImage encodeImage(String chain) {
+	public static BufferedImage encodeImage(String chain) {
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(new ByteArrayInputStream(Base64.decode(chain)));
@@ -42,7 +42,7 @@ public class Utils {
 			Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return image;
-	}*/
+	}
 
 	/**
 	 * Este método coje una imagen y genera un string apartir de ella

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -37,7 +38,7 @@ public class GeneralInfoPanel extends Panel {
 
 	public GeneralInfoPanel(Dimension dimension) {
 		super.setPreferredSize(dimension);
-		this.setLayout(new GridLayout(6, 2));
+		this.setLayout(new GridLayout(3, 4));
 		this.setBorder(new TitledBorder(new EtchedBorder(), "General Information", 1, 1, new Font("", 9, 28)));
 		this.initComponets();
 		this.initGUI();
@@ -75,12 +76,17 @@ public class GeneralInfoPanel extends Panel {
 	}
 	
 	public static void main(String[] arg) {
-		
+		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
+		try {
+			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
+		} catch (Exception e) {
+			System.err.print("Error at Look And Feel");
+		}
 		JFrame frame = new JFrame("Product List");
 		frame.setVisible(true);
-		frame.setSize(500, 500);
+		frame.setSize(1500, 500);
 		
-		GeneralInfoPanel productPanel = new GeneralInfoPanel(new Dimension(500, 600));
+		GeneralInfoPanel productPanel = new GeneralInfoPanel(new Dimension(1500, 600));
 		frame.add(productPanel);
 		frame.pack();
 
