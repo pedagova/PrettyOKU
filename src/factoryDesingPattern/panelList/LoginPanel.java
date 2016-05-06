@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -73,6 +74,14 @@ public class LoginPanel extends Panel{
 	}
 	
 	public static void main(String[] arg){
+		
+		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
+		try {
+			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
+		} catch (Exception e) {
+			System.err.print("Error at Look And Feel");
+		}
+		
 		JFrame frame = new JFrame();
 		frame.setPreferredSize(new Dimension(500,200));
 		frame.add(new LoginPanel(new Dimension(400,100)));
