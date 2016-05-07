@@ -6,10 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import factoryDesingPattern.Panel;
+import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
-public class AuxPanel extends Panel{
+public class AuxPanel extends BasicPanel{
 
 	/**
 	 * 

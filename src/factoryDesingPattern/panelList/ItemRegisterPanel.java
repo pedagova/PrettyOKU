@@ -8,24 +8,24 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.JViewport;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import dataBaseConection.clientREST;
-import factoryDesingPattern.Panel;
+import dataAccessObjectDesingPattern.ItemDao;
+import dataAccessObjectDesingPattern.ItemVO;
+import dataAccessObjectDesingPattern.UserVO;
+import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
-public class ItemRegisterPanel extends Panel{
+public class ItemRegisterPanel extends BasicPanel{
 	private static final long serialVersionUID = 1L;
 
 	private static final double COMPONENT_DIMENSION_Y = 0.03;
@@ -36,11 +36,10 @@ public class ItemRegisterPanel extends Panel{
 	private JScrollPane descriptionRequest;
 	private JTextPane price;
 	private JTextField priceRequest;
+	private JTextArea descriptionRequestArea;
+	private UserVO actUser = new UserVO("Pepe");
 
 	//Pedir datos al controlador sobre usuario actual
-	private String itemId;
-	private String itemOwner;
-	private String itemLastBidder;
 	
 	private JButton createAccount;
 	private JPanel auxPanel;
@@ -56,7 +55,7 @@ public class ItemRegisterPanel extends Panel{
 	@Override
 	public void initComponets() {
 		this.name = new JTextPane();
-		this.generateTextPane(this.name, "Item name", COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.name, "item name", COMPONENT_DIMENSION_Y);
 
 		this.nameRequest = new JTextField();
 		this.generateTextField(this.nameRequest, "tap the item name", COMPONENT_DIMENSION_Y);
@@ -64,7 +63,8 @@ public class ItemRegisterPanel extends Panel{
 		this.description = new JTextPane();
 		this.generateTextPane(this.description, "Item description", COMPONENT_DIMENSION_Y);
 		
-		this.descriptionRequest = new JScrollPane(new JTextArea(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		this.descriptionRequest = new JScrollPane(new JTextArea()
+				, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.descriptionRequest.setPreferredSize(Utils.adjustDimension(1, 0.4, this.getPreferredSize()));
 
@@ -79,14 +79,12 @@ public class ItemRegisterPanel extends Panel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Instancia ddbb
-				clientREST ddbb = new clientREST();
-				JSONObject ob = ddbb.connectionDDBB("POST", "insertProduct", "description=Prueba descripcion&img=Prueba imagen&id_owner=1&id_category=3");
-				try {
-					System.out.println(ob.getJSONArray("result"));
-				} catch (JSONException e1) {
-					System.out.println("Fail");
-				}				
+				JViewport viewport = descriptionRequest.getViewport(); 
+				JTextArea p = (JTextArea)viewport.getView();
+				
+				new ItemDao().add(new ItemVO(p.getText(), 
+						actUser.getName(),
+						(float) Float.valueOf(priceRequest.getText())));
 			}
 		});
 		this.auxPanel = new JPanel();
@@ -114,6 +112,8 @@ public class ItemRegisterPanel extends Panel{
 	}
 
 	public static void main(String[] arg) {
+		ItemDao c  =new ItemDao();
+		
 		JFrame frame = new JFrame();
 		frame.setPreferredSize(Utils.reSize(0.35, 0.4));
 		frame.pack();

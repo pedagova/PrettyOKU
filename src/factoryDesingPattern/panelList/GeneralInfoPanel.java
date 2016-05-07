@@ -12,9 +12,9 @@ import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import factoryDesingPattern.Panel;
+import factoryDesingPattern.BasicPanel;
 
-public class GeneralInfoPanel extends Panel {
+public class GeneralInfoPanel extends BasicPanel {
 
 	/**
 	 * 

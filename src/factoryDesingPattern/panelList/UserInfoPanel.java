@@ -10,10 +10,10 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import factoryDesingPattern.Panel;
+import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
-public class UserInfoPanel extends Panel{
+public class UserInfoPanel extends BasicPanel{
 
 	/**
 	 * 

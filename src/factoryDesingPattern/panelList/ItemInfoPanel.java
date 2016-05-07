@@ -9,10 +9,10 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
 import dataAccessObjectDesingPattern.ItemDao;
-import factoryDesingPattern.Panel;
+import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
-public class ItemInfoPanel extends Panel {
+public class ItemInfoPanel extends BasicPanel {
 
 	/**
 	 * 
@@ -37,11 +37,12 @@ public class ItemInfoPanel extends Panel {
 		this.itemInfo = new JTextArea();
 		this.itemInfo.setLineWrap(true);
 		this.itemInfo.setWrapStyleWord(true);
+		this.itemInfo.setEditable(false);
 		this.itemInfo.setText("A la casa donde vivía el señor Heathcliff se la llamaba «Cumbres Borrascosas» en el dialecto local. El nombre traducía bien los rigores que allí desencadenaba el viento cuando había tempestad. Ventilación no faltaba sin duda. Se advertía lo mucho que azotaba el aire en la inclinación de unos pinos cercanos y en el hecho de que los matorra-les se doblegaban en un solo sentido, como si se proster-nasen ante el sol. El edificio era sólido, de espesos muros a juzgar por lo hondo de las ventanas, y protegidos por grandes guardacantones. " + this.chain());
 		//this.generateTextPane(this.itemInfo, new ItemDao().getItem("9").getDesc(), 0);
 		this.scroll = new JScrollPane(this.itemInfo, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		this.itemInfo.setEditable(true);
+		
 		this.scroll.setPreferredSize(Utils.adjustDimension(0.9, 0.9, this.getPreferredSize()));
 
 	}

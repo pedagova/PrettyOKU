@@ -1,8 +1,8 @@
 package factoryDesingPattern.panelList;
 
-import factoryDesingPattern.Panel;
+import factoryDesingPattern.BasicPanel;
 
-public class ImagePanel extends Panel{
+public class ImagePanel extends BasicPanel{
 
 	/**
 	 * 

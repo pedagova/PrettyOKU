@@ -9,7 +9,7 @@ import javax.swing.JTextPane;
 
 import utils.Utils;
 
-public abstract class Panel extends JPanel{
+public abstract class BasicPanel extends JPanel{
 
 	/**
 	 * 

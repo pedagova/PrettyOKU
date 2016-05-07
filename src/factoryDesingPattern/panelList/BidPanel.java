@@ -12,11 +12,11 @@ import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import factoryDesingPattern.Panel;
+import factoryDesingPattern.BasicPanel;
 
 import utils.Utils;
 
-public class BidPanel extends Panel{
+public class BidPanel extends BasicPanel{
 
 	/**
 	 * 

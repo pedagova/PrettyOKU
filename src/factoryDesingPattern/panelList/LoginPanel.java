@@ -13,9 +13,9 @@ import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import factoryDesingPattern.Panel;
+import factoryDesingPattern.BasicPanel;
 
-public class LoginPanel extends Panel{
+public class LoginPanel extends BasicPanel{
 
 	/**
 	 * 
@@ -74,14 +74,12 @@ public class LoginPanel extends Panel{
 	}
 	
 	public static void main(String[] arg){
-		
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
 			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
 		} catch (Exception e) {
 			System.err.print("Error at Look And Feel");
 		}
-		
 		JFrame frame = new JFrame();
 		frame.setPreferredSize(new Dimension(500,200));
 		frame.add(new LoginPanel(new Dimension(400,100)));

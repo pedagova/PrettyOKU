@@ -14,6 +14,10 @@ public class ItemVO {
 	private String img;
 	private String idCategory;
 	
+	//-------------------------------------------
+	private String user;
+	private float price;
+	
 	
 	public ItemVO(JSONArray jsonArray) {
 		try {
@@ -28,6 +32,15 @@ public class ItemVO {
 			e.printStackTrace();
 		}
 		
+	}
+	public ItemVO(String desc, String user, Float price){
+		this.desc = desc;
+		this.user = user;
+		this.price = price;
+		this.idOwner = "1";
+		this.id = "";
+		this.img = "test Image Iphone";
+		this.idCategory = "3";
 	}
 	//create a parse to pack the info from the current Item
 	public String encodeItem(){

@@ -13,14 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import factoryDesingPattern.Panel;
+import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
-public class ListPanel extends Panel {
+public class ListPanel extends BasicPanel {
 
 	/**
 	 * 
@@ -81,12 +80,7 @@ public class ListPanel extends Panel {
 	}
 
 	public static void main(String[] arg) {
-		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
-		try {
-			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
-		} catch (Exception e) {
-			System.err.print("Error at Look And Feel");
-		}
+		
 		JFrame frame = new JFrame("Product List");
 		frame.setVisible(true);
 		frame.setSize(500, 500);

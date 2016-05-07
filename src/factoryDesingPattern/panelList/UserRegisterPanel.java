@@ -17,10 +17,10 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import factoryDesingPattern.Panel;
+import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
-public class UserRegisterPanel extends Panel {
+public class UserRegisterPanel extends BasicPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -108,7 +108,6 @@ public class UserRegisterPanel extends Panel {
 	}
 
 	public static void main(String[] arg) {
-		
 		JFrame frame = new JFrame();
 		frame.setPreferredSize(Utils.reSize(0.35, 0.7));
 		frame.pack();
