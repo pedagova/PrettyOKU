@@ -21,6 +21,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import ch.randelshofer.quaqua.ext.base64.Base64;
 
 public class Work extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JButton button;
 	JLabel label;
 

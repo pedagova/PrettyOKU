@@ -185,12 +185,12 @@ public class ImagePanel extends BasicPanel {
 		return iconReturn;
 	}
 
-	public static void main(String[] arg) {
+	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.setPreferredSize(new Dimension(500,400));
+		frame.setPreferredSize(new Dimension(500,500));
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		frame.add(new ImagePanel(new Dimension(300,300)));
+		frame.add(new ImagePanel(new Dimension(500,500)));
 		frame.setVisible(true);
 	}
 
