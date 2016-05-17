@@ -23,11 +23,15 @@ public class Utils {
 		return new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
 				(int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
 	}
-	
+
 	public static Dimension adjustDimension(double width, double height, Dimension dimension) {
-		return new Dimension((int) (dimension.getWidth()*width), (int) (dimension.getHeight()*height));
+		return new Dimension((int) (dimension.getWidth() * width), (int) (dimension.getHeight() * height));
 	}
-	
+
+	public static Dimension newDim(double widht, double height, double wMod, double hMod) {
+		return new Dimension((int) (widht * wMod), (int) (height * hMod));
+	}
+
 	/**
 	 * Este método coje una cadena (la imagen) y la devuelve codificada
 	 * 
@@ -64,12 +68,12 @@ public class Utils {
 		return encoder.encode(imageBytes);
 
 	}
-	
+
 	// poner concatenadores de texto para base de datos
-	
-	public static void main(String args[]){
-		BufferedImage bImage = new BufferedImage(200,200,1);
-		
+
+	public static void main(String args[]) {
+		BufferedImage bImage = new BufferedImage(200, 200, 1);
+
 		System.out.println(Utils.decodeImage(bImage, "jpg"));
 	}
 }

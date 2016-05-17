@@ -1,6 +1,7 @@
 package factoryDesingPattern.panelList;
 
 import java.awt.Color;
+import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -74,17 +76,26 @@ public class ListPanel extends BasicPanel {
 		this.scroll = new JScrollPane(this.containerPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.scroll.setBorder(null);
-		this.scroll.setPreferredSize(Utils.adjustDimension(1, 0.9, this.getPreferredSize()));
+		this.scroll.getVerticalScrollBar().setUnitIncrement(10);
+		this.scroll.setPreferredSize(Utils.adjustDimension(0.7,0.9, this.getPreferredSize()));
 		this.scroll.setVisible(true);
 		for (int i = 0; i < ListPanel.NUMBER_ITEM; ++i) {
+			double rand = this.randomImage();
+			if (rand < 0.3) {
+				this.imageIcon = new ImageIcon("src/images/sword (2).png");
+			} else if (rand < 0.6 && rand >= 0.3) {
+				this.imageIcon = new ImageIcon("src/images/book (2).png");
+			}else{
+				this.imageIcon = new ImageIcon("src/images/merchandising (2).png");
+			}
 			buttonList.add(new JButton("See more"));
 			buttonList.get(i).setToolTipText("Click for more information belongs to the item");
 			buttonList.get(i).setHorizontalAlignment(SwingConstants.RIGHT);
 
-			this.reSizeImage();
+			// this.reSizeImage();
 			imageList.add(this.imageIcon);
-			labelList.add(new JLabel());
-			labelList.get(i).setIcon(this.imageList.get(i));
+			labelList.add(new JLabel(this.imageIcon));
+			// labelList.get(i).setIcon(this.imageList.get(i));
 		}
 
 	}
@@ -117,6 +128,10 @@ public class ListPanel extends BasicPanel {
 		return iconReturn;
 	}
 
+	private double randomImage() {
+		return Math.random() * 1;
+	}
+
 	private void reSizeImage() {
 		ImageIcon MyImage = this.iconToImageIcon(this.bufferedImageToIcon(image));
 		Image img = MyImage.getImage();
@@ -139,14 +154,14 @@ public class ListPanel extends BasicPanel {
 			this.containerPanel.add(this.labelList.get(i), this.gbc);
 			++this.gbc.gridx;
 			JTextArea text = new JTextArea();
-			text.setBackground(new Color(232,232,232));
+			text.setBackground(null);
 			text.setText(this.generateItemDescription(1));
 			text.append("\n");
 			text.append(this.generateItemDescription(2));
 			text.append("\n");
 			text.append(this.generateItemDescription(3));
 			text.append("\n");
-			text.append(this.generateItemDescription(4));
+			text.append(this.generateItemInfo());
 			this.containerPanel.add(text, this.gbc);
 			++this.gbc.gridy;
 
@@ -176,10 +191,12 @@ public class ListPanel extends BasicPanel {
 			// take an appropriate action here
 		}
 
+		// JOptionPane.showConfirmDialog(null,new ListPanel(new
+		// Dimension(500,500)), "List", JOptionPane.NO_OPTION);
 		JFrame frame = new JFrame("Product List");
 		frame.setVisible(true);
 		frame.setSize(500, 500);
-		ListPanel productPanel = new ListPanel(new Dimension(500, 600));
+		ListPanel productPanel = new ListPanel(new Dimension(1000, 1000));
 		frame.add(productPanel);
 		frame.pack();
 
