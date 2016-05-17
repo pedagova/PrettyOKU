@@ -38,10 +38,8 @@ public class ImagePanel extends BasicPanel {
 	private ImageIcon imageIcon;
 	
 	public ImagePanel(Dimension dimension) {
-		// this.setLayout(new GridBagLayout());
+		
 		this.setPreferredSize(dimension);
-		// this.setBorder(new TitledBorder(new EtchedBorder(), "USER LOGIN", 1,
-		// 1, new Font("", 9, 28)));
 		this.initComponets();
 		this.initGUI();
 	}

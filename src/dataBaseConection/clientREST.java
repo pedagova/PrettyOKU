@@ -51,7 +51,6 @@ public class clientREST {
 			conn.setRequestMethod("POST");
 			//conn.setRequestProperty("Accept", "application/json");
 			
-			String input = Param;
 			/*
 			OutputStream os = conn.getOutputStream();
 			os.write(input.getBytes());

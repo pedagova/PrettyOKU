@@ -8,24 +8,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import model.AppObserver;
-
-public class ForgotPassPanel extends JFrame /*implements AppObserver*/
+public class ForgotPassPanel extends JFrame
 {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JProgressBar current;
-	JTextArea out;
+	private JProgressBar current;
+	private JTextArea out;
 	
-	JButton find;
-	Thread runner;
-	int num = 0;
+	private JButton find;
+	private Thread runner;
+	private int num = 0;
 
 	private JPanel panel = new JPanel();
 	private JTextArea text = new JTextArea();

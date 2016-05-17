@@ -23,7 +23,7 @@ public class GeneralInfoPanel extends BasicPanel {
 
 	private JButton[] buttons = new JButton[12];
 
-	static final String[] buttonNames = { "...", "Payment methods", "Currency converter", "Shipping policy",
+	public static final String[] buttonNames = { "...", "Payment methods", "Currency converter", "Shipping policy",
 			"Shipping rates", "VAD (value added tax) on assets", "...", "How to add products?", "How to bid?", "...",
 			"Logistics", "..." };
 

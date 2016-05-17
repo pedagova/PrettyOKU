@@ -39,8 +39,8 @@ public class UserRegisterPanel extends BasicPanel {
 	private JButton createAccount;
 	private JPanel auxPanel;
 	
-	public UserRegisterPanel(Dimension dimension) {
-		super.setPreferredSize(dimension);
+	public UserRegisterPanel() {
+		super.setPreferredSize(new Dimension(300, 300));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBorder(new TitledBorder(new EtchedBorder(), "USER REGISTER", 1, 1, new Font("", 9, 28)));
 		this.initComponets();
@@ -112,7 +112,7 @@ public class UserRegisterPanel extends BasicPanel {
 		frame.setPreferredSize(Utils.reSize(0.35, 0.7));
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		frame.add(new UserRegisterPanel(Utils.reSize(0.35, 0.7)));
+		frame.add(new UserRegisterPanel());
 		frame.setVisible(true);
 	}
 }

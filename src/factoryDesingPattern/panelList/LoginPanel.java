@@ -3,16 +3,21 @@ package factoryDesingPattern.panelList;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import dataAccessObjectDesingPattern.UserVO;
 import factoryDesingPattern.BasicPanel;
 
 public class LoginPanel extends BasicPanel{
@@ -56,9 +61,43 @@ public class LoginPanel extends BasicPanel{
 		this.requestPass = new JTextField();
 		this.generateTextField(this.requestPass, "", 0.3);
 		this.accept = new JButton("Accept");
+		this.accept.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ctrl.loginUser(requestName.getText(), requestPass.getText());
+			}
+		});
 		this.cancel  =new JButton("Cancel");
 		this.changePass = new JButton("Forgot password");
+		this.changePass.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						new ForgotPassPanel();
+					}
+				});
+			}
+		});
 		this.createUser = new JButton("New user");
+		this.changePass.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						new UserRegisterPanel();
+						//añadir que se logee solo
+					}
+				});
+			}
+		});
 	}
 
 	@Override

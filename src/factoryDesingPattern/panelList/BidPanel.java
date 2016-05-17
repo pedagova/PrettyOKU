@@ -36,7 +36,6 @@ public class BidPanel extends BasicPanel{
 	public BidPanel(Dimension dimension) {
 		super.setPreferredSize(dimension);
 		this.setLayout(new GridLayout(7, 1));
-		//this.setBorder(new TitledBorder(new EtchedBorder(), "BID INFORMATION", 1, 1, new Font("", 9, 28)));
 		this.setBorder(BorderFactory.createTitledBorder("BID INFORMATION"));
 		this.initComponets();
 		this.initGUI();

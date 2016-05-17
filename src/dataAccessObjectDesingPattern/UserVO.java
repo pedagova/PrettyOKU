@@ -4,6 +4,8 @@ public class UserVO {
 	private String id;
 	private String name;
 	private String forename1, forename2;
+	private String nick;
+	private String pass;
 	public UserVO(String name) {
 		super();
 		this.name = name;
@@ -49,6 +51,18 @@ public class UserVO {
 	 */
 	public String getId() {
 		return id;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 	
 	

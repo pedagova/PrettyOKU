@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import controller.Controler;
 import factoryDesingPattern.panelList.ItemPanel;
 import utils.Utils;
 
@@ -23,10 +24,12 @@ public abstract class BasicPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	protected Controler ctrl = new Controler();
+	
 	public abstract void initComponets();
 
 	public abstract void initGUI();
-
+	
 	protected void generateTextPane(JTextPane component, String data, double dimension) {
 		component.setBackground(null);
 		component.setContentType("text/html");

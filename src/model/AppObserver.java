@@ -1,5 +1,7 @@
 package model;
 
+import dataAccessObjectDesingPattern.UserVO;
+
 
 public interface AppObserver {
 	
@@ -7,6 +9,7 @@ public interface AppObserver {
 	void opAppEnd();
 	void onUserLogIn();
 	void onUserLogOut();
-	//void onBddUpdate(String comand, Dao act);
-	void onBddRequest(String comand, String id);
+	void OnUserBaseUpdate(UserVO user);
+	void OnLoginRight();
+	void OnLoginFail();
 }
