@@ -7,7 +7,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
@@ -45,6 +47,12 @@ public class UserRegisterPanel extends BasicPanel {
 		this.setBorder(new TitledBorder(new EtchedBorder(), "USER REGISTER", 1, 1, new Font("", 9, 28)));
 		this.initComponets();
 		this.initGUI();
+		
+		JDialog dialog = new JDialog();
+		dialog.add(this);
+		dialog.setModal(true);
+		dialog.setVisible(true);
+		
 	}
 
 	@Override
@@ -108,11 +116,13 @@ public class UserRegisterPanel extends BasicPanel {
 	}
 
 	public static void main(String[] arg) {
-		JFrame frame = new JFrame();
+		/*JFrame frame = new JFrame();
 		frame.setPreferredSize(Utils.reSize(0.35, 0.7));
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.add(new UserRegisterPanel());
 		frame.setVisible(true);
+		*/
+		new UserRegisterPanel();
 	}
 }

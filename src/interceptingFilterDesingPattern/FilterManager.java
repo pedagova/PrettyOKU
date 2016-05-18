@@ -1,6 +1,7 @@
 package interceptingFilterDesingPattern;
 
 import interceptingFilterDesingPattern.filters.*;
+import interceptingFilterDesingPattern.targets.Target;
 import exceptions.RegisterException;
 public class FilterManager {
 	FilterChain filterChain;

@@ -19,7 +19,10 @@ public class Model extends Observer{
 	}
 	
 	public void login(String nick, String pass) {
+		//paso filtro
+		//execute
 		UserVO user = new UserDao().getUser(nick);
+		
 		if(pass != user.getPass()) notifyLoginFail();
 		else loginRight();
 	}

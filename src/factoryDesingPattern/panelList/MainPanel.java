@@ -5,12 +5,14 @@ import java.awt.GridBagConstraints;
 import java.awt.Toolkit;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
-public class MainPanel extends JPanel {
+public class MainPanel extends BasicPanel {
 
 	/**
 	 * 
@@ -46,6 +48,7 @@ public class MainPanel extends JPanel {
 
 	public void initComponets() {
 		this.gbc = new GridBagConstraints();
+
 		this.login = new LoginPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.3));
 		this.aux = new TagPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.4));
 		this.list = new ListPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.7));
@@ -69,8 +72,23 @@ public class MainPanel extends JPanel {
 		auxTop.add(list);
 		
 		this.add(auxTop);
-		this.add(infoPanel);
-	
+		
+		JButton b1 = new JButton();
+		JButton b2 = new JButton();
+		JButton b3 = new JButton();
+		JButton b4 = new JButton();
+		super.genereteLinkButton(b1, "b1", 0.1);
+		super.genereteLinkButton(b2, "b2", 0.1);
+		super.genereteLinkButton(b3, "b3", 0.1);
+		super.genereteLinkButton(b4, "b4", 0.1);
+
+		JPanel panela = new JPanel();
+		panela.add(b1);
+		panela.add(b2);
+		panela.add(b3);
+		panela.add(b4);
+		//this.add(infoPanel);
+		this.add(panela);
 
 	}
 

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -14,6 +15,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import factoryDesingPattern.BasicPanel;
+import interceptingFilterDesingPattern.Client;
+import interceptingFilterDesingPattern.FilterManager;
 
 public class LoginPanel extends BasicPanel {
 
@@ -68,6 +71,7 @@ public class LoginPanel extends BasicPanel {
 				ctrl.loginUser(requestName.getText(), requestPass.getText());
 			}
 		});
+		
 		this.cancel = new JButton("<font size=\"16\">Cancel</font>");
 		this.changePass = new JButton("<font size=\"16\">Forgot password</font>");
 		this.changePass.addActionListener(new ActionListener() {
@@ -84,8 +88,8 @@ public class LoginPanel extends BasicPanel {
 			}
 		});
 		this.createUser = new JButton("New user");
-		this.generateButton(createUser, "<font size=\"16\">New user</font>", 0.3);
-		this.changePass.addActionListener(new ActionListener() {
+		//this.generateButton(createUser, "<font size=\"16\">New user</font>", 0.3);
+		this.createUser.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -103,8 +107,8 @@ public class LoginPanel extends BasicPanel {
 
 	@Override
 	public void initGUI() {
-		this.gbc.gridx=0;
-		this.gbc.gridy=0;
+		this.gbc.gridx = 0;
+		this.gbc.gridy = 0;
 		this.add(this.name, this.gbc);
 		++this.gbc.gridx;
 		this.add(this.requestName, this.gbc);

@@ -60,6 +60,8 @@ public class ImagePanel extends BasicPanel {
 	public void initGUI() {
 		this.reSizeImage();
 		this.label.setIcon(this.imageIcon/*this.bufferedImageToIcon(image)*/);
+		this.label.setHorizontalAlignment(JLabel.CENTER);
+		this.label.setVerticalAlignment(JLabel.CENTER);
 		this.add(this.label);
 	}
 	
@@ -90,7 +92,7 @@ public class ImagePanel extends BasicPanel {
 	private void reSizeImage(){
 		ImageIcon MyImage = this.iconToImageIcon(this.bufferedImageToIcon(image));
 		Image img = MyImage.getImage();
-		Image newImg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+		Image newImg = img.getScaledInstance((label.getWidth()-100), (label.getHeight()-100), Image.SCALE_SMOOTH);
 		this.imageIcon = new ImageIcon(newImg);
 	}
 	/*public ImageIcon ResizeImage(String ImagePath) {

@@ -3,6 +3,7 @@ package interceptingFilterDesingPattern;
 import java.util.ArrayList;
 
 import interceptingFilterDesingPattern.filters.Filter;
+import interceptingFilterDesingPattern.targets.Target;
 import exceptions.RegisterException;
 public class FilterChain {
 	private ArrayList<Filter> filters = new ArrayList<Filter>();
