@@ -13,7 +13,7 @@ public class javaExample extends JPanel implements ActionListener, PropertyChang
 	private JTextArea taskOutput;
 	private Task task;
 
-	class Task extends SwingWorker<Void, Void> {
+	public class Task extends SwingWorker<Void, Void> {
 		/*
 		 * Main task. Executed in background thread.
 		 */
@@ -48,15 +48,23 @@ public class javaExample extends JPanel implements ActionListener, PropertyChang
 			Toolkit.getDefaultToolkit().beep();
 			startButton.setEnabled(true);
 			taskOutput.append("Done!\n");
+			taskOutput.append("Yout new password is: " + generatePass());
+
 		}
+	}
+
+	private String generatePass() {
+		StringBuilder chain = new StringBuilder("");
+		chain.append(Math.random() * 9);
+		return chain.toString();
 	}
 
 	public javaExample() {
 		super(new BorderLayout());
 
 		// Create the demo's UI.
-		startButton = new JButton("Start");
-		startButton.setActionCommand("start");
+		startButton = new JButton("Generate new password");
+		startButton.setActionCommand("Generate new password");
 		startButton.addActionListener(this);
 
 		progressBar = new JProgressBar(0, 100);
@@ -110,7 +118,7 @@ public class javaExample extends JPanel implements ActionListener, PropertyChang
 	 */
 	private static void createAndShowGUI() {
 		// Create and set up the window.
-		JFrame frame = new JFrame("ProgressBarDemo2");
+		JFrame frame = new JFrame("Generate a new password");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Create and set up the content pane.

@@ -7,16 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import factoryDesingPattern.BasicPanel;
-import interceptingFilterDesingPattern.Client;
-import interceptingFilterDesingPattern.FilterManager;
 
 public class LoginPanel extends BasicPanel {
 
@@ -47,8 +45,6 @@ public class LoginPanel extends BasicPanel {
 		this.gbc = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
 		this.setPreferredSize(dimension);
-		// this.setBorder(new TitledBorder(new EtchedBorder(), "USER LOGIN", 1,
-		// 1, new Font("", 9, 28)));
 		this.initComponets();
 		this.initGUI();
 	}
@@ -56,14 +52,14 @@ public class LoginPanel extends BasicPanel {
 	@Override
 	public void initComponets() {
 		this.name = new JTextPane();
-		this.generateTextPane(this.name, "<font size=\"16\">Your name</font>", 0.5);
+		this.generateTextPane(this.name, "<font size=\"12\">Your name</font>", 0.5);
 		this.pass = new JTextPane();
-		this.generateTextPane(this.pass, "<font size=\"16\">Your pass</font>", 0.5);
+		this.generateTextPane(this.pass, "<font size=\"12\">Your pass</font>", 0.5);
 		this.requestName = new JTextField();
-		this.generateTextField(this.requestName, "", 0.5);
-		this.requestPass = new JTextField();
-		this.generateTextField(this.requestPass, "", 0.5);
-		this.accept = new JButton("<font size=\"16\">Accept</font>");
+		this.generateTextField(this.requestName, "", 0.3);
+		this.requestPass = new JPasswordField();
+		this.generateTextField(this.requestPass, "", 0.3);
+		this.accept = new JButton("       Accept       ");
 		this.accept.addActionListener(new ActionListener() {
 
 			@Override
@@ -71,9 +67,9 @@ public class LoginPanel extends BasicPanel {
 				ctrl.loginUser(requestName.getText(), requestPass.getText());
 			}
 		});
-		
-		this.cancel = new JButton("<font size=\"16\">Cancel</font>");
-		this.changePass = new JButton("<font size=\"16\">Forgot password</font>");
+
+		this.cancel = new JButton("Cancel");
+		this.changePass = new JButton("Forgot password");
 		this.changePass.addActionListener(new ActionListener() {
 
 			@Override
@@ -82,13 +78,12 @@ public class LoginPanel extends BasicPanel {
 
 					@Override
 					public void run() {
-						new ForgotPassPanel();
+						ForgotPassPanel.createAndShowGUI();
 					}
 				});
 			}
 		});
 		this.createUser = new JButton("New user");
-		//this.generateButton(createUser, "<font size=\"16\">New user</font>", 0.3);
 		this.createUser.addActionListener(new ActionListener() {
 
 			@Override

@@ -2,14 +2,16 @@ package factoryDesingPattern.panelList;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Toolkit;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
@@ -40,19 +42,21 @@ public class UserRegisterPanel extends BasicPanel {
 	private JCheckBox checkPoint;
 	private JButton createAccount;
 	private JPanel auxPanel;
-	
+
 	public UserRegisterPanel() {
 		super.setPreferredSize(new Dimension(300, 300));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBorder(new TitledBorder(new EtchedBorder(), "USER REGISTER", 1, 1, new Font("", 9, 28)));
 		this.initComponets();
 		this.initGUI();
-		
+
 		JDialog dialog = new JDialog();
+		dialog.setSize(new Dimension(500, 700));
 		dialog.add(this);
 		dialog.setModal(true);
 		dialog.setVisible(true);
-		
+		dialog.pack();
+
 	}
 
 	@Override
@@ -61,22 +65,22 @@ public class UserRegisterPanel extends BasicPanel {
 		this.generateTextPane(this.name, "Your name", COMPONENT_DIMENSION_Y);
 
 		this.nameRequest = new JTextField();
-		this.generateTextField(this.nameRequest, "tap here your e-mail",COMPONENT_DIMENSION_Y);
+		this.generateTextField(this.nameRequest, "tap here your e-mail", COMPONENT_DIMENSION_Y);
 
 		this.email = new JTextPane();
-		this.generateTextPane(this.email, "Your e-mail",COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.email, "Your e-mail", COMPONENT_DIMENSION_Y);
 
 		this.emailRequest = new JTextField();
-		this.generateTextField(this.emailRequest, "tap here your e-mail",COMPONENT_DIMENSION_Y);
+		this.generateTextField(this.emailRequest, "tap here your e-mail", COMPONENT_DIMENSION_Y);
 
 		this.pass = new JTextPane();
-		this.generateTextPane(this.pass, "Password",COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.pass, "Password", COMPONENT_DIMENSION_Y);
 
 		this.passRequest = new JPasswordField();
 		this.passRequest.setPreferredSize(Utils.adjustDimension(1, COMPONENT_DIMENSION_Y, this.getPreferredSize()));
 
 		this.passConf = new JTextPane();
-		this.generateTextPane(this.passConf, "Password",COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.passConf, "Password", COMPONENT_DIMENSION_Y);
 
 		this.passConfRequest = new JPasswordField();
 		this.passConfRequest.setPreferredSize(Utils.adjustDimension(1, COMPONENT_DIMENSION_Y, this.getPreferredSize()));
@@ -90,7 +94,7 @@ public class UserRegisterPanel extends BasicPanel {
 
 		this.auxPanel = new JPanel();
 		this.auxPanel.setLayout(new BoxLayout(this.auxPanel, BoxLayout.X_AXIS));
-		this.auxPanel.setPreferredSize(Utils.adjustDimension(1, 0.05, this.getPreferredSize()));
+		this.auxPanel.setPreferredSize(Utils.adjustDimension(1, 0.1, this.getPreferredSize()));
 		this.auxPanel.setVisible(true);
 		this.scroll.setVisible(true);
 
@@ -116,13 +120,12 @@ public class UserRegisterPanel extends BasicPanel {
 	}
 
 	public static void main(String[] arg) {
-		/*JFrame frame = new JFrame();
-		frame.setPreferredSize(Utils.reSize(0.35, 0.7));
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.add(new UserRegisterPanel());
-		frame.setVisible(true);
-		*/
-		new UserRegisterPanel();
+		/*
+		 * JFrame frame = new JFrame();
+		 * frame.setPreferredSize(Utils.reSize(0.35, 0.7)); frame.pack();
+		 * frame.setLocationRelativeTo(null); frame.add(new
+		 * UserRegisterPanel()); frame.setVisible(true);
+		 */
+		//new UserRegisterPanel();
 	}
 }
