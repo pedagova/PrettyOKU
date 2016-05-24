@@ -24,7 +24,7 @@ public abstract class BasicPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected Controler ctrl = new Controler();
+	protected Controler ctrl;
 	
 	public abstract void initComponets();
 
@@ -67,7 +67,7 @@ public abstract class BasicPanel extends JPanel {
 				JFrame j = new JFrame();
 				j.setPreferredSize(new Dimension(600, 600));
 				j.setVisible(true);
-				j.add(new ItemPanel(new Dimension(500, 500)));
+				j.add(new ItemPanel(new Dimension(500, 500), ctrl));
 			}
 		});
 	}

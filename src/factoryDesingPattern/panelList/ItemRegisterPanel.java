@@ -19,6 +19,7 @@ import javax.swing.JViewport;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import controller.Controler;
 import dataAccessObjectDesingPattern.ItemDao;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
@@ -44,7 +45,7 @@ public class ItemRegisterPanel extends BasicPanel{
 	private JButton createAccount;
 	private JPanel auxPanel;
 
-	public ItemRegisterPanel(Dimension dimension) {
+	public ItemRegisterPanel(Dimension dimension, Controler ctrl) {
 		super.setPreferredSize(dimension);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBorder(new TitledBorder(new EtchedBorder(), "ITEM REGISTER", 1, 1, new Font("", 9, 28)));
@@ -84,7 +85,7 @@ public class ItemRegisterPanel extends BasicPanel{
 				
 				new ItemDao().add(new ItemVO(p.getText(), 
 						actUser.getName(),
-						(float) Float.valueOf(priceRequest.getText())));
+						priceRequest.getText()));
 			}
 		});
 		this.auxPanel = new JPanel();
@@ -111,7 +112,7 @@ public class ItemRegisterPanel extends BasicPanel{
 
 	}
 
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 		ItemDao c  =new ItemDao();
 		
 		JFrame frame = new JFrame();
@@ -120,5 +121,5 @@ public class ItemRegisterPanel extends BasicPanel{
 		frame.setLocationRelativeTo(null);
 		frame.add(new ItemRegisterPanel(Utils.reSize(0.35, 0.4)));
 		frame.setVisible(true);
-	}
+	}*/
 }

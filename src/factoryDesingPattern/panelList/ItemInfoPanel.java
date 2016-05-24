@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
+import controller.Controler;
 import dataAccessObjectDesingPattern.ItemDao;
 import factoryDesingPattern.BasicPanel;
 import utils.Utils;
@@ -24,7 +25,7 @@ public class ItemInfoPanel extends BasicPanel {
 
 	private JScrollPane scroll;
 
-	public ItemInfoPanel(Dimension dimension) {
+	public ItemInfoPanel(Dimension dimension, Controler ctrl) {
 		super.setPreferredSize(dimension);
 		// this.setBorder(new TitledBorder(new EtchedBorder(), "BID
 		// INFORMATION", 1, 1, new Font("", 9, 28)));
@@ -62,7 +63,7 @@ public class ItemInfoPanel extends BasicPanel {
 		}
 		return text;
 	}
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
 			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
@@ -75,6 +76,6 @@ public class ItemInfoPanel extends BasicPanel {
 		frame.setLocationRelativeTo(null);
 		frame.add(new ItemInfoPanel(Utils.reSize(0.5, 0.45)));
 		frame.setVisible(true);
-	}
+	}*/
 
 }

@@ -1,5 +1,7 @@
 package dataAccessObjectDesingPattern;
 
+import java.util.List;
+
 import org.json.JSONException;
 
 import dataBaseConection.clientREST;
@@ -28,5 +30,10 @@ public class ItemDao {
 	
 	public void add(ItemVO it){
 		ddbb.connectionDDBB("POST", "insertProduct", it.encodeItem());
+	}
+
+	public List<ItemVO> getAllItems(String category) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

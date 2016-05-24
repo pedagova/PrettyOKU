@@ -1,8 +1,10 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dataAccessObjectDesingPattern.ItemDao;
+import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserDao;
 import dataAccessObjectDesingPattern.UserVO;
 
@@ -13,37 +15,55 @@ public class Model extends Observer{
 	private ItemDao itemConnection;
 	
 	//----------- request ----------------------
-	public void updateBaseUsser(UserVO user) {
-		new UserDao().add(user);
-		notifyUpdateBase(user);
-	}
 	
 	public void login(String nick, String pass) {
 		//paso filtro
-		//execute
-		UserVO user = new UserDao().getUser(nick);
+		//execut
 		
-		if(pass != user.getPass()) notifyLoginFail();
-		else loginRight();
+		UserVO u = userConnection.getUser(nick);
+		System.out.println(pass + " " + u.getPass());
+		if(pass != u.getPass()) notifyLoginFail(u);
+		else notifyLoginRight(u);
 	}
 	
+	public void addObserver(AppObserver o) {
+		observerList.add(o);
+	}
+	
+	public void search(String category) {
+		List<ItemVO> l = itemConnection.getAllItems(category);
+		notifyListAct(l);
+	}
+	
+	
 	//------------ notify ------------------------
-	private void notifyUpdateBase(UserVO user){
+	private void notifyListAct(List<ItemVO> l) {
 		for(AppObserver o: observerList){
-			o.OnUserBaseUpdate(user);
+			o.OnListAct(l);
 		}
 	}
 
-	private void loginRight() {
+	private void notifyLoginRight(UserVO u) {
 		for(AppObserver o: observerList){
-			o.OnLoginFail();
+			o.OnLoginRight(u);
 		}
 	}
 
-	private void notifyLoginFail() {
+	private void notifyLoginFail(UserVO u) {
 		for(AppObserver o: observerList){
-			o.OnLoginRight();
+			o.OnLoginFail(u);
 		}
 	}
+	
+	public Model(){
+		this.observerList = new ArrayList<AppObserver>();
+		this.itemConnection = new ItemDao();
+		this.userConnection = new UserDao();
+	}
 
+	public String getUser(String idOwner) {
+		
+		return userConnection.getUser(idOwner).getId();
+	}
+	
 }

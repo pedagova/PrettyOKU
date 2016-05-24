@@ -13,10 +13,10 @@ public class ItemVO {
 	private String desc;
 	private String img;
 	private String idCategory;
-	
+	private String name;
 	//-------------------------------------------
 	private String user;
-	private float price;
+	private String price;
 	
 	
 	public ItemVO(JSONArray jsonArray) {
@@ -33,7 +33,7 @@ public class ItemVO {
 		}
 		
 	}
-	public ItemVO(String desc, String user, Float price){
+	public ItemVO(String desc, String user, String price){
 		this.desc = desc;
 		this.user = user;
 		this.price = price;
@@ -114,6 +114,22 @@ public class ItemVO {
 	 */
 	public void setIdCategory(String idCategory) {
 		this.idCategory = idCategory;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPrice() {
+		// TODO Auto-generated method stub
+		return price;
+	}
+	
+	public String getIdLastBidder() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

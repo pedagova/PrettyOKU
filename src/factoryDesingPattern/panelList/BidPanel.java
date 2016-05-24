@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 
+import controller.Controler;
 import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
@@ -37,7 +38,7 @@ public class BidPanel extends BasicPanel {
 
 	private GridBagConstraints gbc;
 
-	public BidPanel(Dimension dimension) {
+	public BidPanel(Dimension dimension, Controler ctrl) {
 		super.setPreferredSize(dimension);
 		this.setLayout(new GridBagLayout());
 		this.setBorder(BorderFactory.createTitledBorder("BID INFORMATION"));
@@ -106,7 +107,7 @@ public class BidPanel extends BasicPanel {
 		this.add(this.refreshPrice, this.gbc);
 	}
 
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
 			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
@@ -119,5 +120,5 @@ public class BidPanel extends BasicPanel {
 		frame.setLocationRelativeTo(null);
 		frame.add(new BidPanel(Utils.reSize(0.2, 0.3)));
 		frame.setVisible(true);
-	}
+	}*/
 }

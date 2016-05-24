@@ -1,8 +1,8 @@
 package factoryDesingPattern.panelList;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.Toolkit;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -10,10 +10,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import controller.Controler;
+import dataAccessObjectDesingPattern.ItemVO;
+import dataAccessObjectDesingPattern.UserVO;
 import factoryDesingPattern.BasicPanel;
+import model.AppObserver;
 import utils.Utils;
 
-public class MainPanel extends BasicPanel {
+public class MainPanel extends BasicPanel implements AppObserver {
 
 	/**
 	 * 
@@ -22,6 +26,8 @@ public class MainPanel extends BasicPanel {
 
 	private LoginPanel login;
 
+	private UserInfoPanel userInfo;
+	
 	private TagPanel aux;
 
 	private ListPanel list;
@@ -30,7 +36,7 @@ public class MainPanel extends BasicPanel {
 
 	private double heigthValue;
 
-	public MainPanel(Dimension dimension) {
+	public MainPanel(Dimension dimension, Controler ctrl) {
 		this.widthValue = dimension.getWidth();
 		this.heigthValue = dimension.getHeight();
 		// this.setLayout(new GridBagLayout());
@@ -38,19 +44,23 @@ public class MainPanel extends BasicPanel {
 		this.setPreferredSize(dimension);
 		// this.setBorder(new TitledBorder(new EtchedBorder(), "USER LOGIN", 1,
 		// 1, new Font("", 9, 28)));
+		this.ctrl = new Controler();
 		this.initComponets();
 		this.initGUI();
-
+		this.ctrl.add(this);
+		
 	}
 
 	public void initComponets() {
-		this.login = new LoginPanel(new Dimension(400, 100));
-		this.aux = new TagPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.4));
-		this.list = new ListPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.8));
+		this.login = new LoginPanel(new Dimension(400, 100), ctrl);
+		this.userInfo = new UserInfoPanel(new Dimension(400, 100), ctrl);
+		this.aux = new TagPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.4), ctrl);
+		this.list = new ListPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.8), ctrl);
 
 	}
 
 	public void initGUI() {
+		this.userInfo.setVisible(false);
 		JPanel auxLeft = new JPanel();
 		auxLeft.setLayout(new BoxLayout(auxLeft, BoxLayout.Y_AXIS));
 		// auxLeft.setPreferredSize(new Dimension(100, 200));
@@ -92,15 +102,44 @@ public class MainPanel extends BasicPanel {
 		}
 		JFrame frame = new JFrame();
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		// dimension = Utils.reSize(0.7, 0.7);
-		MainPanel main = new MainPanel(dimension);
+		MainPanel main = new MainPanel(dimension, new Controler());
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setPreferredSize(dimension);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		// frame.pack();
 		frame.add(main);
 
+	}
+
+	@Override
+	public void opAppEnd() {
+		//popear estas seguro de salir		
+	}
+
+	@Override
+	public void onUserLogOut() {
+		//popear adios
+		//desloguearte
+	}
+
+	@Override
+	public void OnLoginRight(UserVO u) {
+		login.setVisible(false);
+		userInfo.setVisible(true);
+		userInfo.setInfo(u);
+		this.repaint();
+	}
+
+	@Override
+	public void OnLoginFail(UserVO u) {
+		//Popear dialog error
+		System.out.println("Error");
+	}
+
+	@Override
+	public void OnListAct(List<ItemVO> l) {
+		this.list.act(l);
+		this.list.repaint();
 	}
 
 }

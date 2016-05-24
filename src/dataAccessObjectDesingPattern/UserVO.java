@@ -6,9 +6,15 @@ public class UserVO {
 	private String forename1, forename2;
 	private String nick;
 	private String pass;
+	private String eMail;
 	public UserVO(String name) {
-		super();
 		this.name = name;
+		this.pass = "1234";
+		this.forename1 = "g";
+		this.forename2 = "v";
+		this.nick = "perm";
+		this.eMail = "@g";
+		this.id = "1";
 	}
 	/**
 	 * @return the name
@@ -63,6 +69,10 @@ public class UserVO {
 	}
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+	public String getEMail() {
+		// TODO Auto-generated method stub
+		return this.eMail;
 	}
 	
 	

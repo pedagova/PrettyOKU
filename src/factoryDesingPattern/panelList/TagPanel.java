@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 
+import controller.Controler;
 import factoryDesingPattern.BasicPanel;
 
 public class TagPanel extends BasicPanel {
@@ -29,7 +30,7 @@ public class TagPanel extends BasicPanel {
 
 	private GridBagConstraints gbc;
 
-	public TagPanel(Dimension dimension) {
+	public TagPanel(Dimension dimension, Controler ctrl) {
 		super.setPreferredSize(dimension);
 		super.setLayout(new GridBagLayout());
 		this.initComponets();
@@ -88,7 +89,7 @@ public class TagPanel extends BasicPanel {
 		// this.getPreferredSize())));
 	}
 
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
 			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
@@ -101,6 +102,6 @@ public class TagPanel extends BasicPanel {
 		frame.setLocationRelativeTo(null);
 		frame.add(new TagPanel(new Dimension(300, 400)));
 		frame.setVisible(true);
-	}
+	}*/
 
 }

@@ -13,6 +13,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -26,6 +27,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import controller.Controler;
+import dataAccessObjectDesingPattern.ItemVO;
 import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
@@ -54,7 +57,7 @@ public class ListPanel extends BasicPanel {
 
 	private BufferedImage image;
 
-	public ListPanel(Dimension dimension) {
+	public ListPanel(Dimension dimension, Controler ctrl) {
 		super.setPreferredSize(dimension);
 		this.initComponets();
 		this.initGUI();
@@ -146,7 +149,7 @@ public class ListPanel extends BasicPanel {
 			this.genereteLinkButton(button, "Nombre del producto", 0);
 			this.containerPanel.add(button, this.gbc);
 			++this.gbc.gridx;
-			this.containerPanel.add(new JLabel(this.generateItemInfo()), this.gbc);
+			this.containerPanel.add(new JLabel(this.generateItemInfo("")), this.gbc);
 			++this.gbc.gridy;
 
 			--this.gbc.gridx;
@@ -161,7 +164,7 @@ public class ListPanel extends BasicPanel {
 			text.append("\n");
 			text.append(this.generateItemDescription(3));
 			text.append("\n");
-			text.append(this.generateItemInfo());
+			text.append(this.generateItemInfo(""));
 			this.containerPanel.add(text, this.gbc);
 			++this.gbc.gridy;
 
@@ -172,15 +175,18 @@ public class ListPanel extends BasicPanel {
 
 	}
 
-	private String generateItemInfo() {
-		return "ejemplo de lo que deberia salir por aqui";
+	private String generateItemInfo(String info) {
+		try{
+		return info.substring(0, 15);
+		}catch (Exception e){
+			return "";
+		}
 	}
-
 	private String generateItemDescription(int i) {
 		return "linea descripcion " + i;
 	}
 
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		// set the Quaqua Look and Feel in the UIManager
@@ -199,34 +205,51 @@ public class ListPanel extends BasicPanel {
 		ListPanel productPanel = new ListPanel(new Dimension(1000, 1000));
 		frame.add(productPanel);
 		frame.pack();
+	}*/
+	
+	public void act(List<ItemVO> l) {
+		
+		for (int i = 0; i < l.size(); ++i) {
+			
+			this.imageIcon = new ImageIcon("src/images/sword (2).png");
+			
+			buttonList.add(new JButton("See more"));
+			buttonList.get(i).setToolTipText("Click for more information belongs to the item");
+			buttonList.get(i).setHorizontalAlignment(SwingConstants.RIGHT);
 
+			// this.reSizeImage();
+			imageList.add(this.imageIcon);
+			labelList.add(new JLabel(this.imageIcon));
+			// labelList.get(i).setIcon(this.imageList.get(i));
+		}
+		
+		int i = 0;
+		for (JButton button : this.buttonList) {
+			ItemVO itemAct = l.get(i);
+			this.genereteLinkButton(button, itemAct.getName(), 0);
+			this.containerPanel.add(button, this.gbc);
+			++this.gbc.gridx;
+			this.containerPanel.add(new JLabel(this.generateItemInfo(itemAct.getDesc())), this.gbc);
+			++this.gbc.gridy;
+
+			--this.gbc.gridx;
+			// --this.gbc.gridy;
+			this.containerPanel.add(this.labelList.get(i), this.gbc);
+			++this.gbc.gridx;
+			JTextArea text = new JTextArea();
+			text.setBackground(null);
+			text.setText("precio: " + itemAct.getPrice());
+			text.append("\n");
+			text.append("Author: " + ctrl.getUser(itemAct.getIdOwner()));
+			text.append("\n");
+			text.append("LastBidder: " + ctrl.getUser(itemAct.getIdLastBidder()));
+			text.append("\n");
+			this.containerPanel.add(text, this.gbc);
+			++this.gbc.gridy;
+
+			this.gbc.gridx = 0;
+			this.imageIcon = Utils.parseIcon(l.get(i).getIdCategory());
+			i++;
+		}
 	}
-	/*
-	 * public static void main(String[] args){ URI uri; try { uri = new
-	 * URI("http://java.sun.com"); } catch (URISyntaxException e1) { // TODO
-	 * Auto-generated catch block e1.printStackTrace(); } class OpenUrlAction
-	 * implements ActionListener {
-	 * 
-	 * @Override public void actionPerformed(ActionEvent e) { open(uri); } }
-	 * JFrame frame = new JFrame("Links");
-	 * frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frame.setSize(100,
-	 * 400); Container container = frame.getContentPane();
-	 * container.setLayout(new GridBagLayout()); JButton button = new JButton();
-	 * button.setText(
-	 * "<HTML>Click the <FONT color=\"#000099\"><U>link</U></FONT>" +
-	 * " to go to the Java website.</HTML>");
-	 * button.setHorizontalAlignment(SwingConstants.LEFT);
-	 * button.setBorderPainted(false); button.setOpaque(false);
-	 * button.setBackground(Color.WHITE); button.addActionListener(new
-	 * ActionListener() {
-	 * 
-	 * @Override public void actionPerformed(ActionEvent e) { JFrame j = new
-	 * JFrame(); j.setPreferredSize(new Dimension(600, 600));
-	 * j.setVisible(true); j.add(new MainPanel(new Dimension(500, 500))); } });
-	 * container.add(button); frame.setVisible(true); }
-	 * 
-	 * private static void open(URI uri) { if (true) { new MainPanel(new
-	 * Dimension(500, 500)); } else { } }
-	 * 
-	 */
 }

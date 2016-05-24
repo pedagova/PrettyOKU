@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import Decoder.BASE64Encoder;
 import ch.randelshofer.quaqua.ext.base64.Base64;
@@ -75,5 +76,9 @@ public class Utils {
 		BufferedImage bImage = new BufferedImage(200, 200, 1);
 
 		System.out.println(Utils.decodeImage(bImage, "jpg"));
+	}
+
+	public static ImageIcon parseIcon(String idCategory){
+		return null;
 	}
 }

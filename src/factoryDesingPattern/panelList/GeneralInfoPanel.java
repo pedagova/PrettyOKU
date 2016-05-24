@@ -12,6 +12,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import controller.Controler;
 import factoryDesingPattern.BasicPanel;
 
 public class GeneralInfoPanel extends BasicPanel {
@@ -36,7 +37,7 @@ public class GeneralInfoPanel extends BasicPanel {
 	
 	
 
-	public GeneralInfoPanel(Dimension dimension) {
+	public GeneralInfoPanel(Dimension dimension, Controler ctrl) {
 		super.setPreferredSize(dimension);
 		this.setLayout(new GridLayout(3, 4));
 		this.setBorder(new TitledBorder(new EtchedBorder(), "General Information", 1, 1, new Font("", 9, 28)));
@@ -75,7 +76,7 @@ public class GeneralInfoPanel extends BasicPanel {
 
 	}
 	
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
 			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
@@ -90,6 +91,6 @@ public class GeneralInfoPanel extends BasicPanel {
 		frame.add(productPanel);
 		frame.pack();
 
-	}
+	}*/
 
 }

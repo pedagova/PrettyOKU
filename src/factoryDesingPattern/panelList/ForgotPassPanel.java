@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 
+import controller.Controler;
 import factoryDesingPattern.BasicPanel;
 import factoryDesingPattern.panelList.progressBar.javaExample;
 import factoryDesingPattern.panelList.progressBar.javaExample.Task;
@@ -32,7 +33,7 @@ public class ForgotPassPanel extends BasicPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ForgotPassPanel(Dimension dimension){
+	public ForgotPassPanel(Dimension dimension, Controler ctrl){
 		
 	}
 	@Override

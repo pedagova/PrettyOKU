@@ -21,6 +21,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import ch.randelshofer.quaqua.ext.base64.Base64;
+import controller.Controler;
 import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
@@ -37,7 +38,7 @@ public class ImagePanel extends BasicPanel {
 
 	private ImageIcon imageIcon;
 	
-	public ImagePanel(Dimension dimension) {
+	public ImagePanel(Dimension dimension, Controler ctrl) {
 		
 		this.setPreferredSize(dimension);
 		this.initComponets();
@@ -185,13 +186,13 @@ public class ImagePanel extends BasicPanel {
 		return iconReturn;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setPreferredSize(new Dimension(500,500));
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.add(new ImagePanel(new Dimension(500,500)));
 		frame.setVisible(true);
-	}
+	}*/
 
 }

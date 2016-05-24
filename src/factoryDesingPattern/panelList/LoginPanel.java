@@ -14,6 +14,7 @@ import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import controller.Controler;
 import factoryDesingPattern.BasicPanel;
 
 public class LoginPanel extends BasicPanel {
@@ -41,10 +42,11 @@ public class LoginPanel extends BasicPanel {
 
 	private GridBagConstraints gbc;
 
-	public LoginPanel(Dimension dimension) {
+	public LoginPanel(Dimension dimension, Controler ctrl) {
 		this.gbc = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
 		this.setPreferredSize(dimension);
+		this.ctrl = ctrl;
 		this.initComponets();
 		this.initGUI();
 	}
@@ -92,7 +94,7 @@ public class LoginPanel extends BasicPanel {
 
 					@Override
 					public void run() {
-						new UserRegisterPanel();
+						new UserRegisterPanel(ctrl);
 						// añadir que se logee solo
 					}
 				});
@@ -124,7 +126,7 @@ public class LoginPanel extends BasicPanel {
 		this.add(this.createUser, this.gbc);
 	}
 
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
 			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
@@ -136,6 +138,6 @@ public class LoginPanel extends BasicPanel {
 		frame.add(new LoginPanel(new Dimension(400, 100)));
 		frame.setVisible(true);
 		frame.pack();
-	}
+	}*/
 
 }

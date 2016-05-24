@@ -3,6 +3,7 @@ package factoryDesingPattern.panelList;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Point;
 import java.awt.Toolkit;
 
 import javax.swing.Box;
@@ -21,6 +22,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import controller.Controler;
 import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
@@ -43,7 +45,7 @@ public class UserRegisterPanel extends BasicPanel {
 	private JButton createAccount;
 	private JPanel auxPanel;
 
-	public UserRegisterPanel() {
+	public UserRegisterPanel(Controler ctrl) {
 		super.setPreferredSize(new Dimension(300, 300));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBorder(new TitledBorder(new EtchedBorder(), "USER REGISTER", 1, 1, new Font("", 9, 28)));
@@ -56,7 +58,6 @@ public class UserRegisterPanel extends BasicPanel {
 		dialog.setModal(true);
 		dialog.setVisible(true);
 		dialog.pack();
-
 	}
 
 	@Override
