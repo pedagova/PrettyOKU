@@ -7,6 +7,7 @@ public class UserVO {
 	private String nick;
 	private String pass;
 	private String eMail;
+	private String id_owner;
 	public UserVO(String name) {
 		this.name = name;
 		this.pass = "1234";
@@ -14,7 +15,6 @@ public class UserVO {
 		this.forename2 = "v";
 		this.nick = "perm";
 		this.eMail = "@g";
-		this.id = "1";
 	}
 	/**
 	 * @return the name

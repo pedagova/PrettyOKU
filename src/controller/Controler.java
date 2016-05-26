@@ -26,4 +26,9 @@ public class Controler {
 	public Controler(){
 		model = new Model();
 	}
+
+	public void getAll(String string) {
+		model.getAll(string);
+		
+	}
 }

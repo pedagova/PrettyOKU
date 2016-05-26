@@ -1,12 +1,17 @@
 package factoryDesingPattern.panelList;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -27,7 +32,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 	private LoginPanel login;
 
 	private UserInfoPanel userInfo;
-	
+
 	private TagPanel aux;
 
 	private ListPanel list;
@@ -36,38 +41,40 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 	private double heigthValue;
 
+	private JPanel auxLeft;
+
+	private JPanel auxTop;
+
 	public MainPanel(Dimension dimension, Controler ctrl) {
 		this.widthValue = dimension.getWidth();
 		this.heigthValue = dimension.getHeight();
-		// this.setLayout(new GridBagLayout());
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setPreferredSize(dimension);
-		// this.setBorder(new TitledBorder(new EtchedBorder(), "USER LOGIN", 1,
-		// 1, new Font("", 9, 28)));
+
 		this.ctrl = new Controler();
 		this.initComponets();
 		this.initGUI();
 		this.ctrl.add(this);
-		
+
 	}
 
 	public void initComponets() {
 		this.login = new LoginPanel(new Dimension(400, 100), ctrl);
-		this.userInfo = new UserInfoPanel(new Dimension(400, 100), ctrl);
+		this.userInfo = new UserInfoPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.5), ctrl);
 		this.aux = new TagPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.4), ctrl);
-		this.list = new ListPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.8), ctrl);
+		this.list = new ListPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.9), ctrl);
 
 	}
 
 	public void initGUI() {
 		this.userInfo.setVisible(false);
-		JPanel auxLeft = new JPanel();
+		auxLeft = new JPanel();
 		auxLeft.setLayout(new BoxLayout(auxLeft, BoxLayout.Y_AXIS));
 		// auxLeft.setPreferredSize(new Dimension(100, 200));
 		auxLeft.add(login);
 		auxLeft.add(aux);
 
-		JPanel auxTop = new JPanel();
+		auxTop = new JPanel();
 
 		auxTop.setLayout(new BoxLayout(auxTop, BoxLayout.X_AXIS));
 		auxTop.add(auxLeft);
@@ -79,10 +86,10 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		JButton b2 = new JButton();
 		JButton b3 = new JButton();
 		JButton b4 = new JButton();
-		super.genereteLinkButton(b1, "About us", 0.1);
-		super.genereteLinkButton(b2, "Payment methods", 0.1);
-		super.genereteLinkButton(b3, "Deliver rates & policy", 0.1);
-		super.genereteLinkButton(b4, "Help", 0.1);
+		super.genereteBottonBarButton(b1, "About us", 0.1, 0);
+		super.genereteBottonBarButton(b2, "Payment methods", 0.1, 1);
+		super.genereteBottonBarButton(b3, "Deliver rates & policy", 0.1, 1);
+		super.genereteBottonBarButton(b4, "Help", 0.1, 1);
 
 		JPanel panela = new JPanel();
 		panela.add(b1);
@@ -113,17 +120,67 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 	@Override
 	public void opAppEnd() {
-		//popear estas seguro de salir		
+
 	}
 
 	@Override
 	public void onUserLogOut() {
-		//popear adios
-		//desloguearte
+		// popear adios
+		// desloguearte
 	}
 
 	@Override
 	public void OnLoginRight(UserVO u) {
+		this.removeAll();
+		this.validate();
+		this.auxLeft.removeAll();
+		this.auxLeft.validate();
+		this.auxLeft.setLayout(new BoxLayout(auxLeft, BoxLayout.Y_AXIS));
+		this.auxLeft.add(userInfo);
+		this.auxLeft.add(aux);
+
+		this.auxTop.removeAll();
+		this.auxTop.validate();
+		this.auxTop.setLayout(new BoxLayout(auxTop, BoxLayout.X_AXIS));
+		this.auxTop.add(this.auxLeft);
+		this.auxTop.add(this.list);
+
+		this.add(auxTop);
+
+		JButton b1 = new JButton();
+		JButton b2 = new JButton();
+		JButton b3 = new JButton();
+		JButton b4 = new JButton();
+		super.genereteLinkButton(b1, "About us", 0.1);
+		super.genereteLinkButton(b2, "Payment methods", 0.1);
+		super.genereteLinkButton(b3, "Deliver rates & policy", 0.1);
+		super.genereteLinkButton(b4, "Help", 0.1);
+
+		JPanel panela = new JPanel();
+
+		b1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialog = new JDialog();
+				dialog.setSize(new Dimension(500, 700));
+				JPanel panel = new JPanel();
+				panel.setPreferredSize(new Dimension(500, 500));
+				panel.setBackground(Color.RED);
+				dialog.add(panel);
+				dialog.setModal(true);
+				dialog.setVisible(true);
+				dialog.pack();
+				dialog.setLocationRelativeTo(MainPanel.this);
+			}
+		});
+
+		panela.add(b1);
+		panela.add(b2);
+		panela.add(b3);
+		panela.add(b4);
+		this.add(panela);
+
 		login.setVisible(false);
 		userInfo.setVisible(true);
 		userInfo.setInfo(u);
@@ -132,14 +189,15 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 	@Override
 	public void OnLoginFail(UserVO u) {
-		//Popear dialog error
+		// Popear dialog error
 		System.out.println("Error");
 	}
 
 	@Override
 	public void OnListAct(List<ItemVO> l) {
-		this.list.act(l);
+		this.list.act(l, Utils.newDim(widthValue, heigthValue, 0.5, 0.9));
 		this.list.repaint();
+		this.list.setVisible(true);
 	}
 
 }

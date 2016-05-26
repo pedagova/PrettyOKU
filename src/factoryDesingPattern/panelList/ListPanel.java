@@ -11,6 +11,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -39,7 +41,7 @@ public class ListPanel extends BasicPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final int NUMBER_ITEM = 50;
+	private static final int NUMBER_ITEM = 10;
 
 	private ArrayList<JButton> buttonList = new ArrayList<JButton>();
 
@@ -59,6 +61,14 @@ public class ListPanel extends BasicPanel {
 
 	public ListPanel(Dimension dimension, Controler ctrl) {
 		super.setPreferredSize(dimension);
+		this.ctrl = ctrl;
+		this.initComponets();
+		this.initGUI();
+	}
+
+	public ListPanel(Dimension dimension, Controler ctrl, List<ItemVO> list) {
+		super.setPreferredSize(dimension);
+		this.ctrl = ctrl;
 		this.initComponets();
 		this.initGUI();
 	}
@@ -80,7 +90,7 @@ public class ListPanel extends BasicPanel {
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.scroll.setBorder(null);
 		this.scroll.getVerticalScrollBar().setUnitIncrement(10);
-		this.scroll.setPreferredSize(Utils.adjustDimension(0.7,0.9, this.getPreferredSize()));
+		this.scroll.setPreferredSize(Utils.adjustDimension(0.7, 0.9, this.getPreferredSize()));
 		this.scroll.setVisible(true);
 		for (int i = 0; i < ListPanel.NUMBER_ITEM; ++i) {
 			double rand = this.randomImage();
@@ -88,7 +98,7 @@ public class ListPanel extends BasicPanel {
 				this.imageIcon = new ImageIcon("src/images/sword (2).png");
 			} else if (rand < 0.6 && rand >= 0.3) {
 				this.imageIcon = new ImageIcon("src/images/book (2).png");
-			}else{
+			} else {
 				this.imageIcon = new ImageIcon("src/images/merchandising (2).png");
 			}
 			buttonList.add(new JButton("See more"));
@@ -149,7 +159,7 @@ public class ListPanel extends BasicPanel {
 			this.genereteLinkButton(button, "Nombre del producto", 0);
 			this.containerPanel.add(button, this.gbc);
 			++this.gbc.gridx;
-			this.containerPanel.add(new JLabel(this.generateItemInfo("")), this.gbc);
+			this.containerPanel.add(new JLabel(this.generateItemInfo("Item descrp")), this.gbc);
 			++this.gbc.gridy;
 
 			--this.gbc.gridx;
@@ -172,68 +182,75 @@ public class ListPanel extends BasicPanel {
 			i++;
 		}
 		this.add(this.scroll);
-
 	}
 
 	private String generateItemInfo(String info) {
-		try{
-		return info.substring(0, 15);
-		}catch (Exception e){
-			return "";
+		try {
+			return info.substring(0, 15);
+		} catch (Exception e) {
+			return "estoy en catch";
 		}
 	}
+
 	private String generateItemDescription(int i) {
 		return "linea descripcion " + i;
 	}
 
-	/*public static void main(String[] arg) {
+	/*
+	 * public static void main(String[] arg) {
+	 * 
+	 * System.setProperty("Quaqua.tabLayoutPolicy", "wrap"); // set the Quaqua
+	 * Look and Feel in the UIManager try {
+	 * UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.
+	 * getLookAndFeel()); // set UI manager properties here that affect Quaqua }
+	 * catch (Exception e) { // take an appropriate action here }
+	 * 
+	 * // JOptionPane.showConfirmDialog(null,new ListPanel(new //
+	 * Dimension(500,500)), "List", JOptionPane.NO_OPTION); JFrame frame = new
+	 * JFrame("Product List"); frame.setVisible(true); frame.setSize(500, 500);
+	 * ListPanel productPanel = new ListPanel(new Dimension(1000, 1000));
+	 * frame.add(productPanel); frame.pack(); }
+	 */
 
-		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
-		// set the Quaqua Look and Feel in the UIManager
-		try {
-			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
-			// set UI manager properties here that affect Quaqua
-		} catch (Exception e) {
-			// take an appropriate action here
-		}
+	public void act(List<ItemVO> l, Dimension dimension) {
+		// JScrollPane pane = (JScrollPane) this.getComponent(0);
+		// pane.validate();
+		this.removeAll();
 
-		// JOptionPane.showConfirmDialog(null,new ListPanel(new
-		// Dimension(500,500)), "List", JOptionPane.NO_OPTION);
-		JFrame frame = new JFrame("Product List");
-		frame.setVisible(true);
-		frame.setSize(500, 500);
-		ListPanel productPanel = new ListPanel(new Dimension(1000, 1000));
-		frame.add(productPanel);
-		frame.pack();
-	}*/
-	
-	public void act(List<ItemVO> l) {
-		
+		this.gbc = new GridBagConstraints();
+		this.gbc.gridy = 0;
+		this.gbc.gridx = 0;
+		this.gbc.insets = new Insets(3, 3, 3, 3);
+		this.containerPanel = new JPanel();
+		this.containerPanel.setLayout(new GridBagLayout());
+		this.repaint();
+		this.buttonList = new ArrayList<JButton>();
+		this.labelList = new ArrayList<JLabel>();
+		this.imageList = new ArrayList<ImageIcon>();
 		for (int i = 0; i < l.size(); ++i) {
-			
+
 			this.imageIcon = new ImageIcon("src/images/sword (2).png");
-			
+
 			buttonList.add(new JButton("See more"));
 			buttonList.get(i).setToolTipText("Click for more information belongs to the item");
 			buttonList.get(i).setHorizontalAlignment(SwingConstants.RIGHT);
 
 			// this.reSizeImage();
 			imageList.add(this.imageIcon);
-			labelList.add(new JLabel(this.imageIcon));
-			// labelList.get(i).setIcon(this.imageList.get(i));
+			labelList.add(new JLabel(this.imageIcon)); //
+			labelList.get(i).setIcon(this.imageList.get(i));
 		}
-		
+
 		int i = 0;
+		
 		for (JButton button : this.buttonList) {
 			ItemVO itemAct = l.get(i);
-			this.genereteLinkButton(button, itemAct.getName(), 0);
+			this.genereteLinkButton(button, itemAct.getName()+ "se me queda corto el null", 0);
 			this.containerPanel.add(button, this.gbc);
 			++this.gbc.gridx;
-			this.containerPanel.add(new JLabel(this.generateItemInfo(itemAct.getDesc())), this.gbc);
-			++this.gbc.gridy;
-
+			this.containerPanel.add(new JLabel(this.generateItemInfo(itemAct.getDesc()) + "pongo esto por descp vacia") , this.gbc);
 			--this.gbc.gridx;
-			// --this.gbc.gridy;
+			++this.gbc.gridy;
 			this.containerPanel.add(this.labelList.get(i), this.gbc);
 			++this.gbc.gridx;
 			JTextArea text = new JTextArea();
@@ -246,10 +263,19 @@ public class ListPanel extends BasicPanel {
 			text.append("\n");
 			this.containerPanel.add(text, this.gbc);
 			++this.gbc.gridy;
-
 			this.gbc.gridx = 0;
 			this.imageIcon = Utils.parseIcon(l.get(i).getIdCategory());
 			i++;
 		}
+		this.scroll = new JScrollPane(this.containerPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scroll.setBorder(null);
+		this.scroll.getVerticalScrollBar().setUnitIncrement(10);
+		this.scroll.setPreferredSize(Utils.adjustDimension(0.7, 0.9, this.getPreferredSize()));
+		this.scroll.setVisible(true);
+		this.add(scroll);
+		this.validate();
+		this.repaint();
 	}
+
 }

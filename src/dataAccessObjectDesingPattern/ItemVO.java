@@ -33,12 +33,26 @@ public class ItemVO {
 		}
 		
 	}
+	public ItemVO(JSONObject jsonArray) {
+		try {
+			JSONObject ob  = jsonArray;
+			this.id = ob.getString("id");
+			this.idOwner = ob.getString("id_owner");
+			this.idCategory = ob.getString("id_category");
+			this.desc = ob.getString("description");
+			this.img = ob.getString("img");
+		} catch (JSONException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
 	public ItemVO(String desc, String user, String price){
 		this.desc = desc;
 		this.user = user;
 		this.price = price;
 		this.idOwner = "1";
-		this.id = "";
+		this.id = " producto id weiiiiii";
 		this.img = "test Image Iphone";
 		this.idCategory = "3";
 	}

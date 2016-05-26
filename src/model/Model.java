@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.ActionMapUIResource;
+
 import dataAccessObjectDesingPattern.ItemDao;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserDao;
@@ -13,7 +15,7 @@ public class Model extends Observer{
 	private List<AppObserver> observerList;
 	private UserDao userConnection;
 	private ItemDao itemConnection;
-	
+	private List<ItemVO> actList;
 	//----------- request ----------------------
 	
 	public void login(String nick, String pass) {
@@ -21,8 +23,8 @@ public class Model extends Observer{
 		//execut
 		
 		UserVO u = userConnection.getUser(nick);
-		System.out.println(pass + " " + u.getPass());
-		if(pass != u.getPass()) notifyLoginFail(u);
+		System.out.println(pass + " " + u.getPass() + " 1");
+		if(!pass.equals(u.getPass())) notifyLoginFail(u);
 		else notifyLoginRight(u);
 	}
 	
@@ -64,6 +66,11 @@ public class Model extends Observer{
 	public String getUser(String idOwner) {
 		
 		return userConnection.getUser(idOwner).getId();
+	}
+
+	public void getAll(String string) {
+		actList = itemConnection.getAllItems(string);
+		notifyListAct(actList);
 	}
 	
 }
