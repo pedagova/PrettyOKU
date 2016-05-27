@@ -38,9 +38,6 @@ public class TagPanel extends BasicPanel {
 		this.ctrl = ctrl;
 		this.initComponets();
 		this.initGUI();
-		// this.setBorder(new TitledBorder(new EtchedBorder(), "adsad", 1, 1,
-		// new Font("", 9, 28)));
-
 	}
 
 	@Override
@@ -52,7 +49,7 @@ public class TagPanel extends BasicPanel {
 
 		this.videoGames = new JButton("Video games");
 		this.videoGames.setToolTipText("Click for see a list of video games");
-		//this.genereteLinkButton(this.videoGames, ">> Video games", 0.1);
+		this.genereteLinkButton(this.videoGames, ">> Video games", 0.1);
 
 		this.videoGames.addActionListener(new ActionListener() {
 

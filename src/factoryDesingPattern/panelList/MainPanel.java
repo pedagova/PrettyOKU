@@ -1,7 +1,7 @@
 package factoryDesingPattern.panelList;
 
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -19,6 +19,8 @@ import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
 import factoryDesingPattern.BasicPanel;
+import factoryDesingPattern.ComponentFactory;
+import factoryDesingPattern.PanelType;
 import model.AppObserver;
 import utils.Utils;
 
@@ -33,25 +35,19 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 	private UserInfoPanel userInfo;
 
-	private TagPanel aux;
+	private TagPanel tagList;
 
 	private ListPanel list;
-
-	private double widthValue;
-
-	private double heigthValue;
 
 	private JPanel auxLeft;
 
 	private JPanel auxTop;
 
 	public MainPanel(Dimension dimension, Controler ctrl) {
-		this.widthValue = dimension.getWidth();
-		this.heigthValue = dimension.getHeight();
+		this.ctrl = new Controler();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setPreferredSize(dimension);
 
-		this.ctrl = new Controler();
 		this.initComponets();
 		this.initGUI();
 		this.ctrl.add(this);
@@ -59,10 +55,26 @@ public class MainPanel extends BasicPanel implements AppObserver {
 	}
 
 	public void initComponets() {
-		this.login = new LoginPanel(new Dimension(400, 100), ctrl);
-		this.userInfo = new UserInfoPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.5), ctrl);
-		this.aux = new TagPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.4), ctrl);
-		this.list = new ListPanel(Utils.newDim(widthValue, heigthValue, 0.5, 0.9), ctrl);
+		/*
+		 * this.login = new LoginPanel(new Dimension(400, 100), ctrl);
+		 * 
+		 * this.userInfo = new UserInfoPanel(Utils.newDim(widthValue,
+		 * heigthValue, 0.5, 0.5), ctrl);
+		 * 
+		 * this.tagList = new TagPanel(Utils.newDim(widthValue, heigthValue,0.5,
+		 * 0.4), ctrl);
+		 * 
+		 * this.list = new ListPanel(Utils.newDim(widthValue, heigthValue,
+		 * 0.5,0.9), ctrl);
+		 */
+
+		this.login = (LoginPanel) BasicPanel.factory.getPanel(PanelType.LOGIN_PANEL, new Dimension(400, 100), this.ctrl);
+		this.userInfo = (UserInfoPanel) BasicPanel.factory.getPanel(PanelType.USER_INFO_PANEL,
+				Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.5), this.ctrl);
+		this.tagList = (TagPanel) BasicPanel.factory.getPanel(PanelType.TAG_PANEL,
+				Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.4), ctrl);
+		this.list = (ListPanel) BasicPanel.factory.getPanel(PanelType.LIST_PANEL,
+				Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.9), ctrl);
 
 	}
 
@@ -72,7 +84,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		auxLeft.setLayout(new BoxLayout(auxLeft, BoxLayout.Y_AXIS));
 		// auxLeft.setPreferredSize(new Dimension(100, 200));
 		auxLeft.add(login);
-		auxLeft.add(aux);
+		auxLeft.add(tagList);
 
 		auxTop = new JPanel();
 
@@ -91,6 +103,21 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		super.genereteBottonBarButton(b3, "Deliver rates & policy", 0.1, 1);
 		super.genereteBottonBarButton(b4, "Help", 0.1, 1);
 
+		b1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JPanel pan = new JPanel();
+				pan.setLayout(new FlowLayout());
+
+				pan.add(new JLabel("label"));
+				pan.add(new JButton("button"));
+
+				JDialog jd = new JDialog();
+
+				jd.add(pan);
+			}
+		});
 		JPanel panela = new JPanel();
 		panela.add(b1);
 		panela.add(b2);
@@ -107,6 +134,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		} catch (Exception e) {
 			System.err.print("Error at Look And Feel");
 		}
+
 		JFrame frame = new JFrame();
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		MainPanel main = new MainPanel(dimension, new Controler());
@@ -137,7 +165,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		this.auxLeft.validate();
 		this.auxLeft.setLayout(new BoxLayout(auxLeft, BoxLayout.Y_AXIS));
 		this.auxLeft.add(userInfo);
-		this.auxLeft.add(aux);
+		this.auxLeft.add(tagList);
 
 		this.auxTop.removeAll();
 		this.auxTop.validate();
@@ -152,28 +180,42 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		JButton b3 = new JButton();
 		JButton b4 = new JButton();
 		super.genereteLinkButton(b1, "About us", 0.1);
+		b1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JPanel pan = new JPanel();
+				pan.setLayout(new FlowLayout());
+				System.out.println("dialog");
+				pan.add(new JLabel("label"));
+				pan.add(new JButton("button"));
+
+				JDialog jd = new JDialog();
+				jd.setPreferredSize(new Dimension(500, 500));
+				jd.add(pan);
+			}
+		});
 		super.genereteLinkButton(b2, "Payment methods", 0.1);
 		super.genereteLinkButton(b3, "Deliver rates & policy", 0.1);
 		super.genereteLinkButton(b4, "Help", 0.1);
-
-		JPanel panela = new JPanel();
 
 		b1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JDialog dialog = new JDialog();
-				dialog.setSize(new Dimension(500, 700));
-				JPanel panel = new JPanel();
-				panel.setPreferredSize(new Dimension(500, 500));
-				panel.setBackground(Color.RED);
-				dialog.add(panel);
-				dialog.setModal(true);
-				dialog.setVisible(true);
-				dialog.pack();
-				dialog.setLocationRelativeTo(MainPanel.this);
+				JPanel pan = new JPanel();
+				pan.setLayout(new FlowLayout());
+
+				pan.add(new JLabel("label"));
+				pan.add(new JButton("button"));
+
+				JDialog jd = new JDialog();
+
+				jd.add(pan);
+				jd.setVisible(true);
 			}
 		});
+		JPanel panela = new JPanel();
 
 		panela.add(b1);
 		panela.add(b2);
@@ -195,7 +237,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 	@Override
 	public void OnListAct(List<ItemVO> l) {
-		this.list.act(l, Utils.newDim(widthValue, heigthValue, 0.5, 0.9));
+		this.list.act(l, Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.9), factory);
 		this.list.repaint();
 		this.list.setVisible(true);
 	}

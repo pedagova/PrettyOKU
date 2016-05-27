@@ -22,7 +22,7 @@ import factoryDesingPattern.panelList.TagPanel;
 import factoryDesingPattern.panelList.UserInfoPanel;
 import factoryDesingPattern.panelList.UserRegisterPanel;
 
-public class PanelFactory extends JComponent {
+public class ComponentFactory extends JPanel {
 
 	/**
 	 * 

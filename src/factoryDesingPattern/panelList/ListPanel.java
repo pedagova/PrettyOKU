@@ -1,7 +1,5 @@
 package factoryDesingPattern.panelList;
 
-import java.awt.Color;
-import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
@@ -11,7 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Toolkit;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,19 +17,16 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
 import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import factoryDesingPattern.BasicPanel;
+import factoryDesingPattern.ComponentFactory;
 import utils.Utils;
 
 public class ListPanel extends BasicPanel {
@@ -212,7 +207,7 @@ public class ListPanel extends BasicPanel {
 	 * frame.add(productPanel); frame.pack(); }
 	 */
 
-	public void act(List<ItemVO> l, Dimension dimension) {
+	public void act(List<ItemVO> l, Dimension dimension, ComponentFactory factory) {
 		// JScrollPane pane = (JScrollPane) this.getComponent(0);
 		// pane.validate();
 		this.removeAll();
@@ -242,13 +237,17 @@ public class ListPanel extends BasicPanel {
 		}
 
 		int i = 0;
-		
+
 		for (JButton button : this.buttonList) {
 			ItemVO itemAct = l.get(i);
-			this.genereteLinkButton(button, itemAct.getName()+ "se me queda corto el null", 0);
+			this.generateProductPanel(
+					new Dimension((int) BasicPanel.screenWidht / 2, (int) BasicPanel.screenHeight / 2), itemAct, button,
+					factory);
+			this.generateProductListButton(dimension, itemAct.getName(), button, this.getBackground());
 			this.containerPanel.add(button, this.gbc);
 			++this.gbc.gridx;
-			this.containerPanel.add(new JLabel(this.generateItemInfo(itemAct.getDesc()) + "pongo esto por descp vacia") , this.gbc);
+			this.containerPanel.add(new JLabel(this.generateItemInfo(itemAct.getDesc()) + "pongo esto por descp vacia"),
+					this.gbc);
 			--this.gbc.gridx;
 			++this.gbc.gridy;
 			this.containerPanel.add(this.labelList.get(i), this.gbc);

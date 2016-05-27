@@ -10,8 +10,11 @@ import javax.swing.UIManager;
 
 import controller.Controler;
 import factoryDesingPattern.BasicPanel;
+import factoryDesingPattern.ComponentFactory;
+import factoryDesingPattern.PanelType;
+import utils.Utils;
 
-public class ItemPanel extends BasicPanel{
+public class ItemPanel extends BasicPanel {
 
 	/**
 	 * 
@@ -19,23 +22,29 @@ public class ItemPanel extends BasicPanel{
 	private static final long serialVersionUID = 1L;
 
 	private ImagePanel image;
-	
+
 	private ItemInfoPanel info;
-	
+
 	private BidPanel bid;
-	
-	public ItemPanel(Dimension dimension, Controler ctrl){
+
+	public ItemPanel(Dimension dimension, Controler ctrl) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setPreferredSize(dimension);
-		//this.setBorder(new TitledBorder(new EtchedBorder(), "USER LOGIN", 1, 1, new Font("", 9, 28)));
 		this.initComponets();
 		this.initGUI();
 	}
+
 	@Override
 	public void initComponets() {
-		this.image = new ImagePanel(new Dimension(300,300), ctrl);
-		this.info = new ItemInfoPanel(new Dimension(800,500), ctrl);
-		this.bid  = new BidPanel(new Dimension(500,300), ctrl);
+		this.image = (ImagePanel) BasicPanel.factory.getPanel(PanelType.IMAGE_PANEL,
+				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 0.4, 0.4), ctrl);
+		this.bid = (BidPanel) BasicPanel.factory.getPanel(PanelType.BID_PANEL,
+				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 0.6, 0.6), ctrl);
+		this.info = (ItemInfoPanel) BasicPanel.factory.getPanel(PanelType.ITEM_INFO_PANEL,
+				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 1, 0.4), ctrl);
+		/*this.image = new ImagePanel(new Dimension(300, 300), ctrl);
+		this.info = new ItemInfoPanel(new Dimension(800, 500), ctrl);
+		this.bid = new BidPanel(new Dimension(500, 300), ctrl);*/
 	}
 
 	@Override
@@ -46,10 +55,10 @@ public class ItemPanel extends BasicPanel{
 		horizntal.add(this.bid);
 		this.add(horizntal);
 		this.add(info);
-		
+
 	}
-	
-	/*public static void main(String[] arg) {
+
+	public static void main(String[] arg) {
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
 			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
@@ -58,10 +67,9 @@ public class ItemPanel extends BasicPanel{
 		}
 		JFrame frame = new JFrame();
 		frame.setPreferredSize(new Dimension(500, 200));
-		frame.add(new ItemPanel(new Dimension(400, 100)));
+		frame.add(new ItemPanel(new Dimension(400, 100), new Controler()));
 		frame.setVisible(true);
 		frame.pack();
-	}*/
-
+	}
 
 }
