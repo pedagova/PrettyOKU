@@ -67,9 +67,17 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		this.info5 = new JButton();
 		super.genereteBottonBarButton(this.info1, "About us", 0.1, 0);
 		super.genereteBottonBarButton(this.info2, "Payment methods", 0.1, 1);
-		super.genereteBottonBarButton(this.info3, "Deliver rates & policy", 0.1, 1);
-		super.genereteBottonBarButton(this.info4, "Help", 0.1, 1);
-		super.genereteBottonBarButton(this.info5, "LOGGOUT", 0.1, 1);
+		super.genereteBottonBarButton(this.info3, "Deliver rates & policy", 0.1, 2);
+		super.genereteBottonBarButton(this.info4, "Help", 0.1, 3);
+		super.genereteBottonBarButton(this.info5, "LOGGOUT", 0.1, 4);
+		JPanel panela = new JPanel();
+		panela.add(info1);
+		panela.add(info2);
+		panela.add(info3);
+		panela.add(info4);
+		panela.add(info5);
+		this.add(panela);
+
 
 	}
 	
@@ -103,99 +111,11 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		auxTop.add(list);
 		this.add(auxTop);
 
-		JButton b1 = new JButton();
-		JButton b2 = new JButton();
-		JButton b3 = new JButton();
-		JButton b4 = new JButton();
-		JButton b5 = new JButton();
-
-		super.genereteBottonBarButton(b1, "About us", 0.1, 0);
-		super.genereteBottonBarButton(b2, "Payment methods", 0.1, 1);
-		super.genereteBottonBarButton(b3, "Deliver rates & policy", 0.1, 1);
-		super.genereteBottonBarButton(b4, "Help", 0.1, 1);
-
-		super.genereteBottonBarButton(b5, "LOGGOUT", 0.1, 1);
-
-		b1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JPanel pan = new JPanel();
-				pan.setLayout(new FlowLayout());
-				pan.add(new JLabel("label"));
-				pan.add(new JButton("button"));
-
-				JDialog jd = new JDialog();
-
-				jd.add(pan);
-			}
-		});
-
-		b2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JPanel pan = new JPanel();
-				pan.setLayout(new FlowLayout());
-
-				pan.add(new JLabel("label"));
-				pan.add(new JButton("button"));
-
-				JDialog jd = new JDialog();
-
-				jd.add(pan);
-			}
-		});
-
-		b3.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JPanel pan = new JPanel();
-				pan.setLayout(new FlowLayout());
-
-				pan.add(new JLabel("label"));
-				pan.add(new JButton("button"));
-
-				JDialog jd = new JDialog();
-
-				jd.add(pan);
-			}
-		});
-
-		b4.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JPanel pan = new JPanel();
-				pan.setLayout(new FlowLayout());
-
-				pan.add(new JLabel("label"));
-				pan.add(new JButton("button"));
-
-				JDialog jd = new JDialog();
-
-				jd.add(pan);
-			}
-		});
-
-		b5.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		JPanel panela = new JPanel();
-		panela.add(b1);
-		panela.add(b2);
-		panela.add(b3);
-		panela.add(b4);
-		panela.add(b5);
-		this.add(panela);
-
+		this.initButton();
+		
+		
 	}
-
+/*
 	public static void main(String[] arg) {
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
@@ -213,7 +133,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		frame.setVisible(true);
 		frame.add(main);
 
-	}
+	}*/
 
 	@Override
 	public void opAppEnd() {
@@ -244,56 +164,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 		this.add(auxTop);
 
-		JButton b1 = new JButton();
-		JButton b2 = new JButton();
-		JButton b3 = new JButton();
-		JButton b4 = new JButton();
-		JButton b5 = new JButton("LOGOUT");
-		super.genereteLinkButton(b1, "About us", 0.1);
-		b1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JPanel pan = new JPanel();
-				pan.setLayout(new FlowLayout());
-				System.out.println("dialog");
-				pan.add(new JLabel("label"));
-				pan.add(new JButton("button"));
-
-				JDialog jd = new JDialog();
-				jd.setPreferredSize(new Dimension(500, 500));
-				jd.add(pan);
-			}
-		});
-		super.genereteLinkButton(b2, "Payment methods", 0.1);
-		super.genereteLinkButton(b3, "Deliver rates & policy", 0.1);
-		super.genereteLinkButton(b4, "Help", 0.1);
-		super.genereteLinkButton(b5, "LOGGOUT", 0.1);
-
-		b1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JPanel pan = new JPanel();
-				pan.setLayout(new FlowLayout());
-
-				pan.add(new JLabel("label"));
-				pan.add(new JButton("button"));
-
-				JDialog jd = new JDialog();
-
-				jd.add(pan);
-				jd.setVisible(true);
-			}
-		});
-		JPanel panela = new JPanel();
-
-		panela.add(b1);
-		panela.add(b2);
-		panela.add(b3);
-		panela.add(b4);
-		panela.add(b5);
-		this.add(panela);
+		this.initButton();
 
 		login.setVisible(false);
 		userInfo.setVisible(true);
@@ -313,7 +184,6 @@ public class MainPanel extends BasicPanel implements AppObserver {
 	public void OnListAct(List<ItemVO> l) {
 		this.list.act(l, Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.9), factory);
 		this.list.repaint();
-		this.list.setVisible(true);
 	}
 
 	@Override

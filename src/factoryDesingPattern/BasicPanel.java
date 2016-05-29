@@ -37,7 +37,7 @@ public abstract class BasicPanel extends JPanel {
 	protected final static double screenHeight = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	protected final static double screenWidht = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	protected final static ComponentFactory factory = new ComponentFactory();
-	
+
 	public abstract void initComponets();
 
 	public abstract void initGUI();
@@ -49,7 +49,8 @@ public abstract class BasicPanel extends JPanel {
 		component.setEditable(false);
 		component.setFont(new Font(data, 10, 28));
 		component.setVisible(true);
-		//component.setPreferredSize(Utils.adjustDimension(0.6, dimension, this.getPreferredSize()));
+		// component.setPreferredSize(Utils.adjustDimension(0.6, dimension,
+		// this.getPreferredSize()));
 	}
 
 	protected void generateTextField(JTextField component, String data, double dimension) {
@@ -71,7 +72,7 @@ public abstract class BasicPanel extends JPanel {
 		component.setHorizontalAlignment(SwingConstants.LEFT);
 		component.setBorderPainted(false);
 		component.setOpaque(false);
-		component.setBackground(new Color(232, 232, 232));
+		component.setBackground(null);
 		component.addActionListener(new ActionListener() {
 
 			@Override
@@ -90,32 +91,67 @@ public abstract class BasicPanel extends JPanel {
 	}
 
 	protected void genereteBottonBarButton(JButton component, String data, double dimension, int option) {
-		String title = "nombre del cuadro";
 		component.setText("<HTML><font size=\"6\"><FONT color=\"#000099\"><U>" + data + "</U></FONT></font></HTML>");
 		component.setHorizontalAlignment(SwingConstants.CENTER);
 		component.setBorderPainted(false);
 		component.setOpaque(false);
-		component.setBackground(new Color(232, 232, 232));
+		component.setBackground(null);
 		component.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JTextArea text = new JTextArea();
-				text.setEditable(false);
-				text.setText(setText());
-				JDialog dialog = new JDialog(new JFrame(), title, true);
+				JFrame frame = new JFrame(data);
+				frame.setSize(500, 500);
 
-				dialog.setPreferredSize(new Dimension(500, 500));
-				dialog.setVisible(true);
-				dialog.setLocationRelativeTo(null);
-				JOptionPane pane = new JOptionPane();
-				pane.add(text);
-				pane.showMessageDialog(BasicPanel.this, "hi");
-				// JOptionPane.showMessageDialog(new JFrame(), "Eggs are not
-				// supposed to be green.", "A plain message",
-				// JOptionPane.PLAIN_MESSAGE);
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(false);
+				JPanel panel = new JPanel();
+				panel.setPreferredSize(new Dimension(500, 500));
+				JTextArea area = new JTextArea();
+				area.setPreferredSize(new Dimension(500, 500));
+
+				switch (option) {
+				case 0:
+					frame.add(area);
+					frame.setVisible(true);
+					break;
+				case 1:
+					frame.add(panel.add(new JTextArea()));
+					frame.setVisible(true);
+					break;
+				case 2:
+					frame.add(panel.add(new JTextArea()));
+					frame.setVisible(true);
+					break;
+				case 3:
+					frame.add(panel.add(new JTextArea()));
+					frame.setVisible(true);
+					break;
+				case 4:
+					String i = JOptionPane.showInputDialog(null, "Eggs are not supposed to be green.",
+							"A plain message", JOptionPane.YES_NO_OPTION);
+					frame.dispose();
+					break;
+				}
+				frame.pack();
 			}
 		});
+
+		/*
+		 * component.addActionListener(new ActionListener() {
+		 * 
+		 * @Override public void actionPerformed(ActionEvent e) { JTextArea text
+		 * = new JTextArea(); text.setEditable(false); text.setText(setText());
+		 * JDialog dialog = new JDialog(new JFrame(), data, true);
+		 * 
+		 * dialog.setPreferredSize(new Dimension(500, 500));
+		 * dialog.setVisible(true); dialog.setLocationRelativeTo(null);
+		 * JOptionPane pane = new JOptionPane(); pane.add(text);
+		 * pane.showMessageDialog(BasicPanel.this, "hi"); //
+		 * JOptionPane.showMessageDialog(new JFrame(), "Eggs are not // supposed
+		 * to be green.", "A plain message", // JOptionPane.PLAIN_MESSAGE); }
+		 * });
+		 */
 	}
 
 	private String setText() {
@@ -136,7 +172,7 @@ public abstract class BasicPanel extends JPanel {
 		button.setHorizontalAlignment(SwingConstants.LEFT);
 		button.setBorderPainted(false);
 		button.setOpaque(false);
-		button.setBackground(new Color(232, 232, 232));
+		button.setBackground(null);
 	}
 
 	protected void generateProductPanel(Dimension dimension, ItemVO item, JButton button, ComponentFactory factory) {

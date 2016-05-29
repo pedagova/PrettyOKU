@@ -1,7 +1,6 @@
 package factoryDesingPattern.panelList;
 
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -9,8 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import controller.Controler;
+import dataAccessObjectDesingPattern.ItemVO;
 import factoryDesingPattern.BasicPanel;
-import factoryDesingPattern.ComponentFactory;
 import factoryDesingPattern.PanelType;
 import utils.Utils;
 
@@ -39,12 +38,9 @@ public class ItemPanel extends BasicPanel {
 		this.image = (ImagePanel) BasicPanel.factory.getPanel(PanelType.IMAGE_PANEL,
 				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 0.4, 0.4), ctrl);
 		this.bid = (BidPanel) BasicPanel.factory.getPanel(PanelType.BID_PANEL,
-				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 0.6, 0.6), ctrl);
+				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 0.6, 0.4), ctrl);
 		this.info = (ItemInfoPanel) BasicPanel.factory.getPanel(PanelType.ITEM_INFO_PANEL,
-				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 1, 0.4), ctrl);
-		/*this.image = new ImagePanel(new Dimension(300, 300), ctrl);
-		this.info = new ItemInfoPanel(new Dimension(800, 500), ctrl);
-		this.bid = new BidPanel(new Dimension(500, 300), ctrl);*/
+				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 1, 0.6), ctrl);
 	}
 
 	@Override
@@ -56,6 +52,10 @@ public class ItemPanel extends BasicPanel {
 		this.add(horizntal);
 		this.add(info);
 
+	}
+	
+	public void addItem(ItemVO item){
+		
 	}
 
 	public static void main(String[] arg) {

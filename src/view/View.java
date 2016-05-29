@@ -18,10 +18,6 @@ public class View extends JFrame {
 	
 	MainPanel panel;
 
-	public View() {
-		
-	}
-
 	public void start(Controler ctrl) {
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
@@ -35,6 +31,7 @@ public class View extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.panel = new MainPanel(Toolkit.getDefaultToolkit().getScreenSize(), ctrl);
 		this.add(panel);
+		ctrl.add(panel);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 

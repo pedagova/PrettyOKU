@@ -59,8 +59,8 @@ public class ListPanel extends BasicPanel {
 	public ListPanel(Dimension dimension, Controler ctrl) {
 		super.setPreferredSize(dimension);
 		this.ctrl = ctrl;
-		this.initComponets();
-		this.initGUI();
+		//this.initComponets();
+		//this.initGUI();
 	}
 
 	public ListPanel(Dimension dimension, Controler ctrl, List<ItemVO> list) {
@@ -169,7 +169,6 @@ public class ListPanel extends BasicPanel {
 			++this.gbc.gridy;
 
 			--this.gbc.gridx;
-			// --this.gbc.gridy;
 			this.containerPanel.add(this.labelList.get(i), this.gbc);
 			++this.gbc.gridx;
 			JTextArea text = new JTextArea();
@@ -284,6 +283,7 @@ public class ListPanel extends BasicPanel {
 		this.scroll.setPreferredSize(Utils.adjustDimension(0.7, 0.9, this.getPreferredSize()));
 		this.scroll.setVisible(true);
 		this.add(scroll);
+		this.setBackground(null);
 		this.validate();
 		this.repaint();
 	}
