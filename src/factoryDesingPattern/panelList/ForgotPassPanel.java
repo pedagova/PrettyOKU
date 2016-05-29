@@ -23,37 +23,21 @@ import javax.swing.UIManager;
 
 import controller.Controler;
 import factoryDesingPattern.BasicPanel;
-import factoryDesingPattern.panelList.progressBar.javaExample;
-import factoryDesingPattern.panelList.progressBar.javaExample.Task;
+import factoryDesingPattern.panelList.progressBar.ProgressBar;
+import factoryDesingPattern.panelList.progressBar.ProgressBar.Task;
 
-public class ForgotPassPanel extends BasicPanel {
+public class ForgotPassPanel extends BasicPanel implements ActionListener, PropertyChangeListener {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	public ForgotPassPanel(Dimension dimension, Controler ctrl){
-		
-	}
-	@Override
-	public void initComponets() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void initGUI() {
-		// TODO Auto-generated method stub
-
-	}
-	
 	private JProgressBar progressBar;
 	private JButton startButton;
 	private JTextArea taskOutput;
 	private Task task;
 
-	class Task extends SwingWorker<Void, Void> {
+	public class Task extends SwingWorker<Void, Void> {
 		/*
 		 * Main task. Executed in background thread.
 		 */
@@ -88,26 +72,34 @@ public class ForgotPassPanel extends BasicPanel {
 			Toolkit.getDefaultToolkit().beep();
 			startButton.setEnabled(true);
 			taskOutput.append("Done!\n");
-			taskOutput.append("Yout new password is: " + generatePass());
+			taskOutput.append("Yout new password is: " + generatePassword(10));
 
 		}
 	}
-	
-	private String generatePass(){
-		StringBuilder chain = new StringBuilder();
-		for(int i=0; i< 15; ++i){
-			chain.append(Math.random());
+
+	private String generatePassword(int longitud) {
+		String cadenaAleatoria = "";
+		long milis = new java.util.GregorianCalendar().getTimeInMillis();
+		Random r = new Random(milis);
+		int i = 0;
+		while (i < longitud) {
+			char c = (char) r.nextInt(255);
+			if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')) {
+				cadenaAleatoria += c;
+				i++;
+			}
 		}
-		return chain.toString();
+		return cadenaAleatoria;
+
 	}
 
-	public void javaExample() {
-		super.setLayout(new BorderLayout());
+	public ForgotPassPanel(Dimension dimension, Controler ctrl) {
+		this.setLayout(new BorderLayout());
 
 		// Create the demo's UI.
 		startButton = new JButton("Generate new password");
 		startButton.setActionCommand("Generate new password");
-		startButton.addActionListener((ActionListener) this);
+		startButton.addActionListener(this);
 
 		progressBar = new JProgressBar(0, 100);
 		progressBar.setValue(0);
@@ -138,7 +130,7 @@ public class ForgotPassPanel extends BasicPanel {
 		// Instances of javax.swing.SwingWorker are not reusuable, so
 		// we create new instances as needed.
 		task = new Task();
-		task.addPropertyChangeListener((PropertyChangeListener) this);
+		task.addPropertyChangeListener(this);
 		task.execute();
 	}
 
@@ -158,13 +150,13 @@ public class ForgotPassPanel extends BasicPanel {
 	 * Create the GUI and show it. As with all GUI code, this must run on the
 	 * event-dispatching thread.
 	 */
-	public static void createAndShowGUI() {
+	static void createAndShowGUI() {
 		// Create and set up the window.
-		JFrame frame = new JFrame("");
+		JFrame frame = new JFrame("Generate a new password");
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Create and set up the content pane.
-		JComponent newContentPane = new javaExample();
+		JComponent newContentPane = new ForgotPassPanel(new Dimension(800,800), null);
 		newContentPane.setOpaque(true); // content panes must be opaque
 		frame.setContentPane(newContentPane);
 
@@ -173,20 +165,15 @@ public class ForgotPassPanel extends BasicPanel {
 		frame.setVisible(true);
 	}
 
-	public static void main(String[] args) {
-		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
-		try {
-			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
-		} catch (Exception e) {
-			System.err.print("Error at Look And Feel");
-		}
-		// Schedule a job for the event-dispatching thread:
-		// creating and showing this application's GUI.
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
+	@Override
+	public void initComponets() {
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
+	public void initGUI() {
+		// TODO Auto-generated method stub
+		
+	}
 }

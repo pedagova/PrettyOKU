@@ -20,8 +20,10 @@ import javax.swing.JOptionPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import Decoder.BASE64Encoder;
 import ch.randelshofer.quaqua.ext.base64.Base64;
 import controller.Controler;
+import dataAccessObjectDesingPattern.ItemVO;
 import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
@@ -54,18 +56,26 @@ public class ImagePanel extends BasicPanel {
 		this.label = new JLabel();
 		this.label.setPreferredSize(getPreferredSize());
 		this.label.setSize(getPreferredSize());
-		this.label.setBorder(new TitledBorder(new EtchedBorder()));
+		this.label.setBorder(null);
 	}
 
 	@Override
 	public void initGUI() {
 		this.reSizeImage();
+		
 		this.label.setIcon(this.imageIcon/*this.bufferedImageToIcon(image)*/);
 		this.label.setHorizontalAlignment(JLabel.CENTER);
 		this.label.setVerticalAlignment(JLabel.CENTER);
 		this.add(this.label);
 	}
 	
+	public void setInfo(ItemVO item){
+		this.image = Utils.encodeImage(item.getImg());
+		this.label.setIcon(this.bufferedImageToIcon(image));
+		this.label.setHorizontalAlignment(JLabel.CENTER);
+		this.label.setVerticalAlignment(JLabel.CENTER);
+		this.add(this.label);
+	}
 	
 	 public ImageIcon iconToImageIcon(Icon icon){
 	        ImageIcon imageIconRetur=new ImageIcon(this.iconToImage(icon));
@@ -180,10 +190,9 @@ public class ImagePanel extends BasicPanel {
 
 	}
 	
-	public Icon bufferedImageToIcon(BufferedImage bufferImage) {
+	public ImageIcon bufferedImageToIcon(BufferedImage bufferImage) {
 		ImageIcon imgIcon = new ImageIcon(bufferImage);
-		Icon iconReturn = (Icon) (imgIcon);
-		return iconReturn;
+		return imgIcon;
 	}
 
 	/*public static void main(String[] args) {

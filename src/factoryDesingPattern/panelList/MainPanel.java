@@ -80,10 +80,6 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 
 	}
-	
-	private void initList(){
-		
-	}
 
 	public void initComponets() {
 		this.login = (LoginPanel) BasicPanel.factory.getPanel(PanelType.LOGIN_PANEL, new Dimension(400, 100),
@@ -93,19 +89,20 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		this.tagList = (TagPanel) BasicPanel.factory.getPanel(PanelType.TAG_PANEL,
 				Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.4), ctrl);
 		this.list = (ListPanel) BasicPanel.factory.getPanel(PanelType.LIST_PANEL,
-				Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.9), ctrl);
+				Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.7, 0.9), ctrl);
 
 	}
 
 	public void initGUI() {
 		this.userInfo.setVisible(false);
 		auxLeft = new JPanel();
+		auxLeft.setBackground(null);
 		auxLeft.setLayout(new BoxLayout(auxLeft, BoxLayout.Y_AXIS));
 		auxLeft.add(login);
 		auxLeft.add(tagList);
 
 		auxTop = new JPanel();
-
+		auxTop.setBackground(null);
 		auxTop.setLayout(new BoxLayout(auxTop, BoxLayout.X_AXIS));
 		auxTop.add(auxLeft);
 		auxTop.add(list);
@@ -182,7 +179,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 	@Override
 	public void OnListAct(List<ItemVO> l) {
-		this.list.act(l, Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.9), factory);
+		this.list.act(l, Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.9));
 		this.list.repaint();
 	}
 

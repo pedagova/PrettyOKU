@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.beans.*;
 import java.util.Random;
 
-public class javaExample extends JPanel implements ActionListener, PropertyChangeListener {
+public class ProgressBar extends JPanel implements ActionListener, PropertyChangeListener {
 
 	private JProgressBar progressBar;
 	private JButton startButton;
@@ -48,18 +48,28 @@ public class javaExample extends JPanel implements ActionListener, PropertyChang
 			Toolkit.getDefaultToolkit().beep();
 			startButton.setEnabled(true);
 			taskOutput.append("Done!\n");
-			taskOutput.append("Yout new password is: " + generatePass());
+			taskOutput.append("Yout new password is: " + generatePassword(10));
 
 		}
 	}
 
-	private String generatePass() {
-		StringBuilder chain = new StringBuilder("");
-		chain.append(Math.random() * 9);
-		return chain.toString();
+	private String generatePassword(int longitud) {
+		String cadenaAleatoria = "";
+		long milis = new java.util.GregorianCalendar().getTimeInMillis();
+		Random r = new Random(milis);
+		int i = 0;
+		while (i < longitud) {
+			char c = (char) r.nextInt(255);
+			if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')) {
+				cadenaAleatoria += c;
+				i++;
+			}
+		}
+		return cadenaAleatoria;
+
 	}
 
-	public javaExample() {
+	public ProgressBar() {
 		super(new BorderLayout());
 
 		// Create the demo's UI.
@@ -122,28 +132,12 @@ public class javaExample extends JPanel implements ActionListener, PropertyChang
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Create and set up the content pane.
-		JComponent newContentPane = new javaExample();
+		JComponent newContentPane = new ProgressBar();
 		newContentPane.setOpaque(true); // content panes must be opaque
 		frame.setContentPane(newContentPane);
 
 		// Display the window.
 		frame.pack();
 		frame.setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
-		try {
-			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
-		} catch (Exception e) {
-			System.err.print("Error at Look And Feel");
-		}
-		// Schedule a job for the event-dispatching thread:
-		// creating and showing this application's GUI.
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
 	}
 }

@@ -159,5 +159,9 @@ public class ItemVO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void setPrice(String price){
+		this.price = price;
+	}
 
 }

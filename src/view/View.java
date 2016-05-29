@@ -25,7 +25,6 @@ public class View extends JFrame {
 		} catch (Exception e) {
 			System.err.print("Error at Look And Feel");
 		}
-
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setPreferredSize(dimension);
 		this.setLocationRelativeTo(null);
@@ -34,7 +33,8 @@ public class View extends JFrame {
 		ctrl.add(panel);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
-
+		this.setBackground(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.pack();
 	}
 

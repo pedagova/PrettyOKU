@@ -1,5 +1,6 @@
 package factoryDesingPattern.panelList;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
@@ -7,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import controller.Controler;
+import dataAccessObjectDesingPattern.ItemVO;
 import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
@@ -31,12 +33,10 @@ public class ItemInfoPanel extends BasicPanel {
 	@Override
 	public void initComponets() {
 		this.itemInfo = new JTextArea();
-		this.itemInfo.setText("");
-		//this.itemInfo.setSize(new Dimension(500,500));
 		this.itemInfo.setLineWrap(true);
 		this.itemInfo.setWrapStyleWord(true);
 		this.itemInfo.setEditable(false);
-		this.itemInfo.setBackground(null);
+		this.itemInfo.setBackground(new Color(232, 232, 232));
 		this.scroll = new JScrollPane(this.itemInfo, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		this.scroll.setBorder(null);
@@ -50,11 +50,7 @@ public class ItemInfoPanel extends BasicPanel {
 		this.add(this.scroll);
 	}
 
-	private String chain(){
-		String text = "0";
-		for(int i=1; i<8000; ++i){
-			text += i;
-		}
-		return text;
+	public void setInfo(ItemVO item){
+		this.itemInfo.setText(item.getDesc());
 	}
 }

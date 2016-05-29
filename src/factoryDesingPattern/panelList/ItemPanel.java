@@ -36,11 +36,11 @@ public class ItemPanel extends BasicPanel {
 	@Override
 	public void initComponets() {
 		this.image = (ImagePanel) BasicPanel.factory.getPanel(PanelType.IMAGE_PANEL,
-				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 0.4, 0.4), ctrl);
+				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 0.6, 0.6), ctrl);
 		this.bid = (BidPanel) BasicPanel.factory.getPanel(PanelType.BID_PANEL,
-				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 0.6, 0.4), ctrl);
+				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 0.4, 0.4), ctrl);
 		this.info = (ItemInfoPanel) BasicPanel.factory.getPanel(PanelType.ITEM_INFO_PANEL,
-				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 1, 0.6), ctrl);
+				Utils.newDim(this.getPreferredSize().getWidth(), this.getPreferredSize().getHeight(), 1, 0.4), ctrl);
 	}
 
 	@Override
@@ -54,8 +54,10 @@ public class ItemPanel extends BasicPanel {
 
 	}
 	
-	public void addItem(ItemVO item){
-		
+	public void setInfo(ItemVO item){
+		this.bid.setInfo(item);
+		this.info.setInfo(item);
+		this.image.setInfo(item);
 	}
 
 	public static void main(String[] arg) {
