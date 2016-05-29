@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -16,6 +17,8 @@ import javax.swing.UIManager;
 
 import controller.Controler;
 import factoryDesingPattern.BasicPanel;
+import factoryDesingPattern.PanelType;
+import utils.Utils;
 
 public class LoginPanel extends BasicPanel {
 
@@ -54,9 +57,9 @@ public class LoginPanel extends BasicPanel {
 	@Override
 	public void initComponets() {
 		this.name = new JTextPane();
-		this.generateTextPane(this.name, "<font size=\"12\">Your name</font>", 0.5);
+		this.generateTextPane(this.name, "<font size=\"12\">Your name</font>");
 		this.pass = new JTextPane();
-		this.generateTextPane(this.pass, "<font size=\"12\">Your pass</font>", 0.5);
+		this.generateTextPane(this.pass, "<font size=\"12\">Your pass</font>");
 		this.requestName = new JTextField();
 		this.generateTextField(this.requestName, "", 0.3);
 		this.requestPass = new JPasswordField();
@@ -94,8 +97,13 @@ public class LoginPanel extends BasicPanel {
 
 					@Override
 					public void run() {
-						new UserRegisterPanel(ctrl);
-						// añadir que se logee solo
+						JDialog dialog = new JDialog();
+						dialog.setSize(new Dimension(500, 700));
+						dialog.add(BasicPanel.factory.getPanel(PanelType.USER_REGISTER_PANEL, new Dimension(500, 500), ctrl));
+						dialog.setModal(true);
+						dialog.setVisible(true);
+						dialog.pack();
+						dialog.setLocationRelativeTo(null);
 					}
 				});
 			}

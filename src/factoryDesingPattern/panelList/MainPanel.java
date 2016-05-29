@@ -55,19 +55,6 @@ public class MainPanel extends BasicPanel implements AppObserver {
 	}
 
 	public void initComponets() {
-		/*
-		 * this.login = new LoginPanel(new Dimension(400, 100), ctrl);
-		 * 
-		 * this.userInfo = new UserInfoPanel(Utils.newDim(widthValue,
-		 * heigthValue, 0.5, 0.5), ctrl);
-		 * 
-		 * this.tagList = new TagPanel(Utils.newDim(widthValue, heigthValue,0.5,
-		 * 0.4), ctrl);
-		 * 
-		 * this.list = new ListPanel(Utils.newDim(widthValue, heigthValue,
-		 * 0.5,0.9), ctrl);
-		 */
-
 		this.login = (LoginPanel) BasicPanel.factory.getPanel(PanelType.LOGIN_PANEL, new Dimension(400, 100), this.ctrl);
 		this.userInfo = (UserInfoPanel) BasicPanel.factory.getPanel(PanelType.USER_INFO_PANEL,
 				Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.5), this.ctrl);
@@ -82,7 +69,6 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		this.userInfo.setVisible(false);
 		auxLeft = new JPanel();
 		auxLeft.setLayout(new BoxLayout(auxLeft, BoxLayout.Y_AXIS));
-		// auxLeft.setPreferredSize(new Dimension(100, 200));
 		auxLeft.add(login);
 		auxLeft.add(tagList);
 
@@ -91,7 +77,6 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		auxTop.setLayout(new BoxLayout(auxTop, BoxLayout.X_AXIS));
 		auxTop.add(auxLeft);
 		auxTop.add(list);
-
 		this.add(auxTop);
 
 		JButton b1 = new JButton();

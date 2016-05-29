@@ -52,36 +52,31 @@ public class UserRegisterPanel extends BasicPanel {
 		this.initComponets();
 		this.initGUI();
 
-		JDialog dialog = new JDialog();
-		dialog.setSize(new Dimension(500, 700));
-		dialog.add(this);
-		dialog.setModal(true);
-		dialog.setVisible(true);
-		dialog.pack();
+		
 	}
 
 	@Override
 	public void initComponets() {
 		this.name = new JTextPane();
-		this.generateTextPane(this.name, "Your name", COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.name, "Your name");
 
 		this.nameRequest = new JTextField();
 		this.generateTextField(this.nameRequest, "tap here your e-mail", COMPONENT_DIMENSION_Y);
 
 		this.email = new JTextPane();
-		this.generateTextPane(this.email, "Your e-mail", COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.email, "Your e-mail");
 
 		this.emailRequest = new JTextField();
 		this.generateTextField(this.emailRequest, "tap here your e-mail", COMPONENT_DIMENSION_Y);
 
 		this.pass = new JTextPane();
-		this.generateTextPane(this.pass, "Password", COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.pass, "Password");
 
 		this.passRequest = new JPasswordField();
-		this.passRequest.setPreferredSize(Utils.adjustDimension(1, COMPONENT_DIMENSION_Y, this.getPreferredSize()));
+		//this.passRequest.setPreferredSize(Utils.adjustDimension(1, COMPONENT_DIMENSION_Y, this.getPreferredSize()));
 
 		this.passConf = new JTextPane();
-		this.generateTextPane(this.passConf, "Password", COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.passConf, "Password");
 
 		this.passConfRequest = new JPasswordField();
 		this.passConfRequest.setPreferredSize(Utils.adjustDimension(1, COMPONENT_DIMENSION_Y, this.getPreferredSize()));
@@ -121,12 +116,14 @@ public class UserRegisterPanel extends BasicPanel {
 	}
 
 	public static void main(String[] arg) {
-		/*
-		 * JFrame frame = new JFrame();
-		 * frame.setPreferredSize(Utils.reSize(0.35, 0.7)); frame.pack();
-		 * frame.setLocationRelativeTo(null); frame.add(new
-		 * UserRegisterPanel()); frame.setVisible(true);
-		 */
-		//new UserRegisterPanel();
+
+		JFrame frame = new JFrame();
+		frame.setPreferredSize(Utils.reSize(0.35, 0.7));
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.add(new UserRegisterPanel(new Controler()));
+		frame.setVisible(true);
+
+		//new UserRegisterPanel(new Controler());
 	}
 }

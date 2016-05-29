@@ -45,7 +45,7 @@ public class TagPanel extends BasicPanel {
 		this.gbc = new GridBagConstraints();
 
 		this.titleList = new JTextPane();
-		this.generateTextPane(this.titleList, "<font size=\"16\">LIST OF TAGS</font>", 0.1);
+		this.generateTextPane(this.titleList, "<font size=\"16\">LIST OF TAGS</font>");
 
 		this.videoGames = new JButton("Video games");
 		this.videoGames.setToolTipText("Click for see a list of video games");

@@ -56,13 +56,13 @@ public class ItemRegisterPanel extends BasicPanel{
 	@Override
 	public void initComponets() {
 		this.name = new JTextPane();
-		this.generateTextPane(this.name, "item name", COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.name, "item name");
 
 		this.nameRequest = new JTextField();
 		this.generateTextField(this.nameRequest, "tap the item name", COMPONENT_DIMENSION_Y);
 
 		this.description = new JTextPane();
-		this.generateTextPane(this.description, "Item description", COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.description, "Item description");
 		
 		this.descriptionRequest = new JScrollPane(new JTextArea()
 				, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -70,7 +70,7 @@ public class ItemRegisterPanel extends BasicPanel{
 		this.descriptionRequest.setPreferredSize(Utils.adjustDimension(1, 0.4, this.getPreferredSize()));
 
 		this.price = new JTextPane();
-		this.generateTextPane(this.price, "Item price", COMPONENT_DIMENSION_Y);
+		this.generateTextPane(this.price, "Item price");
 
 		this.priceRequest = new JTextField();
 		this.priceRequest.setPreferredSize(Utils.adjustDimension(1, COMPONENT_DIMENSION_Y, this.getPreferredSize()));
