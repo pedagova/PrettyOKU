@@ -45,10 +45,46 @@ public class ItemDao {
 				l.add(new ItemVO(a.getJSONObject(i)));
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return l;
+	}
+
+	public List<ItemVO> getNItems(int n) {
+		List<ItemVO> l = new ArrayList<ItemVO>();
+		JSONObject o = ddbb.connectionDDBB("POST", "randomLyst", "number= " + n);
+		System.out.println(o.toString());
+		try {
+			JSONArray a = o.getJSONArray("result");
+			for(int i = 0; i < a.length(); i++){
+				l.add(new ItemVO(a.getJSONObject(i)));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return l;
+	}
+	
+	public void deleteAll(){
+		List<ItemVO> l = new ArrayList<ItemVO>();
+		JSONObject o = ddbb.connectionDDBB("GET", "getAllProducts", null);
+		System.out.println(o.toString());
+		try {
+			JSONArray a = o.getJSONArray("result");
+			for(int i = 0; i < a.length(); i++){
+				l.add(new ItemVO(a.getJSONObject(i)));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		for(ItemVO it: l){
+			this.delete(it);
+		}
+	}
+	
+	public static void main(String[] args){
+		System.out.println(new ItemDao().getItem("29").encodeItem());
 	}
 }

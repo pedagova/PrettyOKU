@@ -27,7 +27,7 @@ public class ItemPanel extends BasicPanel {
 
 	private BidPanel bid;
 
-	public ItemPanel(Dimension dimension, Controler ctrl) {
+	public ItemPanel(Dimension dimension, Controler ctrl){
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setPreferredSize(dimension);
 		this.initComponets();
@@ -66,10 +66,10 @@ public class ItemPanel extends BasicPanel {
 			System.err.print("Error at Look And Feel");
 		}
 		JFrame frame = new JFrame();
-		frame.setPreferredSize(new Dimension(500, 200));
-		frame.add(new ItemPanel(new Dimension(400, 100), new Controler()));
+		frame.setPreferredSize(new Dimension(1100,1100));
+		frame.add(new ItemPanel(new Dimension(1000,1000), new Controler()));
 		frame.setVisible(true);
-		frame.pack();
+		//frame.pack();
 	}
 
 }

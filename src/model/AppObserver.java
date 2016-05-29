@@ -9,7 +9,8 @@ import dataAccessObjectDesingPattern.UserVO;
 public interface AppObserver {
 	
 	void opAppEnd();
-	void onUserLogOut();
+	void opAppStart(List<ItemVO> actList);
+	void OnUserLogOut();
 	void OnLoginRight(UserVO u);
 	void OnLoginFail(UserVO u);
 	void OnListAct(List<ItemVO> l);

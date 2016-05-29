@@ -36,7 +36,7 @@ public class UserInfoPanel extends BasicPanel {
 		this.userName = new JTextArea();
 		this.userName.setBackground(null);
 		this.userName.setFont( new Font("Verdana", Font.BOLD, 18));
-
+		this.userName.setEditable(false);
 		this.panelTitle = new JTextPane();
 		this.generateTextPane(panelTitle, "<font size=\"16\">USER INFORMATION</font>");
 	}
@@ -64,6 +64,7 @@ public class UserInfoPanel extends BasicPanel {
 		this.userName.append(" -> Email adress: " + u.getEMail() + "\n");
 		this.userName.append(" -> Name: " + u.getName() + " " + u.getForename1() + " " + u.getForename2() + "\n");
 		this.userName.append(" -> Pass: " + u.getPass() + "\n");
+		this.userName.append(" -> List of product: " + "\n");
 
 	}
 }

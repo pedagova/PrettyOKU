@@ -3,11 +3,14 @@ package factoryDesingPattern.panelList;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -27,12 +30,6 @@ public class BidPanel extends BasicPanel {
 
 	private static final double COMPONENT_DIMENSION_Y = 0.15;
 
-	private JTextPane currentBidderId;
-	private JTextPane ownerId;
-	private JTextPane currentPrice;
-	private JTextPane originalPrice;
-	private JTextPane bidNumber;
-	private JTextPane price;
 	private JButton increasePrice;
 	private JButton refreshPrice;
 	private JTextField priceInput;
@@ -52,48 +49,29 @@ public class BidPanel extends BasicPanel {
 	@Override
 	public void initComponets() {
 		this.gbc = new GridBagConstraints();
-
-		/*
-		 * this.productInfo = new JTextArea(); this.currentBidderId = new
-		 * JTextPane(); this.generateTextPane(this.currentBidderId,
-		 * "  *Current bidder: " + "data base info");
-		 */
-		/*
-		 * this.ownerId = new JTextPane(); this.generateTextPane(this.ownerId,
-		 * "  *Product owner: " + "data base info");
-		 */
-		/*
-		 * this.currentPrice = new JTextPane();
-		 * this.generateTextPane(this.currentPrice, "  *Current price: " +
-		 * "data base info");
-		 */
-		/*
-		 * this.originalPrice = new JTextPane();
-		 * this.generateTextPane(this.originalPrice, "  *Original price: " +
-		 * "data base info");
-		 */
-		/*
-		 * this.bidNumber = new JTextPane();
-		 * this.generateTextPane(this.bidNumber, "  *Number of bids: " +
-		 * "data base info");
-		 */
-
-		/*
-		 * this.price = new JTextPane(); this.generateTextPane(this.price,
-		 * "  *Product price: ");
-		 */
-
 		this.productInfo = new JTextArea();
 		this.productInfo.setBackground(null);
 		this.setInfo();
 		this.priceInput = new JTextField();
-		this.generateTextField(this.priceInput, "pedir a base de datos precio base", COMPONENT_DIMENSION_Y);
+		//this.generateTextField(this.priceInput, " ", COMPONENT_DIMENSION_Y);
 
-		this.increasePrice = new JButton();
-		this.generateButton(increasePrice, "Increase item price", COMPONENT_DIMENSION_Y);
+		this.increasePrice = new JButton("New item price");
+		this.increasePrice.addActionListener(new ActionListener() {
 
-		this.refreshPrice = new JButton();
-		this.generateButton(this.refreshPrice, "Refresh info", COMPONENT_DIMENSION_Y);
+			private Integer newValue = null;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				newValue = Integer.parseInt(JOptionPane.showInputDialog("Digite el valor numerico:"));
+				priceInput.setText(newValue.toString());
+			}
+		});
+		// this.generateButton(increasePrice, "Increase item price",
+		// COMPONENT_DIMENSION_Y);
+
+		this.refreshPrice = new JButton("Refresh info");
+		// this.generateButton(this.refreshPrice, "Refresh info",
+		// COMPONENT_DIMENSION_Y);
 
 	}
 
@@ -113,7 +91,7 @@ public class BidPanel extends BasicPanel {
 		 * this.add(this.price, this.gbc); ++this.gbc.gridy;
 		 */
 
-		this.gbc.gridx=0;
+		this.gbc.gridx = 0;
 		++this.gbc.gridy;
 
 		this.add(this.productInfo, this.gbc);
@@ -121,19 +99,19 @@ public class BidPanel extends BasicPanel {
 
 		this.add(this.increasePrice, this.gbc);
 		++this.gbc.gridy;
-		this.add(this.priceInput, this.gbc);
-		++this.gbc.gridy;
+		/*this.add(this.priceInput, this.gbc);
+		++this.gbc.gridy;*/
 		this.add(this.refreshPrice, this.gbc);
 
 	}
 
 	private void setInfo() {
-		this.productInfo.append("  *Current bidder: " + "data base info" + "\n");
-		this.productInfo.append("  *Product owner: " + "data base info"+ "\n");
-		this.productInfo.append("  *Current price: " + "data base info"+ "\n");
-		this.productInfo.append("  *Original price: " + "data base info"+ "\n");
-		this.productInfo.append("  *Number of bids: " + "data base info"+ "\n");
-		this.productInfo.append("  *Product price: " + "data base info");
+		this.productInfo.append("Current bidder: " + "data base info" + "\n");
+		this.productInfo.append("Product owner: " + "data base info" + "\n");
+		this.productInfo.append("Current price: " + "data base info" + "\n");
+		this.productInfo.append("Original price: " + "data base info" + "\n");
+		this.productInfo.append("Number of bids: " + "data base info" + "\n");
+		this.productInfo.append("Product price: " + "data base info");
 	}
 
 	public static void main(String[] arg) {

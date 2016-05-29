@@ -44,6 +44,8 @@ public class UserRegisterPanel extends BasicPanel {
 	private JCheckBox checkPoint;
 	private JButton createAccount;
 	private JPanel auxPanel;
+	
+	
 
 	public UserRegisterPanel(Controler ctrl) {
 		super.setPreferredSize(new Dimension(300, 300));

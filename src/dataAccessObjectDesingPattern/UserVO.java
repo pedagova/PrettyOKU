@@ -1,5 +1,9 @@
 package dataAccessObjectDesingPattern;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class UserVO {
 	private String id;
 	private String name;
@@ -8,6 +12,7 @@ public class UserVO {
 	private String pass;
 	private String eMail;
 	private String id_owner;
+	
 	public UserVO(String name) {
 		this.name = name;
 		this.pass = "1234";
@@ -15,6 +20,43 @@ public class UserVO {
 		this.forename2 = "v";
 		this.nick = "perm";
 		this.eMail = "@g";
+	}
+	public UserVO(JSONObject ob) {
+		try {
+			this.name = ob.getString("name");
+			this.id = ob.getString("id");
+			this.forename1 = ob.getString("forename1");
+			this.forename2 = ob.getString("forename2");
+			this.nick = ob.getString("key");
+			this.pass = ob.getString("pass");
+			this.eMail = ob.getString("email");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public UserVO(JSONArray ar){
+		try {
+			JSONObject ob = ar.getJSONObject(0);
+			
+			this.name = ob.getString("name");
+			this.id = ob.getString("id");
+			this.forename1 = ob.getString("forename1");
+			this.forename2 = ob.getString("forename2");
+			this.nick = ob.getString("key");
+			this.pass = ob.getString("pass");
+			this.eMail = ob.getString("email");
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public String encodeUser() {
+		return "id= " + id + "name= " + name + "forename1= " + forename1 + "forename2= " + forename2 + 
+				"nick= " + nick + "pass= " + pass + "email= " + eMail;
 	}
 	/**
 	 * @return the name
@@ -74,6 +116,7 @@ public class UserVO {
 		// TODO Auto-generated method stub
 		return this.eMail;
 	}
+	
 	
 	
 	

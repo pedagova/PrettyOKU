@@ -19,7 +19,6 @@ import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
 import factoryDesingPattern.BasicPanel;
-import factoryDesingPattern.ComponentFactory;
 import factoryDesingPattern.PanelType;
 import model.AppObserver;
 import utils.Utils;
@@ -43,6 +42,12 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 	private JPanel auxTop;
 
+	private JButton info1;
+	private JButton info2;
+	private JButton info3;
+	private JButton info4;
+	private JButton info5;
+
 	public MainPanel(Dimension dimension, Controler ctrl) {
 		this.ctrl = new Controler();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -54,8 +59,27 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 	}
 
+	private void initButton() {
+		this.info1 = new JButton();
+		this.info2 = new JButton();
+		this.info3 = new JButton();
+		this.info4 = new JButton();
+		this.info5 = new JButton();
+		super.genereteBottonBarButton(this.info1, "About us", 0.1, 0);
+		super.genereteBottonBarButton(this.info2, "Payment methods", 0.1, 1);
+		super.genereteBottonBarButton(this.info3, "Deliver rates & policy", 0.1, 1);
+		super.genereteBottonBarButton(this.info4, "Help", 0.1, 1);
+		super.genereteBottonBarButton(this.info5, "LOGGOUT", 0.1, 1);
+
+	}
+	
+	private void initList(){
+		
+	}
+
 	public void initComponets() {
-		this.login = (LoginPanel) BasicPanel.factory.getPanel(PanelType.LOGIN_PANEL, new Dimension(400, 100), this.ctrl);
+		this.login = (LoginPanel) BasicPanel.factory.getPanel(PanelType.LOGIN_PANEL, new Dimension(400, 100),
+				this.ctrl);
 		this.userInfo = (UserInfoPanel) BasicPanel.factory.getPanel(PanelType.USER_INFO_PANEL,
 				Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.5), this.ctrl);
 		this.tagList = (TagPanel) BasicPanel.factory.getPanel(PanelType.TAG_PANEL,
@@ -83,12 +107,31 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		JButton b2 = new JButton();
 		JButton b3 = new JButton();
 		JButton b4 = new JButton();
+		JButton b5 = new JButton();
+
 		super.genereteBottonBarButton(b1, "About us", 0.1, 0);
 		super.genereteBottonBarButton(b2, "Payment methods", 0.1, 1);
 		super.genereteBottonBarButton(b3, "Deliver rates & policy", 0.1, 1);
 		super.genereteBottonBarButton(b4, "Help", 0.1, 1);
 
+		super.genereteBottonBarButton(b5, "LOGGOUT", 0.1, 1);
+
 		b1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JPanel pan = new JPanel();
+				pan.setLayout(new FlowLayout());
+				pan.add(new JLabel("label"));
+				pan.add(new JButton("button"));
+
+				JDialog jd = new JDialog();
+
+				jd.add(pan);
+			}
+		});
+
+		b2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -103,11 +146,52 @@ public class MainPanel extends BasicPanel implements AppObserver {
 				jd.add(pan);
 			}
 		});
+
+		b3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JPanel pan = new JPanel();
+				pan.setLayout(new FlowLayout());
+
+				pan.add(new JLabel("label"));
+				pan.add(new JButton("button"));
+
+				JDialog jd = new JDialog();
+
+				jd.add(pan);
+			}
+		});
+
+		b4.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JPanel pan = new JPanel();
+				pan.setLayout(new FlowLayout());
+
+				pan.add(new JLabel("label"));
+				pan.add(new JButton("button"));
+
+				JDialog jd = new JDialog();
+
+				jd.add(pan);
+			}
+		});
+
+		b5.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		JPanel panela = new JPanel();
 		panela.add(b1);
 		panela.add(b2);
 		panela.add(b3);
 		panela.add(b4);
+		panela.add(b5);
 		this.add(panela);
 
 	}
@@ -137,7 +221,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 	}
 
 	@Override
-	public void onUserLogOut() {
+	public void OnUserLogOut() {
 		// popear adios
 		// desloguearte
 	}
@@ -164,6 +248,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		JButton b2 = new JButton();
 		JButton b3 = new JButton();
 		JButton b4 = new JButton();
+		JButton b5 = new JButton("LOGOUT");
 		super.genereteLinkButton(b1, "About us", 0.1);
 		b1.addActionListener(new ActionListener() {
 
@@ -183,6 +268,7 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		super.genereteLinkButton(b2, "Payment methods", 0.1);
 		super.genereteLinkButton(b3, "Deliver rates & policy", 0.1);
 		super.genereteLinkButton(b4, "Help", 0.1);
+		super.genereteLinkButton(b5, "LOGGOUT", 0.1);
 
 		b1.addActionListener(new ActionListener() {
 
@@ -206,12 +292,15 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		panela.add(b2);
 		panela.add(b3);
 		panela.add(b4);
+		panela.add(b5);
 		this.add(panela);
 
 		login.setVisible(false);
 		userInfo.setVisible(true);
 		userInfo.setInfo(u);
+		this.ctrl.setLoggedOn(true);
 		this.repaint();
+
 	}
 
 	@Override
@@ -225,6 +314,12 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		this.list.act(l, Utils.newDim(BasicPanel.screenWidht, BasicPanel.screenHeight, 0.5, 0.9), factory);
 		this.list.repaint();
 		this.list.setVisible(true);
+	}
+
+	@Override
+	public void opAppStart(List<ItemVO> actList) {
+		this.OnListAct(actList);
+
 	}
 
 }

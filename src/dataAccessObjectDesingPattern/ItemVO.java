@@ -15,8 +15,10 @@ public class ItemVO {
 	private String idCategory;
 	private String name;
 	//-------------------------------------------
-	private String user;
 	private String price;
+	private String date_creation;
+	private String idLastBid;
+	private String duration_bid;
 	
 	
 	public ItemVO(JSONArray jsonArray) {
@@ -27,20 +29,30 @@ public class ItemVO {
 			this.idCategory = ob.getString("id_category");
 			this.desc = ob.getString("description");
 			this.img = ob.getString("img");
+			this.idCategory = ob.getString("id_category");
+			this.name = ob.getString("name");
+			this.price = ob.getString("price");
+			this.date_creation = ob.getString("date_creation");
+			this.idLastBid = ob.getString("idLastBid");
+			this.duration_bid = ob.getString("duration_bid");
 		} catch (JSONException e) {
-			
 			e.printStackTrace();
 		}
 		
 	}
-	public ItemVO(JSONObject jsonArray) {
+	public ItemVO(JSONObject ob) {
 		try {
-			JSONObject ob  = jsonArray;
 			this.id = ob.getString("id");
 			this.idOwner = ob.getString("id_owner");
 			this.idCategory = ob.getString("id_category");
 			this.desc = ob.getString("description");
 			this.img = ob.getString("img");
+			this.idCategory = ob.getString("id_category");
+			this.name = ob.getString("name");
+			this.price = ob.getString("price");
+			this.date_creation = ob.getString("date_creation");
+			this.idLastBid = ob.getString("idLastBid");
+			this.duration_bid = ob.getString("duration_bid");
 		} catch (JSONException e) {
 			
 			e.printStackTrace();
@@ -49,7 +61,7 @@ public class ItemVO {
 	}
 	public ItemVO(String desc, String user, String price){
 		this.desc = desc;
-		this.user = user;
+		//this.user = user;
 		this.price = price;
 		this.idOwner = "1";
 		this.id = " producto id weiiiiii";
@@ -58,7 +70,9 @@ public class ItemVO {
 	}
 	//create a parse to pack the info from the current Item
 	public String encodeItem(){
-		return "id= " + id + "&description= " + desc + "&id_category= " + idCategory + "&id_owner= " + idOwner + "&img= " + img;
+		return "id= " + id + "name= " + name + "description= " + desc + "date_creation= " + date_creation +
+				"id_category= " + idCategory + "id_owner= " + idOwner + "img= " + img + 
+				"price= " + price + "idLastBid= " + idLastBid +"duration_bid= " + duration_bid;
 	}
 	public static void main(String args[]){
 		
