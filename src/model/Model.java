@@ -16,15 +16,12 @@ public class Model extends Observer {
 	private List<ItemVO> actList;
 	// ----------- request ----------------------
 
-	public void login(String nick, String pass) {
-		// paso filtro
-		// execut
-
-		UserVO u = userConnection.getUser(nick, pass);
-		System.out.println(pass + " " + u.getPass() + " 1");
-		if (!pass.equals(u.getPass()))
+	public void login(/*String nick, String pass*/ UserVO u) {
+		//UserVO u = userConnection.getUser(nick, pass);
+		
+		/*if(u.getName() == null)
 			notifyLoginFail(u);
-		else
+		else*/
 			notifyLoginRight(u);
 	}
 
@@ -81,6 +78,23 @@ public class Model extends Observer {
 
 	public List<ItemVO> getList() {
 		return this.actList;
+	}
+
+	public void insertNewBid(String idItem, String idUser,String price) {
+		userConnection.insertNewBid(idItem, idUser, price);		
+	}
+
+	public ItemVO getItem(String id) {
+		return itemConnection.getItem(id);
+	}
+
+	public void addItem(ItemVO it) {
+		itemConnection.add(it);
+		
+	}
+
+	public void addUser(UserVO userVO) {
+		userConnection.add(userVO);
 	}
 
 }

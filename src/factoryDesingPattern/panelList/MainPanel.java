@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -71,6 +72,20 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		super.genereteBottonBarButton(this.info4, "Help", 0.1, 3);
 		super.genereteBottonBarButton(this.info5, "LOGGOUT", 0.1, 4);
 		JPanel panela = new JPanel();
+		JButton newItem = new JButton("New Item");
+		newItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = new JFrame("New item");
+				frame.setSize(1000,800);
+
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
+				frame.add(new ItemRegisterPanel(new Dimension(500, 500),  ctrl));				
+			}
+		});
+		panela.add(newItem);
 		panela.add(info1);
 		panela.add(info2);
 		panela.add(info3);
@@ -173,7 +188,8 @@ public class MainPanel extends BasicPanel implements AppObserver {
 
 	@Override
 	public void OnLoginFail(UserVO u) {
-		// Popear dialog error
+		JOptionPane.showMessageDialog(null, "Some thing went wrong while login try again",
+				"WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
 		System.out.println("Error");
 	}
 

@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -23,6 +25,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import controller.Controler;
+import dataAccessObjectDesingPattern.UserVO;
 import factoryDesingPattern.BasicPanel;
 import utils.Utils;
 
@@ -36,8 +39,10 @@ public class UserRegisterPanel extends BasicPanel {
 	private JTextField nameRequest;
 	private JTextPane email;
 	private JTextField emailRequest;
+	private JTextPane nick;
+	private JTextField nickRequest;
 	private JTextPane pass;
-	private JPasswordField passRequest;
+	private JTextField passRequest;
 	private JTextPane passConf;
 	private JPasswordField passConfRequest;
 	private JScrollPane scroll;
@@ -70,11 +75,16 @@ public class UserRegisterPanel extends BasicPanel {
 
 		this.emailRequest = new JTextField();
 		this.generateTextField(this.emailRequest, "tap here your e-mail", COMPONENT_DIMENSION_Y);
-
+		
+		this.nick = new JTextPane();
+		this.generateTextPane(this.nick, "Nick");
+		
+		this.nickRequest = new JTextField();
+		
 		this.pass = new JTextPane();
 		this.generateTextPane(this.pass, "Password");
 
-		this.passRequest = new JPasswordField();
+		this.passRequest = new JTextField();
 		//this.passRequest.setPreferredSize(Utils.adjustDimension(1, COMPONENT_DIMENSION_Y, this.getPreferredSize()));
 
 		this.passConf = new JTextPane();
@@ -89,6 +99,14 @@ public class UserRegisterPanel extends BasicPanel {
 
 		this.checkPoint = new JCheckBox("I agree with politics");
 		this.createAccount = new JButton("Create an Ôku account");
+		this.createAccount.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ctrl.addUser(new UserVO(nameRequest.getText(), emailRequest.getText(), nickRequest.getText(), passRequest.getText()));
+				
+			}
+		});
 
 		this.auxPanel = new JPanel();
 		this.auxPanel.setLayout(new BoxLayout(this.auxPanel, BoxLayout.X_AXIS));

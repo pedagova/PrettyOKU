@@ -11,15 +11,14 @@ public class UserVO {
 	private String nick;
 	private String pass;
 	private String eMail;
-	private String id_owner;
 	
-	public UserVO(String name) {
+	public UserVO(String name, String nick, String pass, String eMail) {
 		this.name = name;
-		this.pass = "1234";
-		this.forename1 = "g";
-		this.forename2 = "v";
-		this.nick = "perm";
-		this.eMail = "@g";
+		this.pass = pass;
+		this.forename1 = "Unkown";
+		this.forename2 = "Unkown";
+		this.nick = nick;
+		this.eMail = eMail;
 	}
 	public UserVO(JSONObject ob) {
 		try {
@@ -32,7 +31,7 @@ public class UserVO {
 			this.eMail = ob.getString("email");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 	}
 	public UserVO(JSONArray ar){
@@ -49,14 +48,23 @@ public class UserVO {
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 		
 	}
 	
+	public UserVO(String a, String b, String c,
+			String d, String e, String f) {
+		this.nick = a;
+		this.name = b;
+		this.forename1 = c;
+		this.forename2 = d;
+		this.eMail = e;
+		this.id = f;
+	}
 	public String encodeUser() {
-		return "id= " + id + "name= " + name + "forename1= " + forename1 + "forename2= " + forename2 + 
-				"nick= " + nick + "pass= " + pass + "email= " + eMail;
+		return "id= " + id + "&name= " + name + "&forename1= " + forename1 + "&forename2= " + forename2 + 
+				"&nick= " + nick + "&pass= " + pass + "&email= " + eMail;
 	}
 	/**
 	 * @return the name

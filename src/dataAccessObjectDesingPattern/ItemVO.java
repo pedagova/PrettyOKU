@@ -4,8 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import dataBaseConection.clientREST;
-
 public class ItemVO {
 
 	private String id;
@@ -18,6 +16,13 @@ public class ItemVO {
 	private String price;
 	private String date_creation;
 	private String idLastBid;
+	public String getIdLastBid() {
+		return idLastBid;
+	}
+	public void setIdLastBid(String idLastBid) {
+		this.idLastBid = idLastBid;
+	}
+
 	private String duration_bid;
 	
 	
@@ -29,14 +34,13 @@ public class ItemVO {
 			this.idCategory = ob.getString("id_category");
 			this.desc = ob.getString("description");
 			this.img = ob.getString("img");
-			this.idCategory = ob.getString("id_category");
 			this.name = ob.getString("name");
 			this.price = ob.getString("price");
 			this.date_creation = ob.getString("date_creation");
 			this.idLastBid = ob.getString("idLastBid");
 			this.duration_bid = ob.getString("duration_bid");
 		} catch (JSONException e) {
-			e.printStackTrace();
+		
 		}
 		
 	}
@@ -47,26 +51,23 @@ public class ItemVO {
 			this.idCategory = ob.getString("id_category");
 			this.desc = ob.getString("description");
 			this.img = ob.getString("img");
-			this.idCategory = ob.getString("id_category");
 			this.name = ob.getString("name");
 			this.price = ob.getString("price");
 			this.date_creation = ob.getString("date_creation");
 			this.idLastBid = ob.getString("idLastBid");
 			this.duration_bid = ob.getString("duration_bid");
 		} catch (JSONException e) {
-			
-			e.printStackTrace();
+		
 		}
 		
 	}
-	public ItemVO(String desc, String user, String price){
+	public ItemVO(String name, String desc, String price, String image){
 		this.desc = desc;
-		//this.user = user;
+		this.name = name;
 		this.price = price;
-		this.idOwner = "1";
-		this.id = " producto id weiiiiii";
-		this.img = "test Image Iphone";
-		this.idCategory = "3";
+		this.img = image;
+		this.idCategory = "1";
+		this.date_creation= "00-00-00";
 	}
 	//create a parse to pack the info from the current Item
 	public String encodeItem(){
@@ -74,15 +75,7 @@ public class ItemVO {
 				"id_category= " + idCategory + "id_owner= " + idOwner + "img= " + img + 
 				"price= " + price + "idLastBid= " + idLastBid +"duration_bid= " + duration_bid;
 	}
-	public static void main(String args[]){
-		
-		try {
-			System.out.println(new clientREST().connectionDDBB("POST", "insertProduct", new ItemVO(new clientREST().connectionDDBB("POST", "getProduct", "id= 9").getJSONArray("result")).encodeItem()));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 	/**
 	 * @return the id
 	 */

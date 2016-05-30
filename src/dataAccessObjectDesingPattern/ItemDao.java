@@ -61,7 +61,7 @@ public class ItemDao {
 				l.add(new ItemVO(a.getJSONObject(i)));
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
+			
 		}
 		
 		return l;
