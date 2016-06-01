@@ -51,7 +51,7 @@ public class Controler implements AppObserver{
 	}
 
 	public boolean isLoggedOn() {
-		return loggedOn;
+		return false;
 	}
 
 	public void setLoggedOn(boolean loggedOn) {

@@ -68,7 +68,6 @@ public abstract class BasicPanel extends JPanel {
 	}
 
 	protected void genereteLinkButton(JButton component, String data, double dimension) {
-		component.setText("<HTML><font size=\"6\"><FONT color=\"#000099\"><U>" + data + "</U></FONT></font></HTML>");
 		component.setHorizontalAlignment(SwingConstants.LEFT);
 		component.setBorderPainted(false);
 		component.setOpaque(false);

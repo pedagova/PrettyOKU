@@ -20,18 +20,18 @@ public class UserVO {
 		this.nick = nick;
 		this.eMail = eMail;
 	}
-	public UserVO(JSONObject ob) {
+	public UserVO(JSONObject obs) {
 		try {
+			JSONObject ob = obs.getJSONArray("result").getJSONObject(0);
 			this.name = ob.getString("name");
 			this.id = ob.getString("id");
-			this.forename1 = ob.getString("forename1");
-			this.forename2 = ob.getString("forename2");
-			this.nick = ob.getString("key");
-			this.pass = ob.getString("pass");
+			this.forename1 = ob.getString("last_name_1");
+			this.forename2 = ob.getString("last_name_2");
+			this.nick = ob.getString("nick");
+			this.pass = ob.getString("password");
 			this.eMail = ob.getString("email");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			
+			e.printStackTrace();			
 		}
 	}
 	public UserVO(JSONArray ar){
@@ -40,10 +40,10 @@ public class UserVO {
 			
 			this.name = ob.getString("name");
 			this.id = ob.getString("id");
-			this.forename1 = ob.getString("forename1");
-			this.forename2 = ob.getString("forename2");
-			this.nick = ob.getString("key");
-			this.pass = ob.getString("pass");
+			this.forename1 = ob.getString("last_name_1");
+			this.forename2 = ob.getString("last_name_2");
+			this.nick = ob.getString("nick");
+			this.pass = ob.getString("password");
 			this.eMail = ob.getString("email");
 			
 		} catch (JSONException e) {
