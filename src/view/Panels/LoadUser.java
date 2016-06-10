@@ -31,7 +31,7 @@ public class LoadUser extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final String EMAIL = "Email:";
+	public static final String NICK = "Nick:";
 
 	public static final String PASS = "Password:";
 
@@ -103,7 +103,7 @@ public class LoadUser extends JPanel {
 
 		// email text
 		this.eMail = new JTextPane();
-		this.eMail.setText(AddUser.EMAIL);
+		this.eMail.setText(LoadUser.NICK);
 		this.eMail.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.eMail.setOpaque(false);
 		this.eMail.setEditable(false);
@@ -118,7 +118,7 @@ public class LoadUser extends JPanel {
 
 		// pass text
 		this.pass = new JTextPane();
-		this.pass.setText(AddUser.PASS);
+		this.pass.setText(LoadUser.PASS);
 		this.pass.setBorder(BorderFactory.createLineBorder(Color.red));
 		this.pass.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.pass.setForeground(new Color(0, 0, 0));
@@ -126,7 +126,7 @@ public class LoadUser extends JPanel {
 		this.pass.setEditable(false);
 
 		// pass request
-		this.passRequest = new JPasswordField("1234567890", 10);
+		this.passRequest = new JPasswordField(10);
 		this.passRequest.setForeground(new Color(0, 0, 0));
 		// this.passRequest.setBorder(null);
 		this.passRequest.setBorder(BorderFactory.createLineBorder(Color.red));

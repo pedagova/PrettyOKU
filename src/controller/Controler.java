@@ -60,7 +60,7 @@ public class Controler implements AppObserver{
 	}
 
 	public boolean isLoggedOn() {
-		return false;
+		return true;
 	}
 
 	public List<ItemVO> getList() {
@@ -118,6 +118,7 @@ public class Controler implements AppObserver{
 
 	@Override
 	public void OnListAct(List<ItemVO> l) {
+		
 	}
 
 	public void addItem(ItemVO it) {

@@ -12,7 +12,9 @@ public class UserVO {
 	private String pass;
 	private String eMail;
 	private String address;
-	public UserVO(String name, String nick, String forename1, String forename2,String pass, String eMail, String address) {
+
+	public UserVO(String name, String nick, String forename1, String forename2, String pass, String eMail,
+			String address) {
 		this.name = name;
 		this.pass = pass;
 		this.forename1 = forename1;
@@ -21,6 +23,7 @@ public class UserVO {
 		this.eMail = eMail;
 		this.address = address;
 	}
+
 	public UserVO(JSONObject obs) {
 		try {
 			JSONObject ob = obs.getJSONArray("result").getJSONObject(0);
@@ -32,13 +35,14 @@ public class UserVO {
 			this.pass = ob.getString("password");
 			this.eMail = ob.getString("email");
 		} catch (JSONException e) {
-			e.printStackTrace();			
+			e.printStackTrace();
 		}
 	}
-	public UserVO(JSONArray ar){
+
+	public UserVO(JSONArray ar) {
 		try {
 			JSONObject ob = ar.getJSONObject(0);
-			
+
 			this.name = ob.getString("name");
 			this.id = ob.getString("id");
 			this.forename1 = ob.getString("last_name_1");
@@ -46,16 +50,15 @@ public class UserVO {
 			this.nick = ob.getString("nick");
 			this.pass = ob.getString("password");
 			this.eMail = ob.getString("email");
-			
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			
+
 		}
-		
+
 	}
-	
-	public UserVO(String a, String b, String c,
-			String d, String e, String f) {
+
+	public UserVO(String a, String b, String c, String d, String e, String f) {
 		this.nick = a;
 		this.name = b;
 		this.forename1 = c;
@@ -63,70 +66,83 @@ public class UserVO {
 		this.eMail = e;
 		this.id = f;
 	}
+
 	public String encodeUser() {
-		return "id= " + id + "&name= " + name + "&forename1= " + forename1 + "&forename2= " + forename2 + 
-				"&nick= " + nick + "&pass= " + pass + "&email= " + eMail;
+		return "id= " + id + "&name= " + name + "&forename1= " + forename1 + "&forename2= " + forename2 + "&nick= "
+				+ nick + "&pass= " + pass + "&email= " + eMail;
 	}
+
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	/**
 	 * @return the forename1
 	 */
 	public String getForename1() {
 		return forename1;
 	}
+
 	/**
-	 * @param forename1 the forename1 to set
+	 * @param forename1
+	 *            the forename1 to set
 	 */
 	public void setForename1(String forename1) {
 		this.forename1 = forename1;
 	}
+
 	/**
 	 * @return the forename2
 	 */
 	public String getForename2() {
 		return forename2;
 	}
+
 	/**
-	 * @param forename2 the forename2 to set
+	 * @param forename2
+	 *            the forename2 to set
 	 */
 	public void setForename2(String forename2) {
 		this.forename2 = forename2;
 	}
+
 	/**
 	 * @return the id
 	 */
 	public String getId() {
 		return id;
 	}
+
 	public String getNick() {
 		return nick;
 	}
+
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
+
 	public String getPass() {
 		return pass;
 	}
+
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+
 	public String getEMail() {
 		// TODO Auto-generated method stub
 		return this.eMail;
 	}
-	
-	
-	
-	
+
 }

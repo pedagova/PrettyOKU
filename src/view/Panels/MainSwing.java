@@ -20,12 +20,14 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 import javax.swing.plaf.IconUIResource;
@@ -33,6 +35,7 @@ import javax.swing.plaf.IconUIResource;
 import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
+import exceptions.EmptyListException;
 import factoryDesingPattern.panelList.ListPanel;
 import model.AppObserver;
 import model.Model;
@@ -49,6 +52,7 @@ public class MainSwing extends JPanel implements AppObserver {
 	private final int UsesBarSize = 45;
 
 	public JPanel midPanel;
+
 	// ----------anonimus class--------------
 	private class Separator extends JPanel {
 
@@ -76,7 +80,6 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	// ------------Private--------------------
 	public void initGUI() {
-
 		removeAll();
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -216,34 +219,37 @@ public class MainSwing extends JPanel implements AppObserver {
 		p3.setBackground(null);
 		if (!ctrl.isLoggedOn()) {
 			JButton id = new JButton("Identificate");
-			id.setFont(new Font("Arial", Font.BOLD, 12));
+			id.setFont(new Font("Arial", Font.BOLD, 20));
 			id.setBackground(null);
 			id.setForeground(Color.GRAY);
 			id.setBorder(null);
-			id.setPreferredSize(new Dimension(widht * 20 / 100, UsesBarSize - 18));
+			id.setPreferredSize(new Dimension((widht * 20 / 100) + 200, UsesBarSize));
 			p3.add(id);
 		} else {
-			JButton id = new JButton("Bienvenid@\n" + "pedagova@gmail.com");
-			id.setFont(new Font("Microsof sans serif", Font.BOLD, 8));
+			JButton id = new JButton("Bienvenid@\n " + "pedagova@gmail.com");
+			id.setFont(new Font("Microsof sans serif", Font.BOLD, 20));
 			id.setBackground(null);
 			id.setForeground(Color.GRAY);
 			id.setBorder(null);
-			id.setPreferredSize(new Dimension(widht * 20 / 100, UsesBarSize));
+			id.setPreferredSize(new Dimension((widht * 20 / 100) + 200, UsesBarSize));
 			p3.add(id);
 		}
 
 		p.add(p3);
 		p.add(new JSeparator(JSeparator.VERTICAL), BorderLayout.LINE_START);
 
-		JButton b = new JButton("add item");
+		JButton b = new JButton("Add item");
+		b.setHorizontalAlignment(SwingConstants.CENTER);
+		b.setFont(new Font("Arial", 20, 20));
 		b.setBackground(null);
-		b.setBorder(null);
-		b.setPreferredSize(new Dimension(widht * 10 / 100, UsesBarSize));
+		b.setBorder(BorderFactory.createLineBorder(Color.red));
+		b.setPreferredSize(new Dimension(widht * 10 / 100, 80));
 		b.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hola");
+				System.out.println("Añadir cambio en panel principal");
+				MainSwing.this.setPanel(new NewAddItem());
 			}
 		});
 
@@ -288,23 +294,15 @@ public class MainSwing extends JPanel implements AppObserver {
 		return p;
 	}
 
-	/*private Component interestItems(List<ItemVO> list) {
-		JPanel frame = new JPanel();
-		final double NUMCOLS = 4.0;
-		frame.setBackground(null);
-		GridLayout l = new GridLayout((int) NUMCOLS, (int) Math.ceil(list.size() / NUMCOLS));
-		l.setHgap(10);
-		l.setVgap(10);
-		frame.setLayout(l);
-		for (int i = 0; i < list.size(); ++i) {
-			try{
-				frame.add(new ItemRepr(list.get(i), this));
-			}catch(Exception e){
-				System.out.println("Hola");
-			}
-		}
-		return frame;
-	}*/
+	/*
+	 * private Component interestItems(List<ItemVO> list) { JPanel frame = new
+	 * JPanel(); final double NUMCOLS = 4.0; frame.setBackground(null);
+	 * GridLayout l = new GridLayout((int) NUMCOLS, (int) Math.ceil(list.size()
+	 * / NUMCOLS)); l.setHgap(10); l.setVgap(10); frame.setLayout(l); for (int i
+	 * = 0; i < list.size(); ++i) { try{ frame.add(new ItemRepr(list.get(i),
+	 * this)); }catch(Exception e){ System.out.println("Hola"); } } return
+	 * frame; }
+	 */
 
 	private Component information() {
 		// TODO Auto-generated method stub
@@ -357,8 +355,6 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	@Override
 	public void opAppStart(List<ItemVO> actList) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -381,16 +377,23 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	@Override
 	public void OnListAct(List<ItemVO> list) {
-		midPanel = new ItemsList(list, this);
-		initGUI();
+		if (!list.isEmpty()) {
+			midPanel = new ItemsList(list, this);
+			System.out.println("hola 1");
+			initGUI();
+			System.out.println("hola 2");
+		} else {
+			JOptionPane.showMessageDialog(null, "Empty category");
+		}
+
 	}
 
 	public void start(Controler controler) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	public void setPanel(ShowProduct panel) {
+	public void setPanel(JPanel panel) {
 		midPanel = panel;
 		initGUI();
 	}
