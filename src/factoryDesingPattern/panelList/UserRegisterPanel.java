@@ -103,8 +103,7 @@ public class UserRegisterPanel extends BasicPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ctrl.addUser(new UserVO(nameRequest.getText(), emailRequest.getText(), nickRequest.getText(), passRequest.getText()));
-				
+				//ctrl.addUser(new UserVO(nameRequest.getText(), emailRequest.getText(), nickRequest.getText(), passRequest.getText()));
 			}
 		});
 

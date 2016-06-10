@@ -1,12 +1,23 @@
 package controller;
 
+import java.awt.event.MouseAdapter;
 import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
+import exceptions.ActPriceException;
+import exceptions.NotLoggedException;
 import model.AppObserver;
 import model.Model;
 import view.View;
+import view.View2;
+import view.Panels.ItemRepr;
+import view.Panels.MainSwing;
+import view.Panels.ShowProduct;
 
 
 
@@ -14,23 +25,21 @@ public class Controler implements AppObserver{
 
 	Model model;
 	
-	private boolean loggedOn;
-	
-	private View view;
+	private MainSwing view;
 	
 	private UserVO loggedUser;
 	
-	public Controler(Model model, View view){
+	private String category;	
+	
+	public Controler(Model model){
 		loggedUser = null;
-		this.loggedOn = false;
 		this.model = model;
-		this.view = view;
+		this.view = new MainSwing(this);
 		this.model.addObserver(this);
 	}
 	
 	public void loginUser(String nick, String pass) {
-		this.loggedUser = new UserVO("permuta", "pedro", "gonzalez", "vazquez", "p@gmail.com", "2" );
-		model.login(loggedUser);
+		model.login(nick, pass);
 	}
 
 	public String getUser(String idOwner) {
@@ -54,16 +63,12 @@ public class Controler implements AppObserver{
 		return false;
 	}
 
-	public void setLoggedOn(boolean loggedOn) {
-		this.loggedOn = loggedOn;
-	}
-
 	public List<ItemVO> getList() {
 		return this.model.getList();
 	}
 	
 	public static void main(String[] args) {
-		Controler ctrl = new Controler(new Model(), new View());
+		Controler ctrl = new Controler(new Model());
 		ctrl.start();
 	}
 
@@ -86,7 +91,7 @@ public class Controler implements AppObserver{
 
 	@Override
 	public void opAppEnd() {
-		loggedOn = false;		
+				
 	}
 
 	@Override
@@ -98,20 +103,17 @@ public class Controler implements AppObserver{
 	@Override
 	public void OnUserLogOut() {
 		loggedUser = null;
-		loggedOn = false;
 	}
 
 	@Override
 	public void OnLoginRight(UserVO u) {
 		// TODO Auto-generated method stub
 		loggedUser = u;
-		loggedOn = true;
 	}
 
 	@Override
 	public void OnLoginFail(UserVO u) {
 		u = null;
-		loggedOn = false;
 	}
 
 	@Override
@@ -126,6 +128,32 @@ public class Controler implements AppObserver{
 	public void addUser(UserVO userVO) {
 		model.addUser(userVO);
 		
+	}
+
+	public void getN(int i) {
+		model.getN(i);		
+	}
+
+	public void find(String text) {
+		if(category == null){
+			model.find(text);
+		}
+		else{
+			model.find(text, category);
+		}
+	}
+
+	public void itemChose(ShowProduct showProduct) {
+		view.setPanel(showProduct);		
+	}
+
+	public void actPrice(ItemVO item, int i) throws NotLoggedException, ActPriceException {
+		// TODO Auto-generated method stub
+		if(loggedUser != null)
+			model.actPrice(item, i,loggedUser);
+		else{
+			throw new NotLoggedException("Necesitas estar logeado para poder pujar por un item");
+		}
 	}
 }
 

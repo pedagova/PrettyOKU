@@ -3,11 +3,13 @@ package view;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javax.sound.midi.spi.MidiDeviceProvider;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 import controller.Controler;
 import factoryDesingPattern.panelList.MainPanel;
+import view.Panels.ItemRepr;
 
 public class View extends JFrame {
 
@@ -37,6 +39,8 @@ public class View extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.pack();
 	}
+
+	
 
 	/*
 	 * public static void main(String[] args) { MainPanel panel = new

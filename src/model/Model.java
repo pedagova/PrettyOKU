@@ -7,6 +7,7 @@ import dataAccessObjectDesingPattern.ItemDao;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserDao;
 import dataAccessObjectDesingPattern.UserVO;
+import exceptions.ActPriceException;
 
 public class Model extends Observer {
 
@@ -16,12 +17,12 @@ public class Model extends Observer {
 	private List<ItemVO> actList;
 	// ----------- request ----------------------
 
-	public void login(/*String nick, String pass*/ UserVO u) {
-		//UserVO u = userConnection.getUser(nick, pass);
+	public void login(String nick, String pass) {
+		UserVO u = userConnection.getUser(nick, pass);
 		
-		/*if(u.getName() == null)
+		if(u.getName() == null)
 			notifyLoginFail(u);
-		else*/
+		else
 			notifyLoginRight(u);
 	}
 
@@ -97,4 +98,40 @@ public class Model extends Observer {
 		userConnection.add(userVO);
 	}
 
+	public void getN(int i) {
+		actList = itemConnection.getNItems(i);
+		notifyListAct(actList);
+	}
+	
+	public void find(String text) {
+		List<ItemVO> aux = itemConnection.getAllItems();
+		actList = new ArrayList<ItemVO>();
+		for(int i = 0; i < aux.size(); i++){
+			if(aux.get(i).getName().toLowerCase().contains(text.toLowerCase())){
+				actList.add(aux.get(i));
+			}
+		}
+		notifyListAct(actList);
+	}
+
+
+	public void find(String text, String category) {
+		List<ItemVO> aux = itemConnection.getAllItems(category);
+		actList = new ArrayList<ItemVO>();
+		for(int i = 0; i < aux.size(); i++){
+			if(aux.get(i).getName().contains("text")){
+				actList.add(aux.get(i));
+			}
+		}
+		notifyListAct(actList);
+	}
+
+	public void actPrice(ItemVO item, int i, UserVO user) throws ActPriceException {
+		if(Integer.parseInt(itemConnection.getItem(item.getId()).getPrice()) > i){
+			throw new ActPriceException("el precio no puede ser menor que el anterior");
+		}
+		else{
+			itemConnection.actPrice(item.getId(), user.getId(), i);
+		}
+	}
 }

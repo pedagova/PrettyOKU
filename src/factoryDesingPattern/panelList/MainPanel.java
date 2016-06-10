@@ -181,7 +181,6 @@ public class MainPanel extends BasicPanel implements AppObserver {
 		login.setVisible(false);
 		userInfo.setVisible(true);
 		userInfo.setInfo(u);
-		this.ctrl.setLoggedOn(true);
 		this.repaint();
 
 	}

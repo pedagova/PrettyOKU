@@ -11,14 +11,15 @@ public class UserVO {
 	private String nick;
 	private String pass;
 	private String eMail;
-	
-	public UserVO(String name, String nick, String pass, String eMail) {
+	private String address;
+	public UserVO(String name, String nick, String forename1, String forename2,String pass, String eMail, String address) {
 		this.name = name;
 		this.pass = pass;
-		this.forename1 = "Unkown";
-		this.forename2 = "Unkown";
+		this.forename1 = forename1;
+		this.forename2 = forename2;
 		this.nick = nick;
 		this.eMail = eMail;
+		this.address = address;
 	}
 	public UserVO(JSONObject obs) {
 		try {
