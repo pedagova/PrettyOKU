@@ -2,6 +2,7 @@ package view.Panels;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -18,6 +19,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -25,6 +27,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import controller.Controler;
 
@@ -34,12 +37,14 @@ public class LoadUser extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Controler ctrl;
 
-	private final String NICK = "Nick:";
+	private final static String REGISTER_USER = "  Register user:";
 
-	private final String PASS = "Password:";
+	private final static String NICK = "  Nick:";
+
+	private final static String PASS = "  Password:";
 
 	private JTextPane title;
 
@@ -52,7 +57,7 @@ public class LoadUser extends JPanel {
 	private JPasswordField passRequest;
 
 	private Button enterAccount;
-	
+
 	private Button obtainNewPass;
 
 	private Color color;
@@ -60,12 +65,10 @@ public class LoadUser extends JPanel {
 	private Color backGround;
 
 	private JPanel auxButtonPanel;
-	
+
 	public LoadUser(Color backGround, Color color) {
 		this.color = color;
 		this.backGround = backGround;
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setPreferredSize(new Dimension(300, 600));
 		this.setOpaque(false);
 		this.initComponents();
 		this.initGUI();
@@ -79,79 +82,83 @@ public class LoadUser extends JPanel {
 	}
 
 	private void initGUI() {
-		this.add(Box.createRigidArea(new Dimension(250, 100)));
+		this.add(Box.createRigidArea(new Dimension(1, 100)));
 		this.add(title);
 		this.add(generateSeparator());
-		this.add(Box.createRigidArea(new Dimension(250, 50)));
+		this.add(Box.createRigidArea(new Dimension(1, 50)));
 		this.add(eMail);
 		this.add(eMailRequest);
 		this.add(pass);
 		this.add(passRequest);
-		this.add(Box.createRigidArea(new Dimension(250, 100)));
+		this.add(Box.createRigidArea(new Dimension(1, 50)));
 		this.auxButtonPanel.add(enterAccount);
 		this.auxButtonPanel.add(obtainNewPass);
 		this.add(auxButtonPanel);
-		this.add(Box.createRigidArea(new Dimension(250, 500)));
+		this.add(Box.createRigidArea(new Dimension(1, 20)));
 
 	}
 
 	private void initComponents() {
-		
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
 		this.auxButtonPanel = new JPanel();
 		this.auxButtonPanel.setOpaque(false);
+		
 		// title of the component
 		this.title = new JTextPane();
-		this.title.setText(" Register user:");
-		this.title.setFont(new Font("Arial", Font.PLAIN, 20));
-		this.title.setForeground(color);
-		this.title.setOpaque(false);
-		this.title.setEditable(false);
+		this.generateTextPane(title, LoadUser.REGISTER_USER, 28, new Color(255, 96, 0), BorderFactory.createLineBorder(this.color));
 
 		// email text
 		this.eMail = new JTextPane();
-		this.eMail.setText(NICK);
-		this.eMail.setFont(new Font("Arial", Font.PLAIN, 16));
-		this.eMail.setOpaque(false);
-		this.eMail.setEditable(false);
+		this.generateTextPane(eMail, LoadUser.NICK, 20, Color.black, null);
 
 		// email request
 		this.eMailRequest = new JTextField(10);
-		this.eMailRequest.setBorder(null);
-		this.eMailRequest.setBorder(BorderFactory.createRaisedBevelBorder());
-		this.eMailRequest.setForeground(new Color(0, 0, 0));
-		this.eMailRequest.setOpaque(false);
-		this.eMailRequest.setEditable(true);
+		this.generateTextField(eMailRequest, Color.black, BorderFactory.createLineBorder(color));
 
 		// pass text
 		this.pass = new JTextPane();
-		this.pass.setText(PASS);
-		this.pass.setBorder(BorderFactory.createLineBorder(Color.red));
-		this.pass.setFont(new Font("Arial", Font.PLAIN, 16));
-		this.pass.setForeground(new Color(0, 0, 0));
-		this.pass.setOpaque(false);
-		this.pass.setEditable(false);
+		this.generateTextPane(pass, LoadUser.PASS, 20, Color.black, null);
 
 		// pass request
 		this.passRequest = new JPasswordField(10);
-		this.passRequest.setForeground(new Color(0, 0, 0));
-		// this.passRequest.setBorder(null);
-		this.passRequest.setBorder(BorderFactory.createLineBorder(Color.red));
-		this.passRequest.setOpaque(false);
-		this.passRequest.setEditable(true);
-		this.passRequest.setVisible(true);
+		this.generatePasswordField(passRequest, BorderFactory.createLineBorder(color));
 
 		// create account button
 		this.enterAccount = new Button("Access acount");
 		enterAccount.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				ctrl.loginUser(eMailRequest.getText(), passRequest.getPassword());
 			}
 		});
 		this.obtainNewPass = new Button("Obtain new password");
 
+	}
+	
+	private void generatePasswordField(JPasswordField component, Border border){
+		component.setForeground(new Color(0, 0, 0));
+		component.setBorder(border);
+		component.setOpaque(false);
+		component.setEditable(true);
+		component.setVisible(true);
+	}
+	
+	private void generateTextPane(JTextPane component, String constant, int fontSize, Color fontColor, Border border){
+		component.setText(constant);
+		component.setBorder(border);
+		component.setFont(new Font("Arial", Font.PLAIN, fontSize));
+		component.setForeground(fontColor);
+		component.setOpaque(false);
+		component.setEditable(false);
+	}
+	
+	private void generateTextField(JTextField component, Color fontColor, Border border){
+		component.setBorder(border);
+		component.setForeground(fontColor);
+		component.setOpaque(false);
+		component.setEditable(true);
 	}
 
 	@Override
@@ -178,16 +185,10 @@ public class LoadUser extends JPanel {
 
 	class Button extends JButton {
 
-		/**
-		 * ESTA CLASE NO HACE FALTA QUE LA ENTIENDAS, SOLO ES UN BOTON CON COLOR
-		 * QUE PUEDES CAMBIAR EN ARTIB PRIVADOS PUEDES AÑADIRLE UN LISTENER Y
-		 * ESO
-		 */
-
 		private static final long serialVersionUID = 1L;
 		private Color color1 = color;
 		private Color color2 = new Color(0, 0, 0);
-		private Color color3 = Color.BLACK;
+		private Color color3 = Color.white;
 
 		public Button(String text) {
 			this.setText(text);
@@ -234,13 +235,14 @@ public class LoadUser extends JPanel {
 			super.paintComponent(g);
 		}
 	}
+	
+	
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("example");
-		frame.pack();
-	frame.setBackground(new Color(0, 0, 0));
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setBackground(new Color(0, 0, 0));
 		LoadUser user = new LoadUser(new Color(255, 96, 0), Color.black);
-		user.setVisible(true);
 		frame.add(user);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -89,8 +89,6 @@ public class MainSwing extends JPanel implements AppObserver {
 
 		setBackground(Color.white);
 
-		// setPreferredSize(new Dimension(800, 2000));
-
 		add(generateLogo());
 		add(Box.createRigidArea(new Dimension((int) getPreferredSize().getWidth(), 6)));
 		add(tags());

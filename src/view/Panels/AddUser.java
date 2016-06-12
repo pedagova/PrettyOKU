@@ -164,7 +164,7 @@ public class AddUser extends JPanel {
 		// pass text
 		this.pass = new JTextPane();
 		this.pass.setText(AddUser.PASS);
-		this.pass.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.pass.setBorder(null);
 		this.pass.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.pass.setForeground(new Color(0, 0, 0));
 		this.pass.setOpaque(false);
@@ -173,7 +173,7 @@ public class AddUser extends JPanel {
 		// pass request
 		this.passRequest = new JPasswordField("", 10);
 		this.passRequest.setForeground(new Color(0, 0, 0));
-		this.passRequest.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.passRequest.setBorder(null);
 		this.passRequest.setOpaque(false);
 		this.passRequest.setEditable(true);
 
@@ -184,12 +184,12 @@ public class AddUser extends JPanel {
 		this.passAgain.setForeground(new Color(0, 0, 0));
 		this.passAgain.setOpaque(false);
 		this.passAgain.setEditable(false);
-		this.passAgain.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.passAgain.setBorder(null);
 
 		// pass again request
 		this.passAgainRequest = new JPasswordField(10);
 		this.passAgainRequest.setForeground(new Color(0, 0, 0));
-		this.passAgainRequest.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.passAgainRequest.setBorder(null);
 		this.passAgainRequest.setOpaque(false);
 		this.passAgainRequest.setEditable(true);
 
@@ -259,7 +259,7 @@ public class AddUser extends JPanel {
 		// name text
 		this.name = new JTextPane();
 		this.name.setText(AddUser.NAME);
-		this.name.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.name.setBorder(null);
 		this.name.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.name.setForeground(new Color(0, 0, 0));
 		this.name.setOpaque(false);
@@ -287,7 +287,7 @@ public class AddUser extends JPanel {
 		// fore name 1 text
 		this.foreName1 = new JTextPane();
 		this.foreName1.setText(AddUser.FORE_NAME_1);
-		this.foreName1.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.foreName1.setBorder(null);
 		this.foreName1.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.foreName1.setForeground(new Color(0, 0, 0));
 		this.foreName1.setOpaque(false);
@@ -315,7 +315,7 @@ public class AddUser extends JPanel {
 		// fore name 2 text
 		this.foreName2 = new JTextPane();
 		this.foreName2.setText("Fore name 2:");
-		this.foreName2.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.foreName2.setBorder(null);
 		this.foreName2.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.foreName2.setForeground(new Color(0, 0, 0));
 		this.foreName2.setOpaque(false);
@@ -343,7 +343,7 @@ public class AddUser extends JPanel {
 		// address text
 		this.adress = new JTextPane();
 		this.adress.setText(AddUser.ADDRESS);
-		this.adress.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.adress.setBorder(null);
 		this.adress.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.adress.setForeground(new Color(0, 0, 0));
 		this.adress.setOpaque(false);
@@ -371,7 +371,7 @@ public class AddUser extends JPanel {
 		// nick text
 		this.nick = new JTextPane();
 		this.nick.setText(AddUser.NICK);
-		this.nick.setBorder(BorderFactory.createLineBorder(Color.red));
+		this.nick.setBorder(null);
 		this.nick.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.nick.setForeground(new Color(0, 0, 0));
 		this.nick.setOpaque(false);
@@ -398,6 +398,7 @@ public class AddUser extends JPanel {
 
 	}
 
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
