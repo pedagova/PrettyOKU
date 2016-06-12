@@ -20,6 +20,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
@@ -28,6 +29,7 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import controller.Controler;
+import dataAccessObjectDesingPattern.UserVO;
 
 public class AddUser extends JPanel {
 
@@ -198,8 +200,21 @@ public class AddUser extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (passAgainRequest.equals(passRequest)) {
+					try{
+					ctrl.addUser(new UserVO(nameRequest.getText(), nickRequest.getText(),
+							foreName1Request.getText(), foreName2Request.getText(), passRequest.getPassword(),eMailRequest.getText(),
+							adressRequest.getText()));
+					}catch(NullPointerException n){
+						JOptionPane.showMessageDialog(null,
+							    "pass cant be empty",
+							    "Inane error",
+							    JOptionPane.ERROR_MESSAGE);
+					}
 				} else {
-
+					JOptionPane.showMessageDialog(null,
+						    "pass again and pass request are diferent",
+						    "Inane error",
+						    JOptionPane.ERROR_MESSAGE);
 				}
 
 			}

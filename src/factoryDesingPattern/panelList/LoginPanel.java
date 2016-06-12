@@ -69,7 +69,7 @@ public class LoginPanel extends BasicPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ctrl.loginUser(requestName.getText(), requestPass.getText());
+				//ctrl.loginUser(requestName.getText(), requestPass.getText());
 			}
 		});
 

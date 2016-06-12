@@ -9,6 +9,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.BorderFactory;
@@ -24,16 +26,20 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import controller.Controler;
+
 public class LoadUser extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Controler ctrl;
 
-	public static final String NICK = "Nick:";
+	private final String NICK = "Nick:";
 
-	public static final String PASS = "Password:";
+	private final String PASS = "Password:";
 
 	private JTextPane title;
 
@@ -103,7 +109,7 @@ public class LoadUser extends JPanel {
 
 		// email text
 		this.eMail = new JTextPane();
-		this.eMail.setText(LoadUser.NICK);
+		this.eMail.setText(NICK);
 		this.eMail.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.eMail.setOpaque(false);
 		this.eMail.setEditable(false);
@@ -118,7 +124,7 @@ public class LoadUser extends JPanel {
 
 		// pass text
 		this.pass = new JTextPane();
-		this.pass.setText(LoadUser.PASS);
+		this.pass.setText(PASS);
 		this.pass.setBorder(BorderFactory.createLineBorder(Color.red));
 		this.pass.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.pass.setForeground(new Color(0, 0, 0));
@@ -136,6 +142,14 @@ public class LoadUser extends JPanel {
 
 		// create account button
 		this.enterAccount = new Button("Access acount");
+		enterAccount.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ctrl.loginUser(eMailRequest.getText(), passRequest.getPassword());
+			}
+		});
 		this.obtainNewPass = new Button("Obtain new password");
 
 	}

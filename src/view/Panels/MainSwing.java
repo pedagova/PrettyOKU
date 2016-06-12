@@ -9,6 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 import javax.swing.plaf.IconUIResource;
@@ -37,6 +39,7 @@ import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
 import exceptions.EmptyListException;
 import factoryDesingPattern.panelList.ListPanel;
+import factoryDesingPattern.panelList.MainPanel;
 import model.AppObserver;
 import model.Model;
 import view.ViewUtilities;
@@ -224,6 +227,15 @@ public class MainSwing extends JPanel implements AppObserver {
 			id.setForeground(Color.GRAY);
 			id.setBorder(null);
 			id.setPreferredSize(new Dimension((widht * 20 / 100) + 200, UsesBarSize));
+			id.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					//cambialo por el correspondiente que no lo encuentro 
+					midPanel = new UserLog();
+					initGUI();
+				}
+			});
 			p3.add(id);
 		} else {
 			JButton id = new JButton("Bienvenid@\n " + "pedagova@gmail.com");
@@ -232,6 +244,15 @@ public class MainSwing extends JPanel implements AppObserver {
 			id.setForeground(Color.GRAY);
 			id.setBorder(null);
 			id.setPreferredSize(new Dimension((widht * 20 / 100) + 200, UsesBarSize));
+			id.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					//lista cuando el usuario yya esta registrado
+					//midPanel = new PanelRegistro(ctrl);
+				}
+			});
 			p3.add(id);
 		}
 
@@ -249,7 +270,7 @@ public class MainSwing extends JPanel implements AppObserver {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Añadir cambio en panel principal");
-				MainSwing.this.setPanel(new NewAddItem());
+				setPanel(new NewAddItem());
 			}
 		});
 
@@ -355,43 +376,37 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	@Override
 	public void opAppStart(List<ItemVO> actList) {
+		midPanel = new ItemsList(actList, this);
+		initGUI();
 	}
 
 	@Override
 	public void OnUserLogOut() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void OnLoginRight(UserVO u) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void OnLoginFail(UserVO u) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void OnListAct(List<ItemVO> list) {
 		if (!list.isEmpty()) {
 			midPanel = new ItemsList(list, this);
-			System.out.println("hola 1");
 			initGUI();
-			System.out.println("hola 2");
 		} else {
-			JOptionPane.showMessageDialog(null, "Empty category");
+			JOptionPane.showMessageDialog(null, "Empty List");
 		}
 
 	}
 
-	public void start(Controler controler) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	public void setPanel(JPanel panel) {
 		midPanel = panel;
@@ -399,7 +414,6 @@ public class MainSwing extends JPanel implements AppObserver {
 	}
 
 	public Controler getControler() {
-		// TODO Auto-generated method stub
 		return this.ctrl;
 	}
 }

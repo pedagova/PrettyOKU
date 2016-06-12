@@ -13,10 +13,12 @@ public class UserVO {
 	private String eMail;
 	private String address;
 
-	public UserVO(String name, String nick, String forename1, String forename2, String pass, String eMail,
+	public UserVO(String name, String nick, String forename1, String forename2, char[] pass, String eMail,
 			String address) {
 		this.name = name;
-		this.pass = pass;
+		this.pass = "";
+		for(char c : pass)
+			this.pass += c;
 		this.forename1 = forename1;
 		this.forename2 = forename2;
 		this.nick = nick;

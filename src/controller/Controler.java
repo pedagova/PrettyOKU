@@ -34,12 +34,16 @@ public class Controler implements AppObserver{
 	public Controler(Model model){
 		loggedUser = null;
 		this.model = model;
-		this.view = new MainSwing(this);
 		this.model.addObserver(this);
+		this.view = new MainSwing(this);
 	}
 	
-	public void loginUser(String nick, String pass) {
-		model.login(nick, pass);
+	public void loginUser(String nick, char[] cs) {
+		String s = "";
+		for(char st : cs){
+			s+= st;
+		}
+		model.login(nick, s);
 	}
 
 	public String getUser(String idOwner) {
@@ -60,7 +64,7 @@ public class Controler implements AppObserver{
 	}
 
 	public boolean isLoggedOn() {
-		return true;
+		return false;
 	}
 
 	public List<ItemVO> getList() {
@@ -73,12 +77,12 @@ public class Controler implements AppObserver{
 	}
 
 	private void start() {
-		this.view.start(this);
-		this.model.start();
+		//view.start();
+		model.start();
 	}
 
 	public String loggedUser() {
-		return this.loggedUser.getId();
+		return loggedUser.getId();
 	}
 
 	public void newUserItem(ItemVO item, String price) {
@@ -91,7 +95,7 @@ public class Controler implements AppObserver{
 
 	@Override
 	public void opAppEnd() {
-				
+		loggedUser = null;
 	}
 
 	@Override
@@ -113,7 +117,7 @@ public class Controler implements AppObserver{
 
 	@Override
 	public void OnLoginFail(UserVO u) {
-		u = null;
+		loggedUser = null;
 	}
 
 	@Override

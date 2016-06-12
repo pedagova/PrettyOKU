@@ -95,10 +95,6 @@ public class NewAddItem extends JPanel {
 					String path = selectedFile.getAbsolutePath();
 					imageLabel.setIcon(ResizeImage(path));
 				}
-				// if the user click on save in Jfilechooser
-				else if (result == JFileChooser.CANCEL_OPTION) {
-					System.out.println("No File Select");
-				}
 			}
 		});
 		
@@ -138,7 +134,7 @@ public class NewAddItem extends JPanel {
 		});
 
 		// image label
-		ImageIcon image = new ImageIcon("C:/Users/Javi/git/PrettyOKU/src/images/empty.png");
+		ImageIcon image = new ImageIcon("C:/Users/Permuta/Pictures");
 		imageLabel = new JLabel(image);
 		imageLabel.setPreferredSize(new Dimension(400, 400));
 		imageLabel.setBorder(null);
@@ -203,7 +199,7 @@ public class NewAddItem extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (productDescription.getText().equalsIgnoreCase("Put here the item description")) {
-					productDescription.setText(null);
+					productDescription.setText("");
 				}
 			}
 		});
@@ -302,11 +298,18 @@ public class NewAddItem extends JPanel {
 				imageInFile.close();
 				imageOutFile.close();
 
-				System.out.println("Image Successfully Manipulated!");
+				//System.out.println("Image Successfully Manipulated!");
 			} catch (FileNotFoundException e) {
-				System.out.println("Image not found" + e);
+				//System.out.println("Image not found" + e);
+				JOptionPane.showMessageDialog(null,
+					    "La imagen no se ha podido cargar correctamente",
+					    "Inane error",
+					    JOptionPane.ERROR_MESSAGE);
 			} catch (IOException ioe) {
-				System.out.println("Exception while reading the Image " + ioe);
+				JOptionPane.showMessageDialog(null,
+					    "La imagen no se ha podido cargar correctamente",
+					    "Inane error",
+					    JOptionPane.ERROR_MESSAGE);
 			}
 
 			return image;

@@ -15,7 +15,7 @@ public class UserLog extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private AddUser logComponent;
+	private LoadUser logComponent;
 
 	private AddUser registerComponent;
 
@@ -72,7 +72,7 @@ public class UserLog extends JPanel {
 		this.auxLog2.setLayout(new BoxLayout(this.auxLog2, BoxLayout.Y_AXIS));
 		this.auxLog2.setPreferredSize(new Dimension(300, 500));
 		
-		this.logComponent = new AddUser(new Color(255, 96, 0), Color.black, null);
+		this.logComponent = new LoadUser(new Color(255, 96, 0), Color.black);
 
 	}
 
