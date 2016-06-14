@@ -1,14 +1,19 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.ScrollPane;
 import java.awt.Toolkit;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import controller.Controler;
 import view.Panels.MainSwing;
 
-public class View2 extends JFrame{
+public class View2 extends JFrame implements StandartInterface{
 
 		/**
 		 * 
@@ -16,24 +21,44 @@ public class View2 extends JFrame{
 		private static final long serialVersionUID = 1L;
 		
 		MainSwing panel;
+		
+		JScrollPane sp;
 
+		@Override
 		public void start(Controler ctrl) {
-			/*System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
-			try {
-				UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
-			} catch (Exception e) {
-				System.err.print("Error at Look And Feel");
-			}*/
 			Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 			this.setPreferredSize(dimension);
 			this.setLocationRelativeTo(null);
+			setLayout(new BorderLayout());
 			this.panel = new MainSwing(ctrl);
-			this.add(panel);
-			ctrl.add(panel);
+			
+			JPanel pAux = new JPanel();
+			
+			pAux.add(Box.createRigidArea(new Dimension(40, 1)), BorderLayout.WEST);
+			
+			
+			pAux.add(panel, BorderLayout.CENTER);
+			
+			pAux.add(Box.createRigidArea(new Dimension(40, 1)), BorderLayout.EAST);
+			sp = new JScrollPane(pAux);
+			this.add(sp);
 			this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			this.setVisible(true);
 			this.setBackground(null);
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+		}
+
+		@Override
+		public void changePanel(JPanel p) {
+			// TODO Auto-generated method stub
+			panel.setPanel(p);
+		}
+
+		@Override
+		public void initGUI() {
+			panel.initGUI();
+			
 		}
 
 		/*

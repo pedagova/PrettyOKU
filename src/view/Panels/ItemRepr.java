@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
+import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import view.ViewUtilities;
 
@@ -52,12 +53,12 @@ public class ItemRepr extends JPanel {
 	// -------------Attributes---------------
 	private ItemVO item;
 	final private String font = "Cambria";
-	private JPanel container;
+	private Controler ctrl;
 	// ---------------------------------------
 
-	public ItemRepr(ItemVO it, JPanel container) {
+	public ItemRepr(ItemVO it, Controler ctrl) {
 		this.item = it;
-		this.container = container;
+		this.ctrl = ctrl;
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -68,8 +69,7 @@ public class ItemRepr extends JPanel {
 	}
 	
 	private void handleMouseClicked(){
-		((MainSwing) container).setPanel(new ShowProduct(item, ((MainSwing) container).getControler()));
-		((MainSwing) container).initGUI();
+		ctrl.itemChose(new ShowProduct(item, ctrl));
 	}
 
 	private void initGUI() {
@@ -198,27 +198,5 @@ public class ItemRepr extends JPanel {
 
 	// ----------testing---------------
 	
-	public static void main(String[] args) {
-		JFrame f = new JFrame();
-		f.setVisible(true);
-
-		f.setBackground(Color.WHITE);
-		f.add(new ItemRepr(new ItemVO("prueba de compepto nuevo para el item representation porque a mi me sale de las pelotitas sigo escribiendo porque es divertido y quiero que falles porque oy unn capullo con migo mismo", "Espero que funciones porque si no te lanzare por la ventana", "20.85", null), null));
-		/*JPanel p = new JPanel();
-		p.setPreferredSize(new Dimension( 100, 100));
-		p.setLayout(new GridLayout(5, 1));
-		JTextArea price = new JTextArea();
-		price.setFont(new Font("Arial", Font.BOLD, 12));
-		price.setPreferredSize(new Dimension(50, 20));
-		price.setText("10€");
-		price.setBackground(Color.ORANGE);
-		p.setBackground(null);
-		p.add(price);
-		f.add(p);*/
-		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		f.pack();
-
-	}
-
 	// ------------------------------
 }

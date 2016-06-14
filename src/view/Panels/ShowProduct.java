@@ -82,9 +82,9 @@ public class ShowProduct extends JPanel {
 		this.showProduct.add(auxPanel);
 		this.showProduct.add(inputPrice);
 		this.showProduct.add(productDescription);
-		this.add(Box.createRigidArea(new Dimension(300, 1)));
+		this.add(Box.createRigidArea(new Dimension(100, 1)));
 		this.add(showProduct);
-		this.add(Box.createRigidArea(new Dimension(300, 1)));
+		this.add(Box.createRigidArea(new Dimension(100, 1)));
 	}
 
 	private void initComponent() {

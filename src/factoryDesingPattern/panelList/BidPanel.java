@@ -98,7 +98,7 @@ public class BidPanel extends BasicPanel {
 		this.repaint();
 	}
 
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
 			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
@@ -111,6 +111,6 @@ public class BidPanel extends BasicPanel {
 		frame.setLocationRelativeTo(null);
 		frame.add(new BidPanel(Utils.reSize(0.2, 0.3), new Controler()));
 		frame.setVisible(true);
-	}
+	}*/
 
 }

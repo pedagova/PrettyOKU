@@ -134,7 +134,7 @@ public class UserRegisterPanel extends BasicPanel {
 
 	}
 
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 
 		JFrame frame = new JFrame();
 		frame.setPreferredSize(Utils.reSize(0.35, 0.7));
@@ -144,5 +144,5 @@ public class UserRegisterPanel extends BasicPanel {
 		frame.setVisible(true);
 
 		//new UserRegisterPanel(new Controler());
-	}
+	}*/
 }

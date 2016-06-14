@@ -60,7 +60,7 @@ public class ItemPanel extends BasicPanel {
 		this.image.setInfo(item);
 	}
 
-	public static void main(String[] arg) {
+	/*public static void main(String[] arg) {
 		System.setProperty("Quaqua.tabLayoutPolicy", "wrap");
 		try {
 			UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
@@ -72,6 +72,6 @@ public class ItemPanel extends BasicPanel {
 		frame.add(new ItemPanel(new Dimension(1000,1000), new Controler()));
 		frame.setVisible(true);
 		//frame.pack();
-	}
+	}*/
 
 }

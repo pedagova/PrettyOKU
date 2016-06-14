@@ -5,11 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,30 +13,18 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
-import javax.swing.border.Border;
-import javax.swing.plaf.IconUIResource;
 
 import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
-import exceptions.EmptyListException;
-import factoryDesingPattern.panelList.ListPanel;
-import factoryDesingPattern.panelList.MainPanel;
 import model.AppObserver;
-import model.Model;
 import view.ViewUtilities;
 
 public class MainSwing extends JPanel implements AppObserver {
@@ -75,7 +58,7 @@ public class MainSwing extends JPanel implements AppObserver {
 	// Constructors
 	public MainSwing(Controler ctrl) {
 		this.ctrl = ctrl;
-		midPanel = new ItemsList(new ArrayList<ItemVO>(), this);
+		midPanel = new ItemsList(new ArrayList<ItemVO>(), this.ctrl);
 		initGUI();
 		ctrl.add(this);
 	}
@@ -189,9 +172,9 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	private Component userBar() {
 
-		final String text = "Bienvenido a Oku, la tienda de subastas para los \"Otaku\"";
+		final String text = "    Bienvenido a Oku, la tienda de subastas para los \"Otaku\"";
 
-		int widht = 800;
+		int widht = 750;
 
 		JPanel p = new JPanel();
 		p.setBackground(new Color(240, 241, 241));
@@ -224,12 +207,11 @@ public class MainSwing extends JPanel implements AppObserver {
 			id.setBackground(null);
 			id.setForeground(Color.GRAY);
 			id.setBorder(null);
-			id.setPreferredSize(new Dimension((widht * 20 / 100) + 200, UsesBarSize));
+			id.setPreferredSize(new Dimension((widht * 5 / 100) + 200, UsesBarSize - 20 ));
 			id.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					//cambialo por el correspondiente que no lo encuentro 
 					midPanel = new UserLog();
 					initGUI();
 				}
@@ -262,7 +244,7 @@ public class MainSwing extends JPanel implements AppObserver {
 		b.setFont(new Font("Arial", 20, 20));
 		b.setBackground(null);
 		b.setBorder(BorderFactory.createLineBorder(Color.red));
-		b.setPreferredSize(new Dimension(widht * 10 / 100, 80));
+		b.setPreferredSize(new Dimension(widht * 15 / 100, 80));
 		b.addActionListener(new ActionListener() {
 
 			@Override
@@ -346,7 +328,7 @@ public class MainSwing extends JPanel implements AppObserver {
 	 * 
 	 * }
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 		JFrame f = new JFrame();
 		f.setBackground(Color.white);
@@ -365,7 +347,7 @@ public class MainSwing extends JPanel implements AppObserver {
 	}
 
 	// ------------End testing--------------------------------
-
+*/
 	@Override
 	public void opAppEnd() {
 		// TODO Auto-generated method stub
@@ -374,7 +356,7 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	@Override
 	public void opAppStart(List<ItemVO> actList) {
-		midPanel = new ItemsList(actList, this);
+		midPanel = new ItemsList(actList, ctrl);
 		initGUI();
 	}
 
@@ -396,7 +378,7 @@ public class MainSwing extends JPanel implements AppObserver {
 	@Override
 	public void OnListAct(List<ItemVO> list) {
 		if (!list.isEmpty()) {
-			midPanel = new ItemsList(list, this);
+			midPanel = new ItemsList(list, ctrl);
 			initGUI();
 		} else {
 			JOptionPane.showMessageDialog(null, "Empty List");

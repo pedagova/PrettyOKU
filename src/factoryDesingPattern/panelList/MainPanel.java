@@ -50,7 +50,6 @@ public class MainPanel extends BasicPanel implements AppObserver {
 	private JButton info5;
 
 	public MainPanel(Dimension dimension, Controler ctrl) {
-		this.ctrl = new Controler();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setPreferredSize(dimension);
 

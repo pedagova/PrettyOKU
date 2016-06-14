@@ -13,6 +13,7 @@ import exceptions.ActPriceException;
 import exceptions.NotLoggedException;
 import model.AppObserver;
 import model.Model;
+import view.StandartInterface;
 import view.View;
 import view.View2;
 import view.Panels.ItemRepr;
@@ -25,17 +26,18 @@ public class Controler implements AppObserver{
 
 	Model model;
 	
-	private MainSwing view;
+	private StandartInterface view;
 	
 	private UserVO loggedUser;
 	
 	private String category;	
 	
-	public Controler(Model model){
+	public Controler(Model model, StandartInterface view){
 		loggedUser = null;
 		this.model = model;
+		this.view = view;
 		this.model.addObserver(this);
-		this.view = new MainSwing(this);
+		//view.start(this);
 	}
 	
 	public void loginUser(String nick, char[] cs) {
@@ -53,10 +55,6 @@ public class Controler implements AppObserver{
 	public void add(AppObserver o) {
 		model.addObserver(o);
 	}
-	
-	public Controler(){
-		model = new Model();
-	}
 
 	public void getAll(String string) {
 		model.getAll(string);
@@ -72,12 +70,12 @@ public class Controler implements AppObserver{
 	}
 	
 	public static void main(String[] args) {
-		Controler ctrl = new Controler(new Model());
+		Controler ctrl = new Controler(new Model(), new View2());
 		ctrl.start();
 	}
 
-	private void start() {
-		//view.start();
+	public void start() {
+		view.start(this);
 		model.start();
 	}
 
@@ -149,7 +147,8 @@ public class Controler implements AppObserver{
 	}
 
 	public void itemChose(ShowProduct showProduct) {
-		view.setPanel(showProduct);		
+		view.changePanel(showProduct);	
+		view.initGUI();
 	}
 
 	public void actPrice(ItemVO item, int i) throws NotLoggedException, ActPriceException {
