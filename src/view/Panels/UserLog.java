@@ -27,7 +27,6 @@ public class UserLog extends JPanel {
 
 	public UserLog() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.setPreferredSize(new Dimension(1, 1000));
 		this.setBackground(Color.white);
 		
 		this.initComponents();
@@ -40,21 +39,22 @@ public class UserLog extends JPanel {
 		this.auxRegister1.setBackground(Color.white);
 		this.auxRegister2.setBackground(Color.white);
 		
-		this.auxRegister1.add(Box.createRigidArea(new Dimension(400, 300)));
+		this.auxRegister1.add(Box.createRigidArea(new Dimension(200, 1)));
 		this.auxRegister1.add(registerComponent);
 
 		this.auxRegister2.add(auxRegister1);
-		this.auxRegister2.add(Box.createRigidArea(new Dimension(300, 800)));
+		this.auxRegister2.add(Box.createRigidArea(new Dimension(1, 300)));
 
 		this.add(this.auxRegister2);
-		this.auxRegister1.add(Box.createRigidArea(new Dimension(100, 800)));
+		//this.auxRegister1.add(Box.createRigidArea(new Dimension(100, 800)));
 
+		this.add(Box.createRigidArea(new Dimension(80, 1)));
 		this.auxLog1.add(logComponent);
-		this.auxLog1.add(Box.createRigidArea(new Dimension(400, 300)));
+		this.auxLog1.add(Box.createRigidArea(new Dimension(200, 1)));
 
 
 		this.auxLog2.add(auxLog1);
-		this.auxLog2.add(Box.createRigidArea(new Dimension(300, 800)));
+		this.auxLog2.add(Box.createRigidArea(new Dimension(1,400)));
 
 		this.add(this.auxLog2);
 		
@@ -68,7 +68,7 @@ public class UserLog extends JPanel {
 
 		this.auxRegister2 = new JPanel();
 		this.auxRegister2.setLayout(new BoxLayout(this.auxRegister2, BoxLayout.Y_AXIS));
-		this.auxRegister2.setPreferredSize(new Dimension(300, 500));
+		//this.auxRegister2.setPreferredSize(new Dimension(300, 500));
 
 		this.registerComponent = new AddUser(Color.white, Color.black, null);
 
@@ -78,13 +78,13 @@ public class UserLog extends JPanel {
 		
 		this.auxLog2 = new JPanel();
 		this.auxLog2.setLayout(new BoxLayout(this.auxLog2, BoxLayout.Y_AXIS));
-		this.auxLog2.setPreferredSize(new Dimension(300, 500));
+		//this.auxLog2.setPreferredSize(new Dimension(300, 500));
 		
 		this.logComponent = new LoadUser(Color.white, Color.black);
 
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		JFrame frame = new JFrame("example");
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setBackground(new Color(0, 0, 0));
@@ -93,5 +93,5 @@ public class UserLog extends JPanel {
 		frame.add(user);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+	}*/
 }

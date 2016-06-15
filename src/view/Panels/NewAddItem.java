@@ -1,5 +1,6 @@
 package view.Panels;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -67,6 +68,8 @@ public class NewAddItem extends JPanel {
 	private JPanel showProduct;
 
 	private JButton imageButton;
+	
+	private JButton addItem;
 
 	public NewAddItem() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -94,14 +97,13 @@ public class NewAddItem extends JPanel {
 	}
 
 	private void initComponent() {
+		this.addItemButton();
 		this.generateImageButton();
 		this.setBackground(Color.white);
-
-
 		this.generateItemInfo();
 		this.generateCentralPanel();
 		this.generateDescription();
-
+		this.add(addItem);
 	}
 	
 	private void generateItemInfo(){
@@ -113,6 +115,7 @@ public class NewAddItem extends JPanel {
 		// title
 		title = new JTextPane();
 		generateTextPane(title, "Put here the product title", new Color(255, 96, 0));
+		
 		productName = new JTextPane();
 		generateTextPane(productName, "Put here the product name", new Color(0, 0, 0));
 
@@ -137,8 +140,22 @@ public class NewAddItem extends JPanel {
 		});
 
 	}
+	
+	private void addItemButton(){
+		addItem = new JButton("Add item");
+		addItem.setVisible(true);
+		addItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
 	private void generateImageButton(){
 		imageButton = new JButton("Add image");
+		imageButton.setHorizontalAlignment(SwingConstants.CENTER);
 		imageButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -183,9 +200,15 @@ public class NewAddItem extends JPanel {
 		productInfo.add(Box.createRigidArea(new Dimension(1, 100)));
 		productInfo.setBorder(null);
 
+		JPanel imagePanel = new JPanel();
+		imagePanel.setLayout(new BorderLayout());
+		imagePanel.add(imageLabel, BorderLayout.WEST);
+		imagePanel.add(imageButton,BorderLayout.SOUTH);
+		imagePanel.setBackground(Color.white);
+		
 		auxPanel = new JPanel();
 		auxPanel.setBackground(Color.white);
-		auxPanel.add(imageLabel);
+		auxPanel.add(imagePanel);
 		auxPanel.add(productInfo);
 		auxPanel.setBorder(null);
 	}
