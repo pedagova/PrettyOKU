@@ -28,17 +28,17 @@ public class View2 extends JFrame implements StandartInterface {
 	@Override
 	public void start(Controler ctrl) {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setPreferredSize(dimension);
+		//this.setPreferredSize(new Dimension(500, 500));
 		this.setLocationRelativeTo(null);
 		this.panel = new MainSwing(ctrl);
 		this.panel.setBorder(BorderFactory.createLineBorder(Color.blue));
 		JPanel pAux = new JPanel();
 		pAux.setBackground(null);
 		pAux.setLayout(new BoxLayout(pAux, BoxLayout.X_AXIS));
-		pAux.add(Box.createRigidArea(new Dimension(300, 1)));
+		pAux.add(Box.createRigidArea(new Dimension(100, 1)));
 		pAux.add(panel);
-		pAux.add(Box.createRigidArea(new Dimension(300, 1)));
-		sp = new JScrollPane(pAux, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		pAux.add(Box.createRigidArea(new Dimension(100, 1)));
+		sp = new JScrollPane(pAux, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.add(sp);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);

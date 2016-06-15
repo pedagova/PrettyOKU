@@ -41,11 +41,11 @@ public class PersonalAccount extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.mainPanel = new JPanel();
 		this.mainPanel.setLayout(new GridLayout(1, 4));
-		this.imageIcon1 = new ImageIcon("C:/Users/Javi/git/PrettyOKU/bin/images/box.png");
+		this.imageIcon1 = new ImageIcon("src/images/imagen2.png");
 		this.image1 = new JLabel(imageIcon1);
-		this.imageIcon2 = new ImageIcon("C:/Users/Javi/git/PrettyOKU/bin/images/box.png");
+		this.imageIcon2 = new ImageIcon("src/images/imagen1.jpg");
 		this.image2 = new JLabel(imageIcon2);
-		this.imageIcon3 = new ImageIcon("C:/Users/Javi/git/PrettyOKU/bin/images/exit.png");
+		this.imageIcon3 = new ImageIcon("src/images/imagen2.png");
 		this.image3 = new JLabel(imageIcon3);
 	}
 	

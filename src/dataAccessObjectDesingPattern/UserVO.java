@@ -24,6 +24,7 @@ public class UserVO {
 		this.nick = nick;
 		this.eMail = eMail;
 		this.address = address;
+		this.id = "1";
 	}
 
 	public UserVO(JSONObject obs) {

@@ -104,7 +104,7 @@ public class MainSwing extends JPanel implements AppObserver {
 
 		// -------------------1 button------------------------
 		JButton homeB = ViewUtilities.generateButton("Home", "3", backColor, "#FFF5EE");
-		homeB.setPreferredSize(new Dimension(75, 30));
+		homeB.setPreferredSize(new Dimension(1, 30));
 		homeB.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		homeB.addActionListener(new ActionListener() {
 
@@ -118,7 +118,7 @@ public class MainSwing extends JPanel implements AppObserver {
 		//
 		// ------------------2 button-------------------------
 		JButton button2 = ViewUtilities.generateButton("Games", "3", backColor, "#FFF5EE");
-		button2.setPreferredSize(new Dimension(75, 30));
+		button2.setPreferredSize(new Dimension(1, 30));
 		button2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		button2.addActionListener(new ActionListener() {
 
@@ -132,7 +132,7 @@ public class MainSwing extends JPanel implements AppObserver {
 
 		// -------------------3 button------------------------
 		JButton button3 = ViewUtilities.generateButton("Manga", "3", backColor, "#FFF5EE");
-		button3.setPreferredSize(new Dimension(75, 30));
+		button3.setPreferredSize(new Dimension(1, 30));
 		button3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		button3.addActionListener(new ActionListener() {
 
@@ -146,7 +146,7 @@ public class MainSwing extends JPanel implements AppObserver {
 
 		// -------------------4 button------------------------
 		JButton button4 = ViewUtilities.generateButton("Merchandasing", "3", backColor, "#FFF5EE");
-		button4.setPreferredSize(new Dimension(75, 30));
+		button4.setPreferredSize(new Dimension(1, 30));
 		button4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		button4.addActionListener(new ActionListener() {
 
@@ -160,7 +160,7 @@ public class MainSwing extends JPanel implements AppObserver {
 
 		// -----------------5 button---------------------------
 		JButton button5 = ViewUtilities.generateButton("miscellaneus", "3", backColor, "#FFF5EE");
-		button5.setPreferredSize(new Dimension(75, 30));
+		button5.setPreferredSize(new Dimension(1, 30));
 		button5.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		button5.addActionListener(new ActionListener() {
 
@@ -204,10 +204,9 @@ public class MainSwing extends JPanel implements AppObserver {
 
 		p.add(new JSeparator(JSeparator.VERTICAL), BorderLayout.LINE_START);
 
-		JPanel p3 = new JPanel();
-		p3.setBackground(null);
+		JButton id;
 		if (!ctrl.isLoggedOn()) {
-			JButton id = new JButton("Identificate");
+			id = new JButton("Identificate");
 			id.setFont(new Font("Arial", Font.BOLD, 20));
 			id.setBackground(null);
 			id.setForeground(Color.GRAY);
@@ -221,9 +220,9 @@ public class MainSwing extends JPanel implements AppObserver {
 					initGUI();
 				}
 			});
-			p3.add(id);
+		
 		} else {
-			JButton id = new JButton("Bienvenid@\n " + "pedagova@gmail.com");
+			id = new JButton("Bienvenid@\n " + "pedagova@gmail.com");
 			id.setFont(new Font("Microsof sans serif", Font.BOLD, 20));
 			id.setBackground(null);
 			id.setForeground(Color.GRAY);
@@ -238,10 +237,9 @@ public class MainSwing extends JPanel implements AppObserver {
 					// midPanel = new PanelRegistro(ctrl);
 				}
 			});
-			p3.add(id);
 		}
 
-		p.add(p3);
+		p.add(id);
 		p.add(new JSeparator(JSeparator.VERTICAL), BorderLayout.LINE_START);
 
 		JButton b = new JButton("Add item");
@@ -249,12 +247,12 @@ public class MainSwing extends JPanel implements AppObserver {
 		b.setFont(new Font("Arial", 20, 20));
 		b.setBackground(null);
 		b.setBorder(BorderFactory.createLineBorder(Color.red));
-		b.setPreferredSize(new Dimension(widht * 15 / 100, 80));
+		b.setPreferredSize(new Dimension(widht * 15 / 100 , UsesBarSize - 20));
 		b.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setPanel(new NewAddItem());
+				setPanel(new NewAddItem(ctrl));
 			}
 		});
 
@@ -267,6 +265,8 @@ public class MainSwing extends JPanel implements AppObserver {
 		JPanel p = new JPanel();
 		p.setBackground(null);
 
+		p.setBackground(Color.pink);
+		
 		JTextField tf = new JTextField("Buscador:");
 		tf.setFont(new Font("Arial", Font.BOLD, 12));
 		tf.setBackground(null);

@@ -1,11 +1,6 @@
 package controller;
 
-import java.awt.event.MouseAdapter;
 import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
@@ -14,10 +9,7 @@ import exceptions.NotLoggedException;
 import model.AppObserver;
 import model.Model;
 import view.StandartInterface;
-import view.View;
 import view.View2;
-import view.Panels.ItemRepr;
-import view.Panels.MainSwing;
 import view.Panels.ShowProduct;
 
 
@@ -36,8 +28,8 @@ public class Controler implements AppObserver{
 		loggedUser = null;
 		this.model = model;
 		this.view = view;
+		loggedUser = new UserVO("pedro", "permuta", "vazquez", "gonzalez", "1234", "pedagova@gmail.com");
 		this.model.addObserver(this);
-		//view.start(this);
 	}
 	
 	public void loginUser(String nick, char[] cs) {
@@ -62,7 +54,7 @@ public class Controler implements AppObserver{
 	}
 
 	public boolean isLoggedOn() {
-		return false;
+		return true;
 	}
 
 	public List<ItemVO> getList() {

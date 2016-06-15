@@ -37,6 +37,8 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import ch.randelshofer.quaqua.ext.base64.Base64;
+import controller.Controler;
+import dataAccessObjectDesingPattern.ItemVO;
 
 public class NewAddItem extends JPanel {
 
@@ -45,6 +47,8 @@ public class NewAddItem extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private String imageString; 
+	
 	private JLabel imageLabel;
 
 	private JTextPane title;
@@ -71,8 +75,11 @@ public class NewAddItem extends JPanel {
 	
 	private JButton addItem;
 
-	public NewAddItem() {
+	private Controler ctrl;
+
+	public NewAddItem(Controler ctrl) {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.ctrl = ctrl;
 		initComponent();
 		initGUI();
 	}
@@ -148,8 +155,8 @@ public class NewAddItem extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				ctrl.addItem(new ItemVO(productName.getText(), productDescription.getText(),
+						productPrice.getText(), imageString));				
 			}
 		});
 	}
@@ -368,11 +375,17 @@ public class NewAddItem extends JPanel {
 
 			// Converting Image byte array into Base64 String
 			String imageDataString = encodeImage(imageData);
-
+			System.out.println(imageDataString);
 			// Converting a Base64 String into Image byte array
 			byte[] imageByteArray = decodeImage(imageDataString);
-
-			System.out.println(imageDataString);
+			
+			//System.out.println(imageData);
+			
+			String[] s = imageData.toString().split("\n");
+			imageString = "";
+			for(String sAux : s){
+				imageString += sAux;
+			}
 			Base64TImage(imageDataString);
 			// Write a image byte array into file system
 			FileOutputStream imageOutFile = new FileOutputStream(ImagePath);
