@@ -145,7 +145,6 @@ public class Controler implements AppObserver{
 	}
 
 	public void actPrice(ItemVO item, int i) throws NotLoggedException, ActPriceException {
-		// TODO Auto-generated method stub
 		if(loggedUser != null)
 			model.actPrice(item, i,loggedUser);
 		else{

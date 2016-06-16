@@ -12,31 +12,36 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 import ch.randelshofer.quaqua.ext.base64.Base64;
+import dataAccessObjectDesingPattern.ItemDao;
 import utils.Utils;
 
 /**
  * 
- * @author Permuta
- * Date 31/05/2016 6:41
- * version 0.0.1
+ * @author Permuta Date 31/05/2016 6:41 version 0.0.1
  */
 public class ViewUtilities {
 	/**
 	 * 
-	 * @param text text shown at button
-	 * @param fontSize size of the font
-	 * @param colorBack backgroundColor
-	 * @param ColorText color to text
-	 * @return return a JButton with the set information 
+	 * @param text
+	 *            text shown at button
+	 * @param fontSize
+	 *            size of the font
+	 * @param colorBack
+	 *            backgroundColor
+	 * @param ColorText
+	 *            color to text
+	 * @return return a JButton with the set information
 	 */
 	static public JButton generateButton(String text, String fontSize, Color colorBack, String ColorText) {
-		
-		JButton b = new JButton("<HTML><font size=\"" + fontSize + "\"><FONT color=\"" + ColorText + "\">" + text + "</FONT></font></HTML>"); 
+
+		JButton b = new JButton("<HTML><font size=\"" + fontSize + "\"><FONT color=\"" + ColorText + "\">" + text
+				+ "</FONT></font></HTML>");
 		b.setBackground(colorBack);
 		b.setBorderPainted(false);
-		
+
 		return b;
 	}
+
 	/**
 	 * 
 	 * @param chain
@@ -50,5 +55,15 @@ public class ViewUtilities {
 			Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return image;
+	}
+
+	public static String formatedString (String s){
+		String[] g = s.split(" ");
+		StringBuilder sb = new StringBuilder(""), c = new StringBuilder("");
+		for(String h: g)
+			sb.append(h + "+");
+		sb.delete(0, 1);
+		
+		return sb.toString();
 	}
 }

@@ -358,13 +358,15 @@ public class NewAddItem extends JPanel {
 
 			// Converting Image byte array into Base64 String
 			String imageDataString = encodeImage(imageData);
-			System.out.println(imageDataString);
+			//System.out.println(imageDataString);
 			// Converting a Base64 String into Image byte array
 			byte[] imageByteArray = decodeImage(imageDataString);
 			
 			//System.out.println(imageData);
 			
-			String[] s = imageData.toString().split("\n");
+			System.out.println(imageDataString);
+			
+			String[] s = imageDataString.toString().split("\n");
 			imageString = "";
 			for(String sAux : s){
 				imageString += sAux;

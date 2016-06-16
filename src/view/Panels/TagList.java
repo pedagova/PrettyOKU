@@ -60,7 +60,7 @@ public class TagList extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				ctrl.find(text);
 			}
 		});
 		this.add(modalTextPane);

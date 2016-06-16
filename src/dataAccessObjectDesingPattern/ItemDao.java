@@ -3,11 +3,17 @@ package dataAccessObjectDesingPattern;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ch.randelshofer.quaqua.ext.base64.Base64;
 import dataBaseConection.clientREST;
+import view.ViewUtilities;
 
 public class ItemDao {
 	
@@ -96,11 +102,13 @@ public class ItemDao {
 		}
 	}
 	
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		System.out.println(new ItemDao().getItem("29").encodeItem());
-	}
+	}*/
 
 	public void actPrice(String id, String id2, int i) {
 		ddbb.connectionDDBB("POST", "insertBidUp", "id_user= " + id2 + "&id_product= " + id + "&price= " + i);		
 	}
+	
+	
 }
