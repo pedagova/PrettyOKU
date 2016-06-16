@@ -84,7 +84,7 @@ public class ItemRegisterPanel extends BasicPanel{
 				JViewport viewport = descriptionRequest.getViewport(); 
 				JTextArea p = (JTextArea)viewport.getView();
 				
-				ctrl.addItem(new ItemVO(nameRequest.getName(), p.getText(), priceRequest.getText(), image));
+				ctrl.addItem(new ItemVO(nameRequest.getName(), p.getText(), priceRequest.getText(), image, "1"));
 			}
 		});
 		this.auxPanel = new JPanel();

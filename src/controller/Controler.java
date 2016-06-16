@@ -30,7 +30,7 @@ public class Controler implements AppObserver{
 		loggedUser = null;
 		this.model = model;
 		this.view = view;
-		loggedUser = new UserVO("pedro", "permuta", "vazquez", "gonzalez", "1234", "pedagova@gmail.com");
+		loggedUser = null;
 		this.model.addObserver(this);
 	}
 	
@@ -102,7 +102,6 @@ public class Controler implements AppObserver{
 
 	@Override
 	public void OnLoginRight(UserVO u) {
-		// TODO Auto-generated method stub
 		loggedUser = u;
 	}
 
@@ -135,7 +134,7 @@ public class Controler implements AppObserver{
 			model.find(text);
 		}
 		else{
-			model.find(text, category.getId());
+			model.find(text, "1");
 		}
 	}
 
@@ -152,9 +151,25 @@ public class Controler implements AppObserver{
 		}
 	}
 
+	public void getBidItems(){
+		model.getBidItems(loggedUser.getId());
+	}
+	
+	public void getBoughtProducts(){
+		model.getBoughtProducts(loggedUser.getId());
+	}
+	
+	public void getSellProducts(){
+		model.getSellProducts(loggedUser.getId());
+	}
 	
 	public Tags getCategory() {
 		return this.category;
 	}
+	
+	public UserVO getLoggedUser(){
+		return loggedUser;
+	}
+	
 }
 

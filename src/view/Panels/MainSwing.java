@@ -15,6 +15,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -38,17 +39,10 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	private final Color backColor = new Color(255, 69, 0);
 	private final int UsesBarSize = 45;
-
+	final int N = 20;
+	
 	public JPanel midPanel;
 
-	// ----------anonimus class--------------
-	private class Separator extends JPanel {
-
-		public Separator(Dimension d, Color c) {
-			this.setPreferredSize(d);
-			this.setBackground(c);
-		}
-	}
 	// ---------end anonimus class----------
 
 	// -------------Atributos-----------------
@@ -100,16 +94,20 @@ public class MainSwing extends JPanel implements AppObserver {
 	private Component generateLogo() {
 		JPanel p = new JPanel();
 
+		JButton b = new JButton();
+		
+		b.setIcon(new ImageIcon("src/images/okubanner.jpg"));
+		
 		p.setPreferredSize(new Dimension(500, 100));
+		
+		p.add(b);
 
-		return Box.createRigidArea(new Dimension(500, 100));
+		return p;
 	}
 
 	private Component tags() {
 		JPanel p = new JPanel();
-		final Dimension d = new Dimension(1, 1);
-		final Color c = Color.GRAY;
-		final int N = 20;
+		
 		p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 		p.setPreferredSize(new Dimension(500, 30));
 		p.setBackground(null);
@@ -214,7 +212,7 @@ public class MainSwing extends JPanel implements AppObserver {
 		p.add(new JSeparator(JSeparator.VERTICAL), BorderLayout.LINE_START);
 
 		JButton id;
-		if (ctrl.isLoggedOn()) {
+		if (ctrl.getLoggedUser() == null) {
 			id = new JButton("Identify");
 			id.setFont(new Font("Arial", Font.BOLD, 20));
 			id.setBackground(null);
@@ -225,7 +223,7 @@ public class MainSwing extends JPanel implements AppObserver {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					midPanel = new UserLog();
+					midPanel = new UserLog(ctrl);
 					initGUI();
 				}
 			});
@@ -242,7 +240,7 @@ public class MainSwing extends JPanel implements AppObserver {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					// lista cuando el usuario yya esta registrado
+					// lista cuando el usuario ya esta registrado
 					midPanel = new PersonalAccount(ctrl);
 					initGUI();
 				}
@@ -411,12 +409,12 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	@Override
 	public void OnLoginRight(UserVO u) {
-
+		ctrl.getN(N);
 	}
 
 	@Override
 	public void OnLoginFail(UserVO u) {
-
+		System.out.println("Error");
 	}
 
 	@Override

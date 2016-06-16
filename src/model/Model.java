@@ -9,7 +9,7 @@ import dataAccessObjectDesingPattern.UserDao;
 import dataAccessObjectDesingPattern.UserVO;
 import exceptions.ActPriceException;
 
-public class Model extends Observer {
+public class Model{
 
 	private List<AppObserver> observerList;
 	private UserDao userConnection;
@@ -71,7 +71,7 @@ public class Model extends Observer {
 	}
 
 	public void start() {
-		this.actList = itemConnection.getNItems(1);
+		this.actList = itemConnection.getNItems(20);
 		for(AppObserver o : this.observerList){
 			o.opAppStart(this.actList);
 		}
@@ -134,4 +134,20 @@ public class Model extends Observer {
 			itemConnection.actPrice(item.getId(), user.getId(), i);
 		}
 	}
+	
+	public void getBidItems(String id){
+		actList = userConnection.actualBidProduct(id);
+		notifyListAct(actList);
+	}
+	
+	public void getBoughtProducts(String id){
+		actList = userConnection.boughtProducts(id);
+		notifyListAct(actList);
+	}
+	
+	public void getSellProducts(String id){
+		actList = userConnection.sellProducts(id);
+		notifyListAct(actList);
+	}
+	
 }

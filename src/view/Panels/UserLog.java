@@ -5,8 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import controller.Controler;
 
 public class UserLog extends JPanel {
 
@@ -15,6 +16,8 @@ public class UserLog extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private Controler ctrl;
+	
 	private LoadUser logComponent;
 
 	private AddUser registerComponent;
@@ -25,7 +28,8 @@ public class UserLog extends JPanel {
 	private JPanel auxLog1;
 	private JPanel auxLog2;
 
-	public UserLog() {
+	public UserLog(Controler ctrl) {
+		this.ctrl = ctrl;
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.setBackground(Color.white);
 		
@@ -80,7 +84,7 @@ public class UserLog extends JPanel {
 		this.auxLog2.setLayout(new BoxLayout(this.auxLog2, BoxLayout.Y_AXIS));
 		//this.auxLog2.setPreferredSize(new Dimension(300, 500));
 		
-		this.logComponent = new LoadUser(Color.white, Color.black);
+		this.logComponent = new LoadUser(Color.white, Color.black, ctrl);
 
 	}
 

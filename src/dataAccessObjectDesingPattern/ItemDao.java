@@ -102,9 +102,10 @@ public class ItemDao {
 		}
 	}
 	
-	/*public static void main(String[] args){
-		System.out.println(new ItemDao().getItem("29").encodeItem());
-	}*/
+	public static void main(String[] args){
+		//new ItemDao().delete(new ItemDao().getItem(""));
+		//new ItemDao().deleteAll();
+	}
 
 	public void actPrice(String id, String id2, int i) {
 		ddbb.connectionDDBB("POST", "insertBidUp", "id_user= " + id2 + "&id_product= " + id + "&price= " + i);		

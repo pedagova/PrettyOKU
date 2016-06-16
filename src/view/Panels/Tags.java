@@ -26,7 +26,7 @@ public enum Tags {
 		chain[1] = "ps vita";
 		chain[2] = "WII U";
 		chain[3] = "XBOX ONE";
-		chain[4] = "PS4";
+		chain[4] = "PS3";
 		return chain;
 	}
 

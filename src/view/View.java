@@ -5,13 +5,14 @@ import java.awt.Toolkit;
 
 import javax.sound.midi.spi.MidiDeviceProvider;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import controller.Controler;
 import factoryDesingPattern.panelList.MainPanel;
 import view.Panels.ItemRepr;
 
-public class View extends JFrame {
+public class View extends JFrame implements StandartInterface {
 
 	/**
 	 * 
@@ -38,6 +39,17 @@ public class View extends JFrame {
 		this.setBackground(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.pack();
+	}
+
+	@Override
+	public void changePanel(JPanel p) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void initGUI() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

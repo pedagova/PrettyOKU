@@ -66,9 +66,10 @@ public class LoadUser extends JPanel {
 
 	private JPanel auxButtonPanel;
 
-	public LoadUser(Color backGround, Color color) {
+	public LoadUser(Color backGround, Color color, Controler ctrl) {
 		this.color = color;
 		this.backGround = backGround;
+		this.ctrl = ctrl;
 		this.setOpaque(false);
 		this.initComponents();
 		this.initGUI();
@@ -92,7 +93,7 @@ public class LoadUser extends JPanel {
 		this.add(passRequest);
 		this.add(Box.createRigidArea(new Dimension(1, 50)));
 		this.auxButtonPanel.add(enterAccount);
-		this.auxButtonPanel.add(obtainNewPass);
+		//this.auxButtonPanel.add(obtainNewPass);
 		this.add(auxButtonPanel);
 		this.add(Box.createRigidArea(new Dimension(1, 20)));
 
@@ -130,10 +131,15 @@ public class LoadUser extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ctrl.loginUser(eMailRequest.getText(), passRequest.getPassword());
+				try{
+					ctrl.loginUser(eMailRequest.getText(), passRequest.getPassword());
+				}
+				catch(NullPointerException n){
+					n.printStackTrace();
+				}
 			}
 		});
-		this.obtainNewPass = new Button("Obtain new password");
+		//this.obtainNewPass = new Button("Obtain new password");
 
 	}
 	
@@ -235,17 +241,4 @@ public class LoadUser extends JPanel {
 			super.paintComponent(g);
 		}
 	}
-	
-	
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("example");
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setBackground(new Color(0, 0, 0));
-		LoadUser user = new LoadUser(new Color(255, 96, 0), Color.black);
-		frame.add(user);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
 }

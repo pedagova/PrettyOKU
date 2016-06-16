@@ -110,10 +110,11 @@ public class ItemRepr extends JPanel {
 		gbc.gridy = 0;
 		image.setBackground(null);
 		image.add(imageLabel, gbc);
+		image.setOpaque(true);
 		JTextArea j = new JTextArea();
 		j.setFont(new Font("Arial", Font.BOLD, 16));
 		j.setBackground(new Color(255, 75 ,0));
-		j.setText("10.65€");
+		j.setText(item.getPrice());
 		j.setForeground(Color.WHITE);
 		j.setPreferredSize(new Dimension((j.getText().length() - 1) * 11, 40));
 		JPanel p2 = new JPanel();

@@ -1,9 +1,7 @@
 package view.Panels;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -80,6 +78,7 @@ public class NewAddItem extends JPanel {
 	private Controler ctrl;
 
 	public NewAddItem(Controler ctrl) {
+		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.ctrl = ctrl;
 		initComponent();
@@ -158,7 +157,7 @@ public class NewAddItem extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ctrl.addItem(new ItemVO(productName.getText(), productDescription.getText(),
-						productPrice.getText(), imageString));				
+						productPrice.getText(), imageString, "1"));				
 			}
 		});
 	}
