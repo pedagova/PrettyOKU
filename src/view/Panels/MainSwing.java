@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -79,7 +80,18 @@ public class MainSwing extends JPanel implements AppObserver {
 		add(Box.createRigidArea(new Dimension((int) getPreferredSize().getWidth(), 6)));
 		add(userBar());
 		add(Box.createRigidArea(new Dimension((int) getPreferredSize().getWidth(), 6)));
-		add(midPanel);
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setBackground(null);
+		
+		JPanel auxPanel = new JPanel();
+		auxPanel.setLayout(new GridLayout(1, 2));
+		auxPanel.add(new TagList(ctrl));
+		auxPanel.add(Box.createRigidArea(new Dimension(25, 1)));
+		auxPanel.setBackground(null);
+		panel.add(auxPanel);
+		panel.add(midPanel);
+		add(panel);
 		add(information());
 		validate();
 		repaint();
@@ -159,7 +171,7 @@ public class MainSwing extends JPanel implements AppObserver {
 		// ---------------end 4 button -----------------------
 
 		// -----------------5 button---------------------------
-		JButton button5 = ViewUtilities.generateButton("miscellaneus", "3", backColor, "#FFF5EE");
+		JButton button5 = ViewUtilities.generateButton("Art", "3", backColor, "#FFF5EE");
 		button5.setPreferredSize(new Dimension(1, 30));
 		button5.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		button5.addActionListener(new ActionListener() {
@@ -176,9 +188,6 @@ public class MainSwing extends JPanel implements AppObserver {
 	}
 
 	private Component userBar() {
-
-		final String text = "    Bienvenido a Oku, la tienda de subastas para los \"Otaku\"";
-
 		int widht = 750;
 
 		JPanel p = new JPanel();
@@ -189,11 +198,11 @@ public class MainSwing extends JPanel implements AppObserver {
 
 		JPanel p2 = new JPanel();
 
-		JTextArea t = new JTextArea(text);
-		t.setFont(new Font("Microsof sans serif", Font.BOLD, 12));
+		JTextArea t = new JTextArea("Welcome to Ôku, the auction store for \'Otakus\' ");
+		t.setFont(new Font("Microsof sans serif", Font.BOLD, 22));
 		t.setBackground(null);
 		t.setEditable(false);
-		t.setPreferredSize(new Dimension(widht * 50 / 100, UsesBarSize));
+		t.setPreferredSize(new Dimension(widht * 50 / 100 +100, UsesBarSize));
 
 		p2.add(t);
 		p2.setPreferredSize(t.getPreferredSize());
@@ -205,8 +214,8 @@ public class MainSwing extends JPanel implements AppObserver {
 		p.add(new JSeparator(JSeparator.VERTICAL), BorderLayout.LINE_START);
 
 		JButton id;
-		if (!ctrl.isLoggedOn()) {
-			id = new JButton("Identificate");
+		if (ctrl.isLoggedOn()) {
+			id = new JButton("Identify");
 			id.setFont(new Font("Arial", Font.BOLD, 20));
 			id.setBackground(null);
 			id.setForeground(Color.GRAY);
@@ -220,9 +229,9 @@ public class MainSwing extends JPanel implements AppObserver {
 					initGUI();
 				}
 			});
-		
+
 		} else {
-			id = new JButton("Bienvenid@\n " + "pedagova@gmail.com");
+			id = new JButton("Welcome, " + "pedagova@gmail.com");
 			id.setFont(new Font("Microsof sans serif", Font.BOLD, 20));
 			id.setBackground(null);
 			id.setForeground(Color.GRAY);
@@ -234,7 +243,8 @@ public class MainSwing extends JPanel implements AppObserver {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					// lista cuando el usuario yya esta registrado
-					// midPanel = new PanelRegistro(ctrl);
+					midPanel = new PersonalAccount(ctrl);
+					initGUI();
 				}
 			});
 		}
@@ -243,11 +253,11 @@ public class MainSwing extends JPanel implements AppObserver {
 		p.add(new JSeparator(JSeparator.VERTICAL), BorderLayout.LINE_START);
 
 		JButton b = new JButton("Add item");
+		b.setBorder(null);
 		b.setHorizontalAlignment(SwingConstants.CENTER);
 		b.setFont(new Font("Arial", 20, 20));
 		b.setBackground(null);
-		b.setBorder(BorderFactory.createLineBorder(Color.red));
-		b.setPreferredSize(new Dimension(widht * 15 / 100 , UsesBarSize - 20));
+		b.setPreferredSize(new Dimension(widht * 15 / 100, UsesBarSize - 20));
 		b.addActionListener(new ActionListener() {
 
 			@Override
@@ -264,11 +274,8 @@ public class MainSwing extends JPanel implements AppObserver {
 	private Component buscador(int width) {
 		JPanel p = new JPanel();
 		p.setBackground(null);
-
-		p.setBackground(Color.pink);
-		
-		JTextField tf = new JTextField("Buscador:");
-		tf.setFont(new Font("Arial", Font.BOLD, 12));
+		JTextField tf = new JTextField("Search:  ");
+		tf.setFont(new Font("Arial", Font.BOLD, 14));
 		tf.setBackground(null);
 		tf.setBorder(null);
 		tf.setEditable(false);
@@ -278,7 +285,7 @@ public class MainSwing extends JPanel implements AppObserver {
 		t.setPreferredSize(new Dimension(width * 20 / 100, UsesBarSize - 20));
 		t.setBorder(BorderFactory.createLineBorder(new Color(204, 204, 204)));
 
-		JButton b = new JButton("Buscar");
+		JButton b = new JButton("Search");
 		b.setFont(new Font("Arial", Font.BOLD, 12));
 		b.setForeground(Color.WHITE);
 		b.setPreferredSize(new Dimension(width * 10 / 100 + 8, UsesBarSize - 20));

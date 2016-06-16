@@ -1,13 +1,13 @@
 package view.Panels;
 
 public enum Tags {
-	VIDEO_GAMES("VIDEO GAMES", 1), ART("ART", 2), MISCELANIUS("MISCELANIUS", 3), MANGA("MANGA",
-			4), GADGETS("ELECTR. GADGETS", 5);
+	VIDEO_GAMES("Video Games", "1"), ART("Art", "2"), MISCELANIUS("Miscelanius", "3"), MANGA("Manga",
+			"4"), GADGETS("ELECTR. GADGETS", "5");
 
 	private String name;
-	private int id;
+	private String id;
 
-	Tags(String name, int id) {
+	Tags(String name, String id) {
 		this.name = name;
 		this.id=id;
 	}
@@ -16,8 +16,18 @@ public enum Tags {
 		return this.name;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
+	}
+
+	public String[] getChain() {
+		String[] chain = new String[5];
+		chain[0] = "3ds";
+		chain[1] = "ps vita";
+		chain[2] = "WII U";
+		chain[3] = "XBOX ONE";
+		chain[4] = "PS4";
+		return chain;
 	}
 
 }

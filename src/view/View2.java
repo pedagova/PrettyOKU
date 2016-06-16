@@ -35,10 +35,10 @@ public class View2 extends JFrame implements StandartInterface {
 		JPanel pAux = new JPanel();
 		pAux.setBackground(null);
 		pAux.setLayout(new BoxLayout(pAux, BoxLayout.X_AXIS));
-		pAux.add(Box.createRigidArea(new Dimension(100, 1)));
+		pAux.add(Box.createRigidArea(new Dimension(200, 1)));
 		pAux.add(panel);
-		pAux.add(Box.createRigidArea(new Dimension(100, 1)));
-		sp = new JScrollPane(pAux, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		pAux.add(Box.createRigidArea(new Dimension(200, 1)));
+		sp = new JScrollPane(pAux, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.add(sp);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);

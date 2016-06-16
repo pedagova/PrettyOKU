@@ -3,7 +3,9 @@ package view.Panels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -104,13 +106,12 @@ public class NewAddItem extends JPanel {
 	}
 
 	private void initComponent() {
-		this.addItemButton();
+		this.itemButton();
 		this.generateImageButton();
 		this.setBackground(Color.white);
 		this.generateItemInfo();
 		this.generateCentralPanel();
 		this.generateDescription();
-		this.add(addItem);
 	}
 	
 	private void generateItemInfo(){
@@ -121,15 +122,15 @@ public class NewAddItem extends JPanel {
 
 		// title
 		title = new JTextPane();
-		generateTextPane(title, "Put here the product title", new Color(255, 96, 0));
+		generateTextPane(title, "Put here the product title", new Color(255, 96, 0),new Font("Arial", 2, 28));
 		
 		productName = new JTextPane();
-		generateTextPane(productName, "Put here the product name", new Color(0, 0, 0));
+		generateTextPane(productName, "Put here the product name", new Color(0, 0, 0),new Font("Arial", 2, 16));
 
 		productCategory = new JComboBox<String>(categories);
 
 		productPrice = new JTextPane();
-		generateTextPane(productPrice, "Put the price in €", new Color(0, 0, 0));
+		generateTextPane(productPrice, "Put the price in €", new Color(0, 0, 0),new Font("Arial", 2, 16));
 
 		updatePrice = new JButton("Increase price");
 		updatePrice.addActionListener(new ActionListener() {
@@ -148,8 +149,9 @@ public class NewAddItem extends JPanel {
 
 	}
 	
-	private void addItemButton(){
+	private void itemButton(){
 		addItem = new JButton("Add item");
+		addItem.setHorizontalAlignment(SwingConstants.CENTER);
 		addItem.setVisible(true);
 		addItem.addActionListener(new ActionListener() {
 			
@@ -202,20 +204,25 @@ public class NewAddItem extends JPanel {
 		productInfo.add(productPrice);
 		productInfo.add(generateSeparator());
 		productInfo.add(productCategory);
-		productInfo.add(Box.createRigidArea(new Dimension(1, 20)));
-		productInfo.add(imageButton);
 		productInfo.add(Box.createRigidArea(new Dimension(1, 100)));
 		productInfo.setBorder(null);
 
 		JPanel imagePanel = new JPanel();
-		imagePanel.setLayout(new BorderLayout());
-		imagePanel.add(imageLabel, BorderLayout.WEST);
-		imagePanel.add(imageButton,BorderLayout.SOUTH);
+		imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.Y_AXIS));
+		imagePanel.add(imageLabel);
+		JPanel aux = new JPanel();
+		aux.add(Box.createRigidArea(new Dimension(50, 1)));
+		aux.setLayout(new GridLayout(1, 2));
+		aux.add(imageButton);
+		aux.add(addItem);
+		aux.setBackground(null);
+		imagePanel.add(aux);
 		imagePanel.setBackground(Color.white);
 		
 		auxPanel = new JPanel();
 		auxPanel.setBackground(Color.white);
 		auxPanel.add(imagePanel);
+		auxPanel.add(Box.createRigidArea(new Dimension(50, 1)));
 		auxPanel.add(productInfo);
 		auxPanel.setBorder(null);
 	}
@@ -229,34 +236,10 @@ public class NewAddItem extends JPanel {
 		productDescription.setOpaque(false);
 		productDescription.setEditable(true);
 		productDescription.setFocusable(true);
-		productDescription.setFont(new Font("Arial", 0, 22));
+		productDescription.setFont(new Font("Arial", 2, 22));
 		productDescription.setBorder(null);
 		productDescription.setLineWrap(true);
 		productDescription.setWrapStyleWord(true);
-
-		productDescription.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				if (productDescription.getText().length() != 13) {
-					e.consume();
-				}
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (productDescription.getText().length() != 13) {
-					e.consume();
-				}
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (productDescription.getText().length() != 13) {
-					e.consume();
-				}
-			}
-		});
 		productDescription.addMouseListener(new MouseListener() {
 
 			@Override
@@ -286,13 +269,13 @@ public class NewAddItem extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (productDescription.getText().equalsIgnoreCase("Put here the item description")) {
-					productDescription.setText("Description: " + "\n");
+					productDescription.setText(null);
 				}
 			}
 		});
 	}
 
-	private void generateTextPane(JTextPane textPane, String text, Color color) {
+	private void generateTextPane(JTextPane textPane, String text, Color color, Font font) {
 		textPane.addKeyListener(new KeyListener() {
 
 			@Override
@@ -315,7 +298,7 @@ public class NewAddItem extends JPanel {
 			}
 		});
 		textPane.setText(text);
-		textPane.setFont(new Font("Arial", 16, 16));
+		textPane.setFont(font);
 		textPane.setEditable(true);
 		textPane.setForeground(color);
 		textPane.setBackground(null);

@@ -13,7 +13,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,7 +25,6 @@ import javax.swing.SwingConstants;
 
 import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
-import dataAccessObjectDesingPattern.UserVO;
 import exceptions.ActPriceException;
 import exceptions.NotLoggedException;
 import view.ViewUtilities;
@@ -64,8 +62,6 @@ public class ShowProduct extends JPanel {
 
 	private JTextField priceField;
 
-	private JPanel inputPrice;
-
 	private Controler ctrl;
 
 	private JPanel showProduct;
@@ -91,6 +87,7 @@ public class ShowProduct extends JPanel {
 		this.showProduct.add(title);
 		this.showProduct.add(auxPanel);
 		// this.showProduct.add(inputPrice);
+		this.showProduct.add(generateSeparator());
 		this.showProduct.add(productDescription);
 		this.add(Box.createRigidArea(new Dimension(100, 1)));
 		this.add(showProduct);
@@ -104,22 +101,22 @@ public class ShowProduct extends JPanel {
 		this.setBackground(Color.white);
 		// title
 		title = new JTextPane();
-		generateTextPane(title, item.getDesc().toUpperCase(), new Color(255, 96, 0));
+		generateTextPane(title, item.getName(), new Color(255, 96, 0),new Font("Arial", 16, 28));
 
 		productName = new JTextPane();
-		generateTextPane(productName, " >Bid: " + item.getName(), new Color(0, 0, 0));
+		generateTextPane(productName, "Item name: " + item.getName(), new Color(0, 0, 0),new Font("Arial", 16, 16));
 
 		productIdentifier = new JTextPane();
-		generateTextPane(productIdentifier, " >Product cod.: " + item.getId(), new Color(0, 0, 0));
+		generateTextPane(productIdentifier, "Product serial: " + item.getId(), new Color(0, 0, 0),new Font("Arial", 16, 16));
 
 		productCategory = new JTextPane();
-		generateTextPane(productCategory, " >Product category.: " + item.getIdCategory(), new Color(0, 0, 0));
+		generateTextPane(productCategory, "Category: " + item.getIdCategory(), new Color(0, 0, 0),new Font("Arial", 16, 16));
 
 		productPrice = new JTextPane();
-		generateTextPane(productPrice, " >Product price.: " + item.getPrice() + "€", new Color(0, 0, 0));
+		generateTextPane(productPrice, "Price: " + item.getPrice() + "£", new Color(0, 0, 0),new Font("Arial", 16, 16));
 
 		newPrice = new JTextPane();
-		generateTextPane(newPrice, " >Put the new price:", new Color(0, 0, 0));
+		generateTextPane(newPrice, "New price: ", new Color(0, 0, 0),new Font("Arial", 2, 16));
 
 		priceField = new JTextField();
 
@@ -136,9 +133,9 @@ public class ShowProduct extends JPanel {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Inane error", JOptionPane.ERROR_MESSAGE);
 						priceField.setText("");
 					}
-					ShowProduct.this.productPrice.setText(" >Product price.: " + i + "€");
+					ShowProduct.this.productPrice.setText("Product price: " + i + "£");
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "El precio ha de ser numérico", "Inane error",
+					JOptionPane.showMessageDialog(null, "Price must de a number", "Inane error",
 							JOptionPane.ERROR_MESSAGE);
 					priceField.setText("");
 				}
@@ -191,9 +188,9 @@ public class ShowProduct extends JPanel {
 		productDescription.setWrapStyleWord(true);
 	}
 
-	private void generateTextPane(JTextPane textPane, String text, Color color) {
+	private void generateTextPane(JTextPane textPane, String text, Color color, Font font) {
 		textPane.setText(text);
-		textPane.setFont(new Font("Arial", 16, 16));
+		textPane.setFont(font);
 		textPane.setEditable(false);
 		textPane.setForeground(color);
 		textPane.setBackground(null);

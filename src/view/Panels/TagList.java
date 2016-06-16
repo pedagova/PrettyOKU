@@ -24,9 +24,9 @@ public class TagList extends JPanel {
 
 	private String[] chain;
 
-	public TagList(Controler ctrl, String[] chain) {
+	public TagList(Controler ctrl) {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.initComponent(ctrl, chain);
+		this.initComponent(ctrl);
 		this.initGUI();
 
 	}
@@ -60,29 +60,26 @@ public class TagList extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hello pene");
+
 			}
 		});
 		this.add(modalTextPane);
 	}
 
-	private void initComponent(Controler ctrl, String[] chain) {
+	private void initComponent(Controler ctrl) {
 		this.ctrl = ctrl;
-		this.chain = chain;
+		this.chain = ctrl.getCategory().getChain();
 	}
 
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("example");
-		frame.pack();
-		frame.setBackground(new Color(0, 0, 0));
-		String[] chain = { "aaaaaaaaaa", "bbbbbbbb", "cccccccc", "dddddddd", "eeeeeeeee", "ffffffffffffffffff",
-				"sfdsdfs", "sdfsdfs", "sdfsfsd", "fhgfghfgh", "hjkhkhjk", "iyiyuy", "eteteter", "asdaad", "zczxczc",
-				"xcvxcvxcv", "cvbnfggfh", "fdgdfgdfgd", "dfgdgdf", "dgdfgdf" };
-		TagList user = new TagList(new Controler(new Model(), new View2()), chain);
-		user.setVisible(true);
-		frame.add(user);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.pack();
-	}
+	/*
+	 * public static void main(String[] args) { JFrame frame = new
+	 * JFrame("example"); frame.pack(); frame.setBackground(new Color(0, 0, 0));
+	 * String[] chain = { "aaaaaaaaaa", "bbbbbbbb", "cccccccc", "dddddddd",
+	 * "eeeeeeeee", "ffffffffffffffffff", "sfdsdfs", "sdfsdfs", "sdfsfsd",
+	 * "fhgfghfgh", "hjkhkhjk", "iyiyuy", "eteteter", "asdaad", "zczxczc",
+	 * "xcvxcvxcv", "cvbnfggfh", "fdgdfgdfgd", "dfgdgdf", "dgdfgdf" }; TagList
+	 * user = new TagList(new Controler(new Model(), new View2()));
+	 * user.setVisible(true); frame.add(user); frame.setVisible(true);
+	 * frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frame.pack(); }
+	 */
 }

@@ -11,6 +11,7 @@ import model.Model;
 import view.StandartInterface;
 import view.View2;
 import view.Panels.ShowProduct;
+import view.Panels.Tags;
 
 
 
@@ -22,9 +23,10 @@ public class Controler implements AppObserver{
 	
 	private UserVO loggedUser;
 	
-	private String category;	
+	private Tags category;	
 	
 	public Controler(Model model, StandartInterface view){
+		category = Tags.VIDEO_GAMES;
 		loggedUser = null;
 		this.model = model;
 		this.view = view;
@@ -91,7 +93,6 @@ public class Controler implements AppObserver{
 	@Override
 	public void opAppStart(List<ItemVO> actList) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -134,7 +135,7 @@ public class Controler implements AppObserver{
 			model.find(text);
 		}
 		else{
-			model.find(text, category);
+			model.find(text, category.getId());
 		}
 	}
 
@@ -150,6 +151,11 @@ public class Controler implements AppObserver{
 		else{
 			throw new NotLoggedException("Necesitas estar logeado para poder pujar por un item");
 		}
+	}
+
+	
+	public Tags getCategory() {
+		return this.category;
 	}
 }
 
