@@ -63,7 +63,7 @@ public class ItemVO {
 		}
 		
 	}
-	public ItemVO(String name, String desc, String price, String image, String Category){
+	public ItemVO(String name, String desc, String price, String image, String Category, String durationBid){
 		this.desc = desc;
 		this.name = name;
 		this.price = price;

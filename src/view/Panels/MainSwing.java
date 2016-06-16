@@ -40,7 +40,7 @@ public class MainSwing extends JPanel implements AppObserver {
 	private final Color backColor = new Color(255, 69, 0);
 	private final int UsesBarSize = 45;
 	final int N = 20;
-	
+
 	public JPanel midPanel;
 
 	// ---------end anonimus class----------
@@ -77,29 +77,42 @@ public class MainSwing extends JPanel implements AppObserver {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		panel.setBackground(null);
-		
+
 		JPanel auxPanel = new JPanel();
-		auxPanel.setLayout(new GridLayout(1, 2));
-		auxPanel.add(new TagList(ctrl));
+		auxPanel.setLayout(new GridLayout(1, 3));
+		if (ctrl.getCategory() != null) {
+			TagList tag =new TagList(ctrl);
+			auxPanel.add(tag);
+		}else{
+			auxPanel.add(Box.createRigidArea(new Dimension(100, 1)));
+		}
+		
 		auxPanel.add(Box.createRigidArea(new Dimension(25, 1)));
 		auxPanel.setBackground(null);
 		panel.add(auxPanel);
 		panel.add(midPanel);
+		panel.add(Box.createRigidArea(new Dimension(25, 1)));
 		add(panel);
-		add(information());
+		// add(information());
 		validate();
 		repaint();
 	}
 
 	private Component generateLogo() {
 		JPanel p = new JPanel();
-
+		p.setBackground(Color.white);
 		JButton b = new JButton();
-		
-		b.setIcon(new ImageIcon("src/images/okubanner.jpg"));
-		
-		p.setPreferredSize(new Dimension(500, 100));
-		
+		b.setBorder(null);
+		b.setIcon(new ImageIcon("src/images/banner.jpg"));
+		b.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.err.println("oku");
+			}
+		});
+		p.setPreferredSize(new Dimension(1100, 150));
+
 		p.add(b);
 
 		return p;
@@ -107,7 +120,7 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	private Component tags() {
 		JPanel p = new JPanel();
-		
+
 		p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 		p.setPreferredSize(new Dimension(500, 30));
 		p.setBackground(null);
@@ -200,7 +213,7 @@ public class MainSwing extends JPanel implements AppObserver {
 		t.setFont(new Font("Microsof sans serif", Font.BOLD, 22));
 		t.setBackground(null);
 		t.setEditable(false);
-		t.setPreferredSize(new Dimension(widht * 50 / 100 +100, UsesBarSize));
+		t.setPreferredSize(new Dimension(widht * 50 / 100 + 100, UsesBarSize));
 
 		p2.add(t);
 		p2.setPreferredSize(t.getPreferredSize());
@@ -239,8 +252,6 @@ public class MainSwing extends JPanel implements AppObserver {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					// lista cuando el usuario ya esta registrado
 					midPanel = new PersonalAccount(ctrl);
 					initGUI();
 				}
@@ -320,13 +331,13 @@ public class MainSwing extends JPanel implements AppObserver {
 		infoPanel.setVisible(true);
 		infoPanel.setLayout(new FlowLayout());
 		infoPanel.add(Box.createRigidArea(new Dimension(1200, 1)));
-		infoPanel.add(this.generateComponent(new JButton("Politicas de empresa"), Color.black, "PENE",
+		infoPanel.add(this.generateComponent(new JButton("Politicas de empresa"), Color.black, "B1",
 				new Font("Arial", 2, 10)));
-		infoPanel.add(this.generateComponent(new JButton("Politicas de empresa"), Color.gray, "PENE",
+		infoPanel.add(this.generateComponent(new JButton("Politicas de empresa"), Color.gray, "B2",
 				new Font("Arial", 2, 10)));
-		infoPanel.add(this.generateComponent(new JButton("Politicas de empresa"), Color.gray, "PENE",
+		infoPanel.add(this.generateComponent(new JButton("Politicas de empresa"), Color.gray, "B3",
 				new Font("Arial", 2, 10)));
-		infoPanel.add(this.generateComponent(new JButton("Politicas de empresa"), Color.gray, "PENE",
+		infoPanel.add(this.generateComponent(new JButton("Politicas de empresa"), Color.gray, "B4",
 				new Font("Arial", 2, 10)));
 		return infoPanel;
 	}
@@ -348,7 +359,7 @@ public class MainSwing extends JPanel implements AppObserver {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hello pene");
+
 			}
 		});
 		return button;
@@ -423,7 +434,7 @@ public class MainSwing extends JPanel implements AppObserver {
 			midPanel = new ItemsList(list, ctrl);
 			initGUI();
 		} else {
-			JOptionPane.showMessageDialog(null, "Empty List");
+			// JOptionPane.showMessageDialog(null, "Empty List");
 		}
 
 	}

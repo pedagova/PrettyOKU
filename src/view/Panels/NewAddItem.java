@@ -59,7 +59,7 @@ public class NewAddItem extends JPanel {
 
 	private JPanel auxPanel;
 
-	private JTextPane productName;
+	private JTextPane productLifeTime;
 
 	private JComboBox<String> productCategory;
 
@@ -123,13 +123,13 @@ public class NewAddItem extends JPanel {
 		title = new JTextPane();
 		generateTextPane(title, "Put here the product title", new Color(255, 96, 0),new Font("Arial", 2, 28));
 		
-		productName = new JTextPane();
-		generateTextPane(productName, "Put here the product name", new Color(0, 0, 0),new Font("Arial", 2, 16));
-
+		productLifeTime = new JTextPane();
+		generateTextPane(productLifeTime, "Put here the auction days", new Color(0, 0, 0),new Font("Arial", 2, 16));
+		
 		productCategory = new JComboBox<String>(categories);
 
 		productPrice = new JTextPane();
-		generateTextPane(productPrice, "Put the price in €", new Color(0, 0, 0),new Font("Arial", 2, 16));
+		generateTextPane(productPrice, "Put the price in £", new Color(0, 0, 0),new Font("Arial", 2, 16));
 
 		updatePrice = new JButton("Increase price");
 		updatePrice.addActionListener(new ActionListener() {
@@ -139,9 +139,9 @@ public class NewAddItem extends JPanel {
 				try {
 					int i = Integer.parseInt(productPrice.getText());
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "Price must be a number", "Inane error",
+					JOptionPane.showMessageDialog(null, "Price must be a number", "Error",
 							JOptionPane.ERROR_MESSAGE);
-					productPrice.setText(" Put the price in €");
+					productPrice.setText(" Put the price in £");
 				}
 			}
 		});
@@ -156,8 +156,16 @@ public class NewAddItem extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ctrl.addItem(new ItemVO(productName.getText(), productDescription.getText(),
-						productPrice.getText(), imageString, "1"));				
+				try {
+					int i = Integer.parseInt(productLifeTime.getText());
+					ctrl.addItem(new ItemVO(title.getText(), productDescription.getText(),
+							productPrice.getText(), imageString, "1", productLifeTime.getText()));	
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Duration must be a number", "Error",
+							JOptionPane.ERROR_MESSAGE);
+					productPrice.setText("Put here the auction days");
+				}
+							
 			}
 		});
 	}
@@ -198,7 +206,7 @@ public class NewAddItem extends JPanel {
 		productInfo.setBackground(Color.white);
 		productInfo.setLayout(new BoxLayout(productInfo, BoxLayout.Y_AXIS));
 		productInfo.add(generateSeparator());
-		productInfo.add(productName);
+		productInfo.add(productLifeTime);
 		productInfo.add(generateSeparator());
 		productInfo.add(productPrice);
 		productInfo.add(generateSeparator());
@@ -382,11 +390,7 @@ public class NewAddItem extends JPanel {
 			// System.out.println("Image Successfully Manipulated!");
 		} catch (FileNotFoundException e) {
 			// System.out.println("Image not found" + e);
-			JOptionPane.showMessageDialog(null, "La imagen no se ha podido cargar correctamente", "Inane error",
-					JOptionPane.ERROR_MESSAGE);
 		} catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, "La imagen no se ha podido cargar correctamente", "Inane error",
-					JOptionPane.ERROR_MESSAGE);
 		}
 
 		return image;

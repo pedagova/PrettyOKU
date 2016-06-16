@@ -83,10 +83,11 @@ public class LoadUser extends JPanel {
 	}
 
 	private void initGUI() {
-		this.add(Box.createRigidArea(new Dimension(1, 100)));
+		this.add(Box.createRigidArea(new Dimension(1, 20)));
 		this.add(title);
 		this.add(generateSeparator());
-		this.add(Box.createRigidArea(new Dimension(1, 50)));
+
+		this.add(Box.createRigidArea(new Dimension(1, 10)));
 		this.add(eMail);
 		this.add(eMailRequest);
 		this.add(pass);
@@ -95,7 +96,7 @@ public class LoadUser extends JPanel {
 		this.auxButtonPanel.add(enterAccount);
 		//this.auxButtonPanel.add(obtainNewPass);
 		this.add(auxButtonPanel);
-		this.add(Box.createRigidArea(new Dimension(1, 20)));
+		this.add(Box.createRigidArea(new Dimension(1, 10)));
 
 	}
 
@@ -107,7 +108,7 @@ public class LoadUser extends JPanel {
 		
 		// title of the component
 		this.title = new JTextPane();
-		this.generateTextPane(title, LoadUser.REGISTER_USER, 28, new Color(255, 96, 0), BorderFactory.createLineBorder(this.color));
+		this.generateTextPane(title, LoadUser.REGISTER_USER, 28, new Color(255, 96, 0), null);
 
 		// email text
 		this.eMail = new JTextPane();

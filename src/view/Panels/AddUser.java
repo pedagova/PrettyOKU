@@ -175,17 +175,38 @@ public class AddUser extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (passAgainRequest.equals(passRequest)) {
+				boolean correct = true;
+				if (passAgainRequest.getPassword().length == passRequest.getPassword().length) {
+					for (int i = 0; i < passAgainRequest.getPassword().length; ++i) {
+						if (passAgainRequest.getPassword()[i] != passRequest.getPassword()[i]) {
+							correct = false;
+							break;
+						}
+					}
+				}
+				if (correct) {
 					try {
-						ctrl.addUser(new UserVO(nameRequest.getText(), nickRequest.getText(),
-								foreName1Request.getText(), foreName2Request.getText(), passRequest.getPassword(),
-								eMailRequest.getText(), adressRequest.getText()));
+						for (int i = 0; i < passAgainRequest.getPassword().length; ++i) {
+							System.err.println(passRequest.getPassword()[i]);
+							System.err.println(passAgainRequest.getPassword()[i]);
+						}
+						ctrl.addUser(new UserVO(
+								nameRequest.getText(), 
+								nickRequest.getText(),
+								foreName1Request.getText(), 
+								foreName2Request.getText(), 
+								passRequest.getPassword(),
+								eMailRequest.getText(),
+								adressRequest.getText()));
+						
+						
 					} catch (NullPointerException n) {
-						JOptionPane.showMessageDialog(null, "pass cant be empty", "Inane error",
+						n.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Pass can´t be empty", "Inane error",
 								JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "pass again and pass request are diferent", "Inane error",
+					JOptionPane.showMessageDialog(null, "Pass again and pass request are diferent", "Inane error",
 							JOptionPane.ERROR_MESSAGE);
 				}
 
@@ -196,16 +217,13 @@ public class AddUser extends JPanel {
 		this.emailPanel = new JPanel();
 		this.generatePanel(emailPanel, eMail, eMailRequest);
 
-
 		// pass panel
 		this.passPanel = new JPanel();
 		this.generatePanel(passPanel, pass, passRequest);
 
-
 		// second pass panel
 		this.passAgainPanel = new JPanel();
 		this.generatePanel(passAgainPanel, passAgain, passAgainRequest);
-
 
 		// name text
 		this.name = new JTextPane();
@@ -219,7 +237,6 @@ public class AddUser extends JPanel {
 		this.namePanel = new JPanel();
 		this.generatePanel(namePanel, name, nameRequest);
 
-
 		// fore name 1 text
 		this.foreName1 = new JTextPane();
 		this.generateTextPane(foreName1, AddUser.FORE_NAME_1, 22, Color.black);
@@ -231,7 +248,6 @@ public class AddUser extends JPanel {
 		// fore name 1 panel
 		this.foreName1Panel = new JPanel();
 		this.generatePanel(foreName1Panel, foreName1, foreName1Request);
-
 
 		// fore name 2 text
 		this.foreName2 = new JTextPane();
@@ -284,7 +300,7 @@ public class AddUser extends JPanel {
 
 	private void generatePasswordField(JPasswordField component) {
 		component.setForeground(new Color(0, 0, 0));
-		component.setBorder(BorderFactory.createLineBorder(Color.red));
+		component.setBorder(BorderFactory.createLineBorder(Color.gray));
 		component.setOpaque(false);
 		component.setEditable(true);
 		component.setVisible(true);
@@ -292,7 +308,7 @@ public class AddUser extends JPanel {
 
 	private void generateTextPane(JTextPane component, String constant, int fontSize, Color fontColor) {
 		component.setText(constant);
-		component.setBorder(BorderFactory.createLineBorder(Color.red));
+		component.setBorder(null);
 		component.setFont(new Font("Arial", Font.PLAIN, fontSize));
 		component.setForeground(fontColor);
 		component.setOpaque(false);
@@ -300,7 +316,7 @@ public class AddUser extends JPanel {
 	}
 
 	private void generateTextField(JTextField component, Color fontColor) {
-		component.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+		component.setBorder(BorderFactory.createLineBorder(Color.gray));
 		component.setForeground(fontColor);
 		component.setOpaque(false);
 		component.setEditable(true);

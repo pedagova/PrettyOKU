@@ -119,7 +119,7 @@ public class Model{
 		List<ItemVO> aux = itemConnection.getAllItems(category);
 		actList = new ArrayList<ItemVO>();
 		for(int i = 0; i < aux.size(); i++){
-			if(aux.get(i).getName().contains("text")){
+			if(aux.get(i).getName().toLowerCase().contains(text.toLowerCase())){
 				actList.add(aux.get(i));
 			}
 		}

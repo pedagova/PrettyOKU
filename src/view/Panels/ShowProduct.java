@@ -48,7 +48,7 @@ public class ShowProduct extends JPanel {
 
 	private ItemVO item;
 
-	private JTextPane productName;
+	private JTextPane productLifeTime;
 
 	private JTextPane productIdentifier;
 
@@ -103,8 +103,8 @@ public class ShowProduct extends JPanel {
 		title = new JTextPane();
 		generateTextPane(title, item.getName(), new Color(255, 96, 0),new Font("Arial", 16, 28));
 
-		productName = new JTextPane();
-		generateTextPane(productName, "Item name: " + item.getName(), new Color(0, 0, 0),new Font("Arial", 16, 16));
+		productLifeTime = new JTextPane();
+		generateTextPane(productLifeTime, "Item bid time: " + item.getName(), new Color(0, 0, 0),new Font("Arial", 16, 16));
 
 		productIdentifier = new JTextPane();
 		generateTextPane(productIdentifier, "Product serial: " + item.getId(), new Color(0, 0, 0),new Font("Arial", 16, 16));
@@ -130,12 +130,12 @@ public class ShowProduct extends JPanel {
 					try {
 						ctrl.actPrice(item, i);
 					} catch (NotLoggedException | ActPriceException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage(), "Inane error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						priceField.setText("");
 					}
-					ShowProduct.this.productPrice.setText("Product price: " + i + "£");
+					ShowProduct.this.productPrice.setText("Price: " + i + "£");
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "Price must de a number", "Inane error",
+					JOptionPane.showMessageDialog(null, "Price must be a number", "Error",
 							JOptionPane.ERROR_MESSAGE);
 					priceField.setText("");
 				}
@@ -144,7 +144,7 @@ public class ShowProduct extends JPanel {
 
 		// image label
 		BufferedImage im = ViewUtilities.encodeImage(ViewUtilities.formatedString(item.getImg()));
-		imageLabel = new JLabel(new ImageIcon(im.getScaledInstance(230, 200, Image.SCALE_DEFAULT)));
+		imageLabel = new JLabel(new ImageIcon(im.getScaledInstance(400, 400, Image.SCALE_DEFAULT)));
 		imageLabel.setPreferredSize(new Dimension(400, 400));
 		imageLabel.setBorder(null);
 		imageLabel.setBackground(Color.white);
@@ -153,7 +153,7 @@ public class ShowProduct extends JPanel {
 		productInfo.setPreferredSize(new Dimension(200, 300));
 		productInfo.setBackground(Color.white);
 		productInfo.setLayout(new BoxLayout(productInfo, BoxLayout.Y_AXIS));
-		productInfo.add(productName);
+		productInfo.add(productLifeTime);
 		productInfo.add(productIdentifier);
 		productInfo.add(productCategory);
 		productInfo.add(productPrice);

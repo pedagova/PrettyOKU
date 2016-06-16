@@ -58,7 +58,7 @@ public class UserLog extends JPanel {
 
 
 		this.auxLog2.add(auxLog1);
-		this.auxLog2.add(Box.createRigidArea(new Dimension(1,400)));
+		this.auxLog2.add(Box.createRigidArea(new Dimension(1,500)));
 
 		this.add(this.auxLog2);
 		
@@ -74,7 +74,7 @@ public class UserLog extends JPanel {
 		this.auxRegister2.setLayout(new BoxLayout(this.auxRegister2, BoxLayout.Y_AXIS));
 		//this.auxRegister2.setPreferredSize(new Dimension(300, 500));
 
-		this.registerComponent = new AddUser(Color.white, Color.black, null);
+		this.registerComponent = new AddUser(Color.white, Color.black, ctrl);
 
 		
 		this.auxLog1 = new JPanel();

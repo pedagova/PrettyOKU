@@ -27,8 +27,8 @@ public class ItemsList extends JPanel{
 			l = new GridLayout(3, (int) NUMCOLS);
 		else
 			l = new GridLayout( (int) Math.ceil(list.size() / NUMCOLS), (int) NUMCOLS);
-		l.setHgap(10);
-		l.setVgap(10);	
+		l.setHgap(20);
+		l.setVgap(20);
 		setLayout(l);
 		for (int i = 0; i < list.size(); ++i) {
 			add(new ItemRepr(list.get(i), ctrl));

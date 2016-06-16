@@ -26,7 +26,7 @@ public class Controler implements AppObserver{
 	private Tags category;	
 	
 	public Controler(Model model, StandartInterface view){
-		category = Tags.VIDEO_GAMES;
+		category = null;
 		loggedUser = null;
 		this.model = model;
 		this.view = view;
@@ -147,7 +147,7 @@ public class Controler implements AppObserver{
 		if(loggedUser != null)
 			model.actPrice(item, i,loggedUser);
 		else{
-			throw new NotLoggedException("Necesitas estar logeado para poder pujar por un item");
+			throw new NotLoggedException("You must to be logged to bid on a product");
 		}
 	}
 
