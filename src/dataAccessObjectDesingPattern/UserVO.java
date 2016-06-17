@@ -77,8 +77,8 @@ public class UserVO {
 	}
 
 	public String encodeUser() {
-		return "id= " + id + "&name= " + name + "&forename1= " + forename1 + "&forename2= " + forename2 + "&nick= "
-				+ nick + "&pass= " + pass + "&email= " + eMail;
+		return "id= " + id + "&name= " + name + "&forename1= " + forename1 + "&forename2= " + forename2 +
+				"&nick= " + nick + "&pass= " + pass + "&email= " + eMail + "&address= " + address;
 	}
 
 	/**

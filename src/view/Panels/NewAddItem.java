@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -39,6 +40,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import ch.randelshofer.quaqua.ext.base64.Base64;
 import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
+import exceptions.NotLoggedException;
 
 public class NewAddItem extends JPanel {
 
@@ -61,9 +63,9 @@ public class NewAddItem extends JPanel {
 
 	private JTextPane productLifeTime;
 
-	private JComboBox<String> productCategory;
+	private JComboBox<Tags> productCategory;
 
-	private String[] categories = { "Video games", "Manga", "Merchandising", "Art" };
+	private Vector<Tags> categories;
 
 	private JTextPane productPrice;
 
@@ -78,7 +80,9 @@ public class NewAddItem extends JPanel {
 	private Controler ctrl;
 
 	public NewAddItem(Controler ctrl) {
-		
+		categories = new Vector<Tags>();
+		for(Tags t : Tags.values())
+			categories.add(t);
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.ctrl = ctrl;
 		initComponent();
@@ -126,7 +130,7 @@ public class NewAddItem extends JPanel {
 		productLifeTime = new JTextPane();
 		generateTextPane(productLifeTime, "Put here the auction days", new Color(0, 0, 0),new Font("Arial", 2, 16));
 		
-		productCategory = new JComboBox<String>(categories);
+		productCategory = new JComboBox<Tags>(categories);
 
 		productPrice = new JTextPane();
 		generateTextPane(productPrice, "Put the price in £", new Color(0, 0, 0),new Font("Arial", 2, 16));
@@ -157,9 +161,15 @@ public class NewAddItem extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int i = Integer.parseInt(productLifeTime.getText());
-					ctrl.addItem(new ItemVO(title.getText(), productDescription.getText(),
-							productPrice.getText(), imageString, "1", productLifeTime.getText()));	
+					Integer.parseInt(productLifeTime.getText());
+					try {
+						ctrl.addItem(new ItemVO(title.getText(), productDescription.getText(),
+								productPrice.getText(), imageString, (Tags)productCategory.getSelectedItem(), productLifeTime.getText()));
+					} catch (NotLoggedException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error",
+								JOptionPane.ERROR_MESSAGE);
+						productPrice.setText("Put here the auction days");
+					}	
 				} catch (NumberFormatException ex) {
 					JOptionPane.showMessageDialog(null, "Duration must be a number", "Error",
 							JOptionPane.ERROR_MESSAGE);
@@ -194,7 +204,7 @@ public class NewAddItem extends JPanel {
 
 	private void generateCentralPanel() {
 		// image label
-		ImageIcon image = new ImageIcon("C:/Users/Javi/git/PrettyOKU/src/images/empty.png");
+		ImageIcon image = new ImageIcon("src/images/empty.png");
 		imageLabel = new JLabel(image);
 		imageLabel.setPreferredSize(new Dimension(400, 400));
 		imageLabel.setBorder(null);

@@ -115,8 +115,13 @@ public class Controler implements AppObserver{
 		
 	}
 
-	public void addItem(ItemVO it) {
-		it.setIdOwner(loggedUser.getId());
+	public void addItem(ItemVO it) throws NotLoggedException {
+		if(loggedUser != null){
+			it.setIdOwner(loggedUser.getId());
+		}
+		else{
+			throw new NotLoggedException("You must be logged to add an Item");
+		}
 		model.addItem(it);		
 	}
 
@@ -169,6 +174,11 @@ public class Controler implements AppObserver{
 	
 	public UserVO getLoggedUser(){
 		return loggedUser;
+	}
+
+	public void setCategory(Tags c) {
+		category = c;
+		
 	}
 	
 }

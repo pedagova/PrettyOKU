@@ -108,7 +108,8 @@ public class MainSwing extends JPanel implements AppObserver {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.err.println("oku");
+				ctrl.setCategory(null);
+				ctrl.getN(N);
 			}
 		});
 		p.setPreferredSize(new Dimension(1100, 150));
@@ -133,6 +134,7 @@ public class MainSwing extends JPanel implements AppObserver {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ctrl.setCategory(null);
 				ctrl.getN(N);
 			}
 		});
@@ -147,6 +149,8 @@ public class MainSwing extends JPanel implements AppObserver {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				ctrl.setCategory(Tags.VIDEO_GAMES);
 				ctrl.getAll("1");
 			}
 		});
@@ -161,7 +165,9 @@ public class MainSwing extends JPanel implements AppObserver {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ctrl.getAll("2");
+				
+				ctrl.setCategory(Tags.MANGA);
+				ctrl.getAll("4");
 			}
 		});
 		p.add(button3);
@@ -175,6 +181,8 @@ public class MainSwing extends JPanel implements AppObserver {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				ctrl.setCategory(Tags.MERCHANDASING);
 				ctrl.getAll("3");
 			}
 		});
@@ -189,7 +197,8 @@ public class MainSwing extends JPanel implements AppObserver {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ctrl.getAll("4");
+				ctrl.setCategory(Tags.ART);
+				ctrl.getAll("2");
 			}
 		});
 		p.add(button5);

@@ -1,7 +1,7 @@
 package view.Panels;
 
 public enum Tags {
-	VIDEO_GAMES("Video Games", "1"), ART("Art", "2"), MISCELANIUS("Miscelanius", "3"), MANGA("Manga",
+	VIDEO_GAMES("Video Games", "1"), ART("Art", "2"), MERCHANDASING("Merchandasing", "3"), MANGA("Manga",
 			"4"), GADGETS("ELECTR. GADGETS", "5");
 
 	private String name;
@@ -12,7 +12,7 @@ public enum Tags {
 		this.id=id;
 	}
 
-	public String getName(int id) {
+	public String getName() {
 		return this.name;
 	}
 

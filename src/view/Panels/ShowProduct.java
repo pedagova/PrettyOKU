@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -66,8 +67,14 @@ public class ShowProduct extends JPanel {
 
 	private JPanel showProduct;
 
+	private Vector<String> tags;
+	
 	public ShowProduct(ItemVO it, Controler ctrl) {
 		item = it;
+		tags = new Vector<String>();
+		for(Tags t: Tags.values()){
+			tags.add(t.getName());
+		}
 		this.ctrl = ctrl;
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		initComponent();
@@ -86,7 +93,6 @@ public class ShowProduct extends JPanel {
 		this.showProduct.add(generateSeparator());
 		this.showProduct.add(title);
 		this.showProduct.add(auxPanel);
-		// this.showProduct.add(inputPrice);
 		this.showProduct.add(generateSeparator());
 		this.showProduct.add(productDescription);
 		this.add(Box.createRigidArea(new Dimension(100, 1)));
@@ -110,7 +116,7 @@ public class ShowProduct extends JPanel {
 		generateTextPane(productIdentifier, "Product serial: " + item.getId(), new Color(0, 0, 0),new Font("Arial", 16, 16));
 
 		productCategory = new JTextPane();
-		generateTextPane(productCategory, "Category: " + item.getIdCategory(), new Color(0, 0, 0),new Font("Arial", 16, 16));
+		generateTextPane(productCategory, "Category: " + tags.get(Integer.parseInt(item.getIdCategory()) - 1), new Color(0, 0, 0),new Font("Arial", 16, 16));
 
 		productPrice = new JTextPane();
 		generateTextPane(productPrice, "Price: " + item.getPrice() + "£", new Color(0, 0, 0),new Font("Arial", 16, 16));
@@ -129,11 +135,12 @@ public class ShowProduct extends JPanel {
 					int i = Integer.parseInt(priceField.getText());
 					try {
 						ctrl.actPrice(item, i);
+						ShowProduct.this.productPrice.setText("Price: " + i + "£");
 					} catch (NotLoggedException | ActPriceException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						priceField.setText("");
 					}
-					ShowProduct.this.productPrice.setText("Price: " + i + "£");
+					
 				} catch (NumberFormatException ex) {
 					JOptionPane.showMessageDialog(null, "Price must be a number", "Error",
 							JOptionPane.ERROR_MESSAGE);

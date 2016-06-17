@@ -4,6 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import view.Panels.Tags;
+
 public class ItemVO {
 
 	private String id;
@@ -63,12 +65,12 @@ public class ItemVO {
 		}
 		
 	}
-	public ItemVO(String name, String desc, String price, String image, String Category, String durationBid){
+	public ItemVO(String name, String desc, String price, String image, Tags Category, String durationBid){
 		this.desc = desc;
 		this.name = name;
 		this.price = price;
 		this.img = image;
-		this.idCategory = "1";
+		this.idCategory = Category.getId();
 		this.date_creation= "00-00-00";
 		this.duration_bid = "2";
 	}

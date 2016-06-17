@@ -36,7 +36,7 @@ public class TagList extends JPanel {
 			this.generateComponent(modalTextPane, new Color(0), "  Empty category", new Font("Arial", 16, 16));
 			return;
 		} else {
-			this.generateComponent(modalTextPane, new Color(0), "    " + Tags.VIDEO_GAMES.getName(0), new Font("Arial", 16, 20));
+			this.generateComponent(modalTextPane, new Color(0), "    " + Tags.VIDEO_GAMES.getName(), new Font("Arial", 16, 20));
 		}
 		for (int i = 0; i < this.chain.length; ++i) {
 			this.generateComponent(modalTextPane, new Color(255, 96, 0), "         > " + chain[i], new Font("Arial", 16, 16));
