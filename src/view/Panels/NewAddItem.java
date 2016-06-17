@@ -165,6 +165,9 @@ public class NewAddItem extends JPanel {
 					try {
 						ctrl.addItem(new ItemVO(title.getText(), productDescription.getText(),
 								productPrice.getText(), imageString, (Tags)productCategory.getSelectedItem(), productLifeTime.getText()));
+						JOptionPane.showMessageDialog(null, "Item added correctly", "information",
+								JOptionPane.ERROR_MESSAGE);
+						productPrice.setText("Put here the auction days");
 					} catch (NotLoggedException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error",
 								JOptionPane.ERROR_MESSAGE);
@@ -381,7 +384,7 @@ public class NewAddItem extends JPanel {
 			
 			//System.out.println(imageData);
 			
-			System.out.println(imageDataString);
+			//System.out.println(imageDataString);
 			
 			String[] s = imageDataString.toString().split("\n");
 			imageString = "";

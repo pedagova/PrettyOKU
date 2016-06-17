@@ -4,9 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,18 +17,17 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import model.AppObserver;
+import view.ViewUtilities;
 import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
-import model.AppObserver;
-import view.ViewUtilities;
 
 public class MainSwing extends JPanel implements AppObserver {
 
@@ -69,7 +68,7 @@ public class MainSwing extends JPanel implements AppObserver {
 		setBackground(Color.white);
 
 		add(generateLogo());
-		add(Box.createRigidArea(new Dimension((int) getPreferredSize().getWidth(), 6)));
+		//add(Box.createRigidArea(new Dimension((int) getPreferredSize().getWidth(), 6)));
 		add(tags());
 		add(Box.createRigidArea(new Dimension((int) getPreferredSize().getWidth(), 6)));
 		add(userBar());
@@ -84,7 +83,7 @@ public class MainSwing extends JPanel implements AppObserver {
 			TagList tag =new TagList(ctrl);
 			auxPanel.add(tag);
 		}else{
-			auxPanel.add(Box.createRigidArea(new Dimension(100, 1)));
+			auxPanel.add(Box.createRigidArea(new Dimension(160, 1)));
 		}
 		
 		auxPanel.add(Box.createRigidArea(new Dimension(25, 1)));
@@ -103,7 +102,10 @@ public class MainSwing extends JPanel implements AppObserver {
 		p.setBackground(Color.white);
 		JButton b = new JButton();
 		b.setBorder(null);
-		b.setIcon(new ImageIcon("src/images/banner.jpg"));
+		ImageIcon MyImage = new ImageIcon("src/images/banner.jpg");
+		Image img = MyImage.getImage();
+		Image newImg = img.getScaledInstance(1400, 150, Image.SCALE_SMOOTH);
+		b.setIcon((new ImageIcon(newImg)));
 		b.addActionListener(new ActionListener() {
 
 			@Override
@@ -334,7 +336,7 @@ public class MainSwing extends JPanel implements AppObserver {
 	 * frame; }
 	 */
 
-	private Component information() {
+	/*private Component information() {
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBackground(Color.white);
 		infoPanel.setVisible(true);
@@ -349,7 +351,7 @@ public class MainSwing extends JPanel implements AppObserver {
 		infoPanel.add(this.generateComponent(new JButton("Politicas de empresa"), Color.gray, "B4",
 				new Font("Arial", 2, 10)));
 		return infoPanel;
-	}
+	}*/
 
 	private Component generateComponent(JButton button, Color color, String text, Font font) {
 		button = new JButton();

@@ -1,8 +1,8 @@
 package main;
 
-import controller.Controler;
 import model.Model;
 import view.View2;
+import controller.Controler;
 
 public class Main {
 	public static void main(String[] args){

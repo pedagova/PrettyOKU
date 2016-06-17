@@ -1,15 +1,20 @@
 package view.Panels;
 
 public enum Tags {
-	VIDEO_GAMES("Video Games", "1"), ART("Art", "2"), MERCHANDASING("Merchandasing", "3"), MANGA("Manga",
-			"4"), GADGETS("ELECTR. GADGETS", "5");
+	VIDEO_GAMES("Video Games", "1", new String[]{"PS", "PS1", "PS2", "PS3", "XBOX" , "XBOX360", "XBOXONE", "Nintendo", "3Ds", "2Ds"}),
+	ART("Art", "2", new String[]{""}), 
+	MERCHANDASING("Merchandasing", "3", new String[]{""}), 
+	MANGA("Manga", "4", new String[]{""}),
+	GADGETS("ELECTR. GADGETS", "5", new String[]{""});
 
 	private String name;
 	private String id;
+	private String[] chain;
 
-	Tags(String name, String id) {
+	Tags(String name, String id, String[] chain) {
 		this.name = name;
 		this.id=id;
+		this.chain = chain;
 	}
 
 	public String getName() {
@@ -21,12 +26,6 @@ public enum Tags {
 	}
 
 	public String[] getChain() {
-		String[] chain = new String[5];
-		chain[0] = "3ds";
-		chain[1] = "ps vita";
-		chain[2] = "WII U";
-		chain[3] = "XBOX ONE";
-		chain[4] = "PS3";
 		return chain;
 	}
 
