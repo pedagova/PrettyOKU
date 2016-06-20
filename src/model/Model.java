@@ -137,6 +137,7 @@ public class Model{
 	
 	public void getBidItems(String id){
 		actList = userConnection.actualBidProduct(id);
+		System.out.println(actList.size());
 		notifyListAct(actList);
 	}
 	
@@ -148,6 +149,16 @@ public class Model{
 	public void getSellProducts(String id){
 		actList = userConnection.sellProducts(id);
 		notifyListAct(actList);
+	}
+
+	public void loggOut() {
+		notifyLogOut();		
+	}
+
+	private void notifyLogOut() {
+		for (AppObserver o : observerList) {
+			o.OnUserLogOut();
+		}
 	}
 	
 }

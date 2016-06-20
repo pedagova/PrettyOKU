@@ -180,6 +180,10 @@ public class Controler implements AppObserver{
 		category = c;
 		
 	}
+
+	public void loggOut() {
+		model.loggOut();		
+	}
 	
 }
 

@@ -19,7 +19,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -29,7 +28,6 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 import controller.Controler;
 import dataAccessObjectDesingPattern.UserVO;
@@ -41,16 +39,16 @@ public class AddUser extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final String EMAIL = "Email:";
+	public final String EMAIL = "Email:";
 
-	public static final String PASS = "Password:";
+	public final String PASS = "Password:";
 
-	public static final String PASS_AGAIN = "Password again:";
-	public static final String NAME = "Name:";
+	public final String PASS_AGAIN = "Password again:";
+	public final String NAME = "Name:";
 
-	public static final String NICK = "Nick:";
-	public static final String FORE_NAME_1 = "Surename:";
-	public static final String ADDRESS = "Address:";
+	public final String NICK = "Nick:";
+	public final String FORE_NAME_1 = "Surename:";
+	public final String ADDRESS = "Address:";
 
 	private JTextPane title;
 
@@ -147,7 +145,7 @@ public class AddUser extends JPanel {
 
 		// email text
 		this.eMail = new JTextPane();
-		this.generateTextPane(eMail, AddUser.EMAIL, 22, Color.black);
+		this.generateTextPane(eMail, EMAIL, 22, Color.black);
 
 		// email request
 		this.eMailRequest = new JTextField(10);
@@ -155,7 +153,7 @@ public class AddUser extends JPanel {
 
 		// pass text
 		this.pass = new JTextPane();
-		this.generateTextPane(pass, AddUser.PASS, 22, Color.black);
+		this.generateTextPane(pass, PASS, 22, Color.black);
 
 		// pass request
 		this.passRequest = new JPasswordField("", 10);
@@ -163,7 +161,7 @@ public class AddUser extends JPanel {
 
 		// pass again text
 		this.passAgain = new JTextPane();
-		this.generateTextPane(passAgain, AddUser.PASS_AGAIN, 22, Color.black);
+		this.generateTextPane(passAgain, PASS_AGAIN, 22, Color.black);
 
 		// pass again request
 		this.passAgainRequest = new JPasswordField(10);
@@ -186,22 +184,19 @@ public class AddUser extends JPanel {
 				}
 				if (correct) {
 					try {
-						for (int i = 0; i < passAgainRequest.getPassword().length; ++i) {
-							System.err.println(passRequest.getPassword()[i]);
-							System.err.println(passAgainRequest.getPassword()[i]);
-						}
-						ctrl.addUser(new UserVO(
+						UserVO u = new UserVO(
 								nameRequest.getText(), 
 								nickRequest.getText(),
 								foreName1Request.getText(), 
 								foreName2Request.getText(), 
 								passRequest.getPassword(),
 								eMailRequest.getText(),
-								adressRequest.getText()));
+								adressRequest.getText());
+						ctrl.addUser(u);
+						System.out.println(u.encodeUser());
 						
 						
 					} catch (NullPointerException n) {
-						n.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Pass can´t be empty", "Inane error",
 								JOptionPane.ERROR_MESSAGE);
 					}
@@ -227,7 +222,7 @@ public class AddUser extends JPanel {
 
 		// name text
 		this.name = new JTextPane();
-		this.generateTextPane(name, AddUser.NAME, 22, Color.black);
+		this.generateTextPane(name, NAME, 22, Color.black);
 
 		// name request
 		this.nameRequest = new JTextField(10);
@@ -239,7 +234,7 @@ public class AddUser extends JPanel {
 
 		// fore name 1 text
 		this.foreName1 = new JTextPane();
-		this.generateTextPane(foreName1, AddUser.FORE_NAME_1, 22, Color.black);
+		this.generateTextPane(foreName1, FORE_NAME_1, 22, Color.black);
 
 		// fore name 1 request
 		this.foreName1Request = new JTextField(10);
@@ -263,7 +258,7 @@ public class AddUser extends JPanel {
 
 		// address text
 		this.adress = new JTextPane();
-		this.generateTextPane(adress, AddUser.ADDRESS, 22, Color.black);
+		this.generateTextPane(adress, ADDRESS, 22, Color.black);
 
 		// address request
 		this.adressRequest = new JTextField(10);
@@ -275,7 +270,7 @@ public class AddUser extends JPanel {
 
 		// nick text
 		this.nick = new JTextPane();
-		this.generateTextPane(nick, AddUser.NICK, 22, Color.black);
+		this.generateTextPane(nick, NICK, 22, Color.black);
 
 		// nick request
 		this.nickRequest = new JTextField(10);
@@ -345,12 +340,6 @@ public class AddUser extends JPanel {
 	}
 
 	class Button extends JButton {
-
-		/**
-		 * ESTA CLASE NO HACE FALTA QUE LA ENTIENDAS, SOLO ES UN BOTON CON COLOR
-		 * QUE PUEDES CAMBIAR EN ARTIB PRIVADOS PUEDES AÑADIRLE UN LISTENER Y
-		 * ESO
-		 */
 
 		private static final long serialVersionUID = 1L;
 		private Color color1 = color;

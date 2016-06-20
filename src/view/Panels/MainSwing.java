@@ -17,17 +17,18 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import model.AppObserver;
-import view.ViewUtilities;
 import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
+import model.AppObserver;
+import view.ViewUtilities;
 
 public class MainSwing extends JPanel implements AppObserver {
 
@@ -426,7 +427,8 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	@Override
 	public void OnUserLogOut() {
-
+		JOptionPane.showMessageDialog(null,
+			    "See you soon");
 	}
 
 	@Override
@@ -436,7 +438,10 @@ public class MainSwing extends JPanel implements AppObserver {
 
 	@Override
 	public void OnLoginFail(UserVO u) {
-		System.out.println("Error");
+		JOptionPane.showMessageDialog(null,
+			    "Sorry, fail loggin your account",
+			    "Inane error",
+			    JOptionPane.ERROR_MESSAGE);
 	}
 
 	@Override

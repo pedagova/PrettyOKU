@@ -53,7 +53,11 @@ public class PersonalAccount extends JPanel {
 		this.setBackground(Color.white);
 		this.mainPanel = new JPanel();
 		this.mainPanel.setBackground(Color.white);
-		this.mainPanel.setLayout(new GridLayout(1, 5));
+		
+		GridLayout g = new GridLayout(2, 3);
+		g.setHgap(40);
+		
+		this.mainPanel.setLayout(g);
 		this.imageIcon1 = new ImageIcon("src/images/actual_bid.png");
 		this.image1 = new JButton(imageIcon1);
 		image1.addActionListener(new ActionListener() {
@@ -84,6 +88,14 @@ public class PersonalAccount extends JPanel {
 
 		this.imageIcon4 = new ImageIcon("src/images/personal_info.png");
 		this.image4 = new JButton(imageIcon4);
+		image4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ctrl.loggOut();				
+			}
+		});
+		
 		this.imageIcon5 = new ImageIcon("src/images/exit.png");
 		this.image5 = new JButton(imageIcon5);
 	}
@@ -114,8 +126,8 @@ public class PersonalAccount extends JPanel {
 
 		panel5.add(image5);
 		this.mainPanel.add(panel5);
-		this.add(Box.createRigidArea(new Dimension(300, 1)), BorderLayout.WEST);
-		this.add(Box.createRigidArea(new Dimension(300, 1)), BorderLayout.EAST);
+		this.add(Box.createRigidArea(new Dimension(100, 1)), BorderLayout.WEST);
+		this.add(Box.createRigidArea(new Dimension(100, 1)), BorderLayout.EAST);
 		this.add(Box.createRigidArea(new Dimension(1, 100)), BorderLayout.NORTH);
 		this.add(Box.createRigidArea(new Dimension(1, 500)), BorderLayout.SOUTH);
 		this.add(this.mainPanel, BorderLayout.CENTER);
