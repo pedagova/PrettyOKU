@@ -41,6 +41,8 @@ import ch.randelshofer.quaqua.ext.base64.Base64;
 import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import exceptions.NotLoggedException;
+import model.Tags;
+import view.ViewUtilities;
 
 public class NewAddItem extends JPanel {
 
@@ -80,6 +82,7 @@ public class NewAddItem extends JPanel {
 	private Controler ctrl;
 
 	public NewAddItem(Controler ctrl) {
+		imageString = Base64.encodeFromFile("src/images/empty.png");		
 		categories = new Vector<Tags>();
 		for(Tags t : Tags.values())
 			categories.add(t);
@@ -165,8 +168,8 @@ public class NewAddItem extends JPanel {
 					try {
 						ctrl.addItem(new ItemVO(title.getText(), productDescription.getText(),
 								productPrice.getText(), imageString, (Tags)productCategory.getSelectedItem(), productLifeTime.getText()));
-						JOptionPane.showMessageDialog(null, "Item added correctly", "information",
-								JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Item added correctly", "Information",
+								JOptionPane.INFORMATION_MESSAGE);
 						productPrice.setText("Put here the auction days");
 					} catch (NotLoggedException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error",

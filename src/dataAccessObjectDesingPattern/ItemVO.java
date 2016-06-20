@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import view.Panels.Tags;
+import model.Tags;
 
 public class ItemVO {
 
@@ -180,5 +180,9 @@ public class ItemVO {
 	public boolean isFinished() {
 		// TODO Auto-generated method stub
 		return finished;
+	}
+	
+	public String getDataCreation() {
+		return date_creation;
 	}
 }

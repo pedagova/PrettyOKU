@@ -3,41 +3,34 @@ package dataAccessObjectDesingPattern;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ch.randelshofer.quaqua.ext.base64.Base64;
 import dataBaseConection.clientREST;
-import view.ViewUtilities;
 
 public class ItemDao {
-	
+
 	private clientREST ddbb = new clientREST();
-	
-	public ItemVO getItem(String id){
-		
+
+	public ItemVO getItem(String id) {
+
 		try {
 			return new ItemVO(ddbb.connectionDDBB("POST", "getProduct", "id= " + id).getJSONArray("result"));
 		} catch (JSONException e) {
-			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	public void update(ItemVO it){
+
+	public void update(ItemVO it) {
 		ddbb.connectionDDBB("POST", "updateProduct", it.encodeItem());
 	}
-	
-	public void delete(ItemVO it){
+
+	public void delete(ItemVO it) {
 		ddbb.connectionDDBB("POST", "deleteProduct", it.encodeItem());
 	}
-	
-	public void add(ItemVO it){
+
+	public void add(ItemVO it) {
 		ddbb.connectionDDBB("POST", "insertProduct", it.encodeItem());
 	}
 
@@ -46,28 +39,30 @@ public class ItemDao {
 		JSONObject o = ddbb.connectionDDBB("GET", "getAllProducts", null);
 		try {
 			JSONArray a = o.getJSONArray("result");
-			for(int i = 0; i < a.length(); i++){
-				l.add(new ItemVO(a.getJSONObject(i)));
+			for (int i = 0; i < a.length(); i++) {
+				ItemVO item= new ItemVO(a.getJSONObject(i));
+				if(!item.isFinished())l.add(item);
 			}
 		} catch (JSONException e) {
 			return l;
 		}
-		
+
 		return l;
 	}
-	
+
 	public List<ItemVO> getAllItems(String id_category) {
 		List<ItemVO> l = new ArrayList<ItemVO>();
 		JSONObject o = ddbb.connectionDDBB("POST", "getCategoriesProducts", "id_category= " + id_category);
 		try {
 			JSONArray a = o.getJSONArray("result");
-			for(int i = 0; i < a.length(); i++){
-				l.add(new ItemVO(a.getJSONObject(i)));
+			for (int i = 0; i < a.length(); i++) {
+				ItemVO item= new ItemVO(a.getJSONObject(i));
+				if(!item.isFinished())l.add(item);
 			}
 		} catch (JSONException e) {
 			return l;
 		}
-		
+
 		return l;
 	}
 
@@ -76,40 +71,38 @@ public class ItemDao {
 		JSONObject o = ddbb.connectionDDBB("POST", "randomLyst", "number= " + n);
 		try {
 			JSONArray a = o.getJSONArray("result");
-			for(int i = 0; i < a.length(); i++){
+			for (int i = 0; i < a.length(); i++) {
 				l.add(new ItemVO(a.getJSONObject(i)));
 			}
 		} catch (JSONException e) {
-			
+
 		}
-		
+
 		return l;
 	}
-	
-	public void deleteAll(){
+
+	public void deleteAll() {
 		List<ItemVO> l = new ArrayList<ItemVO>();
 		JSONObject o = ddbb.connectionDDBB("GET", "getAllProducts", null);
 		try {
 			JSONArray a = o.getJSONArray("result");
-			for(int i = 0; i < a.length(); i++){
+			for (int i = 0; i < a.length(); i++) {
 				l.add(new ItemVO(a.getJSONObject(i)));
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
 		}
-		for(ItemVO it: l){
+		for (ItemVO it : l) {
 			this.delete(it);
 		}
 	}
-	
-	public static void main(String[] args){
-		//new ItemDao().delete(new ItemDao().getItem(""));
-		//new ItemDao().deleteAll();
+
+	public static void main(String[] args) {
+		// new ItemDao().delete(new ItemDao().getItem(""));
+		// new ItemDao().deleteAll();
 	}
 
 	public void actPrice(String id, String id2, int i) {
-		ddbb.connectionDDBB("POST", "insertBidUp", "id_user= " + id2 + "&id_product= " + id + "&price= " + i);		
+		ddbb.connectionDDBB("POST", "insertBidUp", "id_user= " + id2 + "&id_product= " + id + "&price= " + i);
 	}
-	
-	
+
 }

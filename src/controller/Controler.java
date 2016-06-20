@@ -9,10 +9,10 @@ import exceptions.FinishedException;
 import exceptions.NotLoggedException;
 import model.AppObserver;
 import model.Model;
+import model.Tags;
 import view.StandartInterface;
 import view.View2;
 import view.Panels.ShowProduct;
-import view.Panels.Tags;
 
 
 
@@ -31,8 +31,7 @@ public class Controler implements AppObserver{
 		loggedUser = null;
 		this.model = model;
 		this.view = view;
-		loggedUser = null;
-		this.model.addObserver(this);
+this.model.addObserver(this);
 	}
 	
 	public void loginUser(String nick, char[] cs) {
@@ -99,6 +98,7 @@ public class Controler implements AppObserver{
 	@Override
 	public void OnUserLogOut() {
 		loggedUser = null;
+		
 	}
 
 	@Override

@@ -14,7 +14,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -29,6 +28,7 @@ import dataAccessObjectDesingPattern.ItemVO;
 import exceptions.ActPriceException;
 import exceptions.FinishedException;
 import exceptions.NotLoggedException;
+import model.Tags;
 import view.ViewUtilities;
 
 public class ShowProduct extends JPanel {
@@ -69,11 +69,11 @@ public class ShowProduct extends JPanel {
 	private JPanel showProduct;
 
 	private Vector<String> tags;
-	
+
 	public ShowProduct(ItemVO it, Controler ctrl) {
 		item = it;
 		tags = new Vector<String>();
-		for(Tags t: Tags.values()){
+		for (Tags t : Tags.values()) {
 			tags.add(t.getName());
 		}
 		this.ctrl = ctrl;
@@ -108,22 +108,30 @@ public class ShowProduct extends JPanel {
 		this.setBackground(Color.white);
 		// title
 		title = new JTextPane();
-		generateTextPane(title, item.getName(), new Color(255, 96, 0),new Font("Arial", 16, 28));
+		generateTextPane(title, item.getName(), new Color(255, 96, 0), new Font("Arial", 16, 28));
 
 		productLifeTime = new JTextPane();
-		generateTextPane(productLifeTime, "Item bid time: " + item.getName(), new Color(0, 0, 0),new Font("Arial", 16, 16));
+		String chain = "Bid creation date: " + item.getDataCreation();
+		if (item.isFinished())
+			chain += "\nFINISHED BID";
+		else
+			chain += "\nRUNNIG BID";
+		generateTextPane(productLifeTime, chain, new Color(0, 0, 0), new Font("Arial", 16, 16));
 
 		productIdentifier = new JTextPane();
-		generateTextPane(productIdentifier, "Product serial: " + item.getId(), new Color(0, 0, 0),new Font("Arial", 16, 16));
+		generateTextPane(productIdentifier, "Product serial: " + item.getId(), new Color(0, 0, 0),
+				new Font("Arial", 16, 16));
 
 		productCategory = new JTextPane();
-		generateTextPane(productCategory, "Category: " + tags.get(Integer.parseInt(item.getIdCategory()) - 1), new Color(0, 0, 0),new Font("Arial", 16, 16));
+		generateTextPane(productCategory, "Category: " + tags.get(Integer.parseInt(item.getIdCategory()) - 1),
+				new Color(0, 0, 0), new Font("Arial", 16, 16));
 
 		productPrice = new JTextPane();
-		generateTextPane(productPrice, "Price: " + item.getPrice() + "£", new Color(0, 0, 0),new Font("Arial", 16, 16));
+		generateTextPane(productPrice, "Price: " + item.getPrice() + "£", new Color(0, 0, 0),
+				new Font("Arial", 16, 16));
 
 		newPrice = new JTextPane();
-		generateTextPane(newPrice, "New price: ", new Color(0, 0, 0),new Font("Arial", 2, 16));
+		generateTextPane(newPrice, "New price: ", new Color(0, 0, 0), new Font("Arial", 2, 16));
 
 		priceField = new JTextField();
 
@@ -141,10 +149,9 @@ public class ShowProduct extends JPanel {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						priceField.setText("");
 					}
-					
+
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "Price must be a number", "Error",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Price must be a number", "Error", JOptionPane.ERROR_MESSAGE);
 					priceField.setText("");
 				}
 			}
@@ -165,14 +172,17 @@ public class ShowProduct extends JPanel {
 		productInfo.add(productIdentifier);
 		productInfo.add(productCategory);
 		productInfo.add(productPrice);
-		productInfo.add(priceField);
-		productInfo.add(updatePrice);
+		if (!item.isFinished() && ctrl.getLoggedUser()!=null) {
+			productInfo.add(priceField);
+			productInfo.add(updatePrice);
+		}
 		productInfo.add(Box.createRigidArea(new Dimension(1, 100)));
 		productInfo.setBorder(null);
 
 		auxPanel = new JPanel();
 		auxPanel.setBackground(Color.white);
 		auxPanel.add(imageLabel);
+		auxPanel.add(Box.createRigidArea(new Dimension(50, 1)));
 		auxPanel.add(productInfo);
 		auxPanel.setBorder(null);
 

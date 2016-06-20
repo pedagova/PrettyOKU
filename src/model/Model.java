@@ -129,10 +129,10 @@ public class Model{
 
 	public void actPrice(ItemVO item, int i, UserVO user) throws ActPriceException, FinishedException {
 		if(item.isFinished()){
-			throw new FinishedException("No puedes añadir precio, esta acabado");
+			throw new FinishedException("You can not add a price , the auction is over");
 		}
-		if(Integer.parseInt(itemConnection.getItem(item.getId()).getPrice()) > i){
-			throw new ActPriceException("el precio no puede ser menor que el anterior");
+		if(Integer.parseInt(itemConnection.getItem(item.getId()).getPrice()) >= i){
+			throw new ActPriceException("The price should be higher");
 		}
 		itemConnection.actPrice(item.getId(), user.getId(), i);
 	}

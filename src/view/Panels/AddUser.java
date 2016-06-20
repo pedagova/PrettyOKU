@@ -47,7 +47,7 @@ public class AddUser extends JPanel {
 	public final String NAME = "Name:";
 
 	public final String NICK = "Nick:";
-	public final String FORE_NAME_1 = "Surename:";
+	public final String FORE_NAME_1 = "Forename 1:";
 	public final String ADDRESS = "Address:";
 
 	private JTextPane title;
@@ -141,7 +141,7 @@ public class AddUser extends JPanel {
 
 		// title of the component
 		this.title = new JTextPane();
-		this.generateTextPane(title, " New user", 30, new Color(0, 96, 255));
+		this.generateTextPane(title, " New user", 30, new Color(255, 96, 0));
 
 		// email text
 		this.eMail = new JTextPane();
@@ -193,9 +193,7 @@ public class AddUser extends JPanel {
 								eMailRequest.getText(),
 								adressRequest.getText());
 						ctrl.addUser(u);
-						System.out.println(u.encodeUser());
-						
-						
+						ctrl.loginUser(nickRequest.getText(), passRequest.getPassword());
 					} catch (NullPointerException n) {
 						JOptionPane.showMessageDialog(null, "Pass can´t be empty", "Inane error",
 								JOptionPane.ERROR_MESSAGE);
@@ -246,7 +244,7 @@ public class AddUser extends JPanel {
 
 		// fore name 2 text
 		this.foreName2 = new JTextPane();
-		this.generateTextPane(foreName2, "Fore name 2:", 22, Color.black);
+		this.generateTextPane(foreName2, "Forename 2:", 22, Color.black);
 
 		// fore name 2 request
 		this.foreName2Request = new JTextField(10);

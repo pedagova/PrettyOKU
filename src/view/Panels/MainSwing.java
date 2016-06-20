@@ -28,6 +28,7 @@ import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
 import model.AppObserver;
+import model.Tags;
 import view.ViewUtilities;
 
 public class MainSwing extends JPanel implements AppObserver {
@@ -145,7 +146,7 @@ public class MainSwing extends JPanel implements AppObserver {
 		// ---------------end 1 button -----------------------
 		//
 		// ------------------2 button-------------------------
-		JButton button2 = ViewUtilities.generateButton("Games", "3", backColor, "#FFF5EE");
+		JButton button2 = ViewUtilities.generateButton(Tags.VIDEO_GAMES.getName(), "3", backColor, "#FFF5EE");
 		button2.setPreferredSize(new Dimension(1, 30));
 		button2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		button2.addActionListener(new ActionListener() {
@@ -154,14 +155,14 @@ public class MainSwing extends JPanel implements AppObserver {
 			public void actionPerformed(ActionEvent e) {
 				
 				ctrl.setCategory(Tags.VIDEO_GAMES);
-				ctrl.getAll("1");
+				ctrl.getAll(Tags.VIDEO_GAMES.getId());
 			}
 		});
 		p.add(button2);
 		// ---------------end 2 button-----------------------
 
 		// -------------------3 button------------------------
-		JButton button3 = ViewUtilities.generateButton("Manga", "3", backColor, "#FFF5EE");
+		JButton button3 = ViewUtilities.generateButton(Tags.MANGA.getName(), "3", backColor, "#FFF5EE");
 		button3.setPreferredSize(new Dimension(1, 30));
 		button3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		button3.addActionListener(new ActionListener() {
@@ -170,14 +171,14 @@ public class MainSwing extends JPanel implements AppObserver {
 			public void actionPerformed(ActionEvent e) {
 				
 				ctrl.setCategory(Tags.MANGA);
-				ctrl.getAll("4");
+				ctrl.getAll(Tags.MANGA.getId());
 			}
 		});
 		p.add(button3);
 		// ---------------end 3 button -----------------------
 
 		// -------------------4 button------------------------
-		JButton button4 = ViewUtilities.generateButton("Merchandasing", "3", backColor, "#FFF5EE");
+		JButton button4 = ViewUtilities.generateButton(Tags.MERCHANDASING.getName(), "3", backColor, "#FFF5EE");
 		button4.setPreferredSize(new Dimension(1, 30));
 		button4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		button4.addActionListener(new ActionListener() {
@@ -186,14 +187,14 @@ public class MainSwing extends JPanel implements AppObserver {
 			public void actionPerformed(ActionEvent e) {
 				
 				ctrl.setCategory(Tags.MERCHANDASING);
-				ctrl.getAll("3");
+				ctrl.getAll(Tags.MERCHANDASING.getId());
 			}
 		});
 		p.add(button4);
 		// ---------------end 4 button -----------------------
 
 		// -----------------5 button---------------------------
-		JButton button5 = ViewUtilities.generateButton("Art", "3", backColor, "#FFF5EE");
+		JButton button5 = ViewUtilities.generateButton(Tags.ART.getName(), "3", backColor, "#FFF5EE");
 		button5.setPreferredSize(new Dimension(1, 30));
 		button5.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		button5.addActionListener(new ActionListener() {
@@ -201,12 +202,27 @@ public class MainSwing extends JPanel implements AppObserver {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ctrl.setCategory(Tags.ART);
-				ctrl.getAll("2");
+				ctrl.getAll(Tags.ART.getId());
 			}
 		});
 		p.add(button5);
 		// ---------------end 5 button -----------------------
 
+		// -----------------6 button---------------------------
+				JButton button6 = ViewUtilities.generateButton(Tags.GADGETS.getName(), "3", backColor, "#FFF5EE");
+				button6.setPreferredSize(new Dimension(1, 30));
+				button6.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				button6.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						ctrl.setCategory(Tags.GADGETS);
+						ctrl.getAll(Tags.GADGETS.getId());
+					}
+				});
+				p.add(button6);
+				// ---------------end 5 button -----------------------
+				
 		return p;
 	}
 
@@ -222,7 +238,7 @@ public class MainSwing extends JPanel implements AppObserver {
 		JPanel p2 = new JPanel();
 
 		JTextArea t = new JTextArea("Welcome to Ôku, the auction store for \'Otakus\' ");
-		t.setFont(new Font("Microsof sans serif", Font.BOLD, 22));
+		t.setFont(new Font("Arial", Font.BOLD, 22));
 		t.setBackground(null);
 		t.setEditable(false);
 		t.setPreferredSize(new Dimension(widht * 50 / 100 + 100, UsesBarSize));
@@ -231,7 +247,6 @@ public class MainSwing extends JPanel implements AppObserver {
 		p2.setPreferredSize(t.getPreferredSize());
 		p2.setBackground(null);
 		p.add(p2);
-
 		p.add(buscador(widht));
 
 		p.add(new JSeparator(JSeparator.VERTICAL), BorderLayout.LINE_START);
@@ -241,9 +256,9 @@ public class MainSwing extends JPanel implements AppObserver {
 			id = new JButton("Identify");
 			id.setFont(new Font("Arial", Font.BOLD, 20));
 			id.setBackground(null);
-			id.setForeground(Color.GRAY);
+			id.setForeground(Color.black);
 			id.setBorder(null);
-			id.setPreferredSize(new Dimension((widht * 5 / 100) + 200, UsesBarSize - 20));
+			id.setPreferredSize(new Dimension((widht * 5 / 100) + 100, UsesBarSize - 20));
 			id.addActionListener(new ActionListener() {
 
 				@Override
@@ -254,10 +269,10 @@ public class MainSwing extends JPanel implements AppObserver {
 			});
 
 		} else {
-			id = new JButton("Welcome, " + "pedagova@gmail.com");
-			id.setFont(new Font("Microsof sans serif", Font.BOLD, 20));
+			id = new JButton("Welcome, " + ctrl.getLoggedUser().getNick());
+			id.setFont(new Font("Arial", Font.BOLD, 20));
 			id.setBackground(null);
-			id.setForeground(Color.GRAY);
+			id.setForeground(Color.black);
 			id.setBorder(null);
 			id.setPreferredSize(new Dimension((widht * 20 / 100) + 200, UsesBarSize));
 			id.addActionListener(new ActionListener() {
@@ -269,14 +284,13 @@ public class MainSwing extends JPanel implements AppObserver {
 				}
 			});
 		}
-
 		p.add(id);
 		p.add(new JSeparator(JSeparator.VERTICAL), BorderLayout.LINE_START);
 
 		JButton b = new JButton("Add item");
 		b.setBorder(null);
 		b.setHorizontalAlignment(SwingConstants.CENTER);
-		b.setFont(new Font("Arial", 20, 20));
+		b.setFont(new Font("Arial", Font.BOLD, 20));
 		b.setBackground(null);
 		b.setPreferredSize(new Dimension(widht * 15 / 100, UsesBarSize - 20));
 		b.addActionListener(new ActionListener() {
@@ -296,11 +310,11 @@ public class MainSwing extends JPanel implements AppObserver {
 		JPanel p = new JPanel();
 		p.setBackground(null);
 		JTextField tf = new JTextField("Search:  ");
-		tf.setFont(new Font("Arial", Font.BOLD, 14));
+		tf.setFont(new Font("Arial", Font.BOLD, 18));
 		tf.setBackground(null);
 		tf.setBorder(null);
 		tf.setEditable(false);
-		tf.setPreferredSize(new Dimension(width * 8 / 100 + 6, UsesBarSize - 20));
+		tf.setPreferredSize(new Dimension(width * 8 / 100 + 18, UsesBarSize - 20));
 
 		JTextArea t = new JTextArea();
 		t.setPreferredSize(new Dimension(width * 20 / 100, UsesBarSize - 20));
