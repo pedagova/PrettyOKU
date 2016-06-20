@@ -18,6 +18,8 @@ public class ItemVO {
 	private String price;
 	private String date_creation;
 	private String idLastBid;
+	private boolean finished;
+	
 	public String getIdLastBid() {
 		return idLastBid;
 	}
@@ -42,6 +44,12 @@ public class ItemVO {
 			this.date_creation = ob.getString("date_creation");
 			this.idLastBid = ob.getString("idLastBid");
 			this.duration_bid = ob.getString("duration_bid");
+			if( ob.getString("finished") != "1"){
+				finished = true;
+			}
+			else{
+				finished = false;
+			}
 		} catch (JSONException e) {
 		
 		}
@@ -60,6 +68,12 @@ public class ItemVO {
 			this.date_creation = obs.getString("date_creation");
 			this.idLastBid = obs.getString("idLastBid");
 			this.duration_bid = obs.getString("duration_bid");
+			if( obs.getString("finished") != "1"){
+				finished = true;
+			}
+			else{
+				finished = false;
+			}
 		} catch (JSONException e) {
 		
 		}
@@ -73,6 +87,7 @@ public class ItemVO {
 		this.idCategory = Category.getId();
 		this.date_creation= "00-00-00";
 		this.duration_bid = "2";
+		finished = false;
 	}
 	//create a parse to pack the info from the current Item
 	public String encodeItem(){
@@ -161,5 +176,9 @@ public class ItemVO {
 	public void setPrice(String price){
 		this.price = price;
 	}
-
+	
+	public boolean isFinished() {
+		// TODO Auto-generated method stub
+		return finished;
+	}
 }

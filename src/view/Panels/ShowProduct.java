@@ -27,6 +27,7 @@ import javax.swing.SwingConstants;
 import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import exceptions.ActPriceException;
+import exceptions.FinishedException;
 import exceptions.NotLoggedException;
 import view.ViewUtilities;
 
@@ -136,7 +137,7 @@ public class ShowProduct extends JPanel {
 					try {
 						ctrl.actPrice(item, i);
 						ShowProduct.this.productPrice.setText("Price: " + i + "£");
-					} catch (NotLoggedException | ActPriceException e1) {
+					} catch (NotLoggedException | ActPriceException | FinishedException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						priceField.setText("");
 					}

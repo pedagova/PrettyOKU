@@ -88,16 +88,17 @@ public class PersonalAccount extends JPanel {
 
 		this.imageIcon4 = new ImageIcon("src/images/personal_info.png");
 		this.image4 = new JButton(imageIcon4);
-		image4.addActionListener(new ActionListener() {
+		
+		
+		this.imageIcon5 = new ImageIcon("src/images/exit.png");
+		this.image5 = new JButton(imageIcon5);
+		image5.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ctrl.loggOut();				
 			}
 		});
-		
-		this.imageIcon5 = new ImageIcon("src/images/exit.png");
-		this.image5 = new JButton(imageIcon5);
 	}
 
 	private void initGUI() {

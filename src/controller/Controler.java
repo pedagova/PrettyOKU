@@ -5,6 +5,7 @@ import java.util.List;
 import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserVO;
 import exceptions.ActPriceException;
+import exceptions.FinishedException;
 import exceptions.NotLoggedException;
 import model.AppObserver;
 import model.Model;
@@ -148,7 +149,7 @@ public class Controler implements AppObserver{
 		view.initGUI();
 	}
 
-	public void actPrice(ItemVO item, int i) throws NotLoggedException, ActPriceException {
+	public void actPrice(ItemVO item, int i) throws NotLoggedException, ActPriceException, FinishedException {
 		if(loggedUser != null)
 			model.actPrice(item, i,loggedUser);
 		else{

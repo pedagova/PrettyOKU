@@ -8,6 +8,7 @@ import dataAccessObjectDesingPattern.ItemVO;
 import dataAccessObjectDesingPattern.UserDao;
 import dataAccessObjectDesingPattern.UserVO;
 import exceptions.ActPriceException;
+import exceptions.FinishedException;
 
 public class Model{
 
@@ -126,13 +127,14 @@ public class Model{
 		notifyListAct(actList);
 	}
 
-	public void actPrice(ItemVO item, int i, UserVO user) throws ActPriceException {
+	public void actPrice(ItemVO item, int i, UserVO user) throws ActPriceException, FinishedException {
+		if(item.isFinished()){
+			throw new FinishedException("No puedes añadir precio, esta acabado");
+		}
 		if(Integer.parseInt(itemConnection.getItem(item.getId()).getPrice()) > i){
 			throw new ActPriceException("el precio no puede ser menor que el anterior");
 		}
-		else{
-			itemConnection.actPrice(item.getId(), user.getId(), i);
-		}
+		itemConnection.actPrice(item.getId(), user.getId(), i);
 	}
 	
 	public void getBidItems(String id){
