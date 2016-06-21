@@ -31,7 +31,7 @@ import model.AppObserver;
 import model.Tags;
 import view.ViewUtilities;
 
-public class MainSwing extends JPanel implements AppObserver {
+public class MainSwing extends Panel implements AppObserver {
 
 	/**
 	 * 
@@ -47,14 +47,13 @@ public class MainSwing extends JPanel implements AppObserver {
 	// ---------end anonimus class----------
 
 	// -------------Atributos-----------------
-	Controler ctrl;
 
 	// -----------fin Atributos---------------
 
 	// ------------Public---------------------
 	// Constructors
 	public MainSwing(Controler ctrl) {
-		this.ctrl = ctrl;
+		super(ctrl);
 		midPanel = new ItemsList(new ArrayList<ItemVO>(), this.ctrl);
 		initGUI();
 		ctrl.add(this);

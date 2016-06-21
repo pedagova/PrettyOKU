@@ -18,7 +18,7 @@ import view.Panels.ShowProduct;
 
 public class Controler implements AppObserver{
 
-	Model model;
+	private Model model;
 	
 	private StandartInterface view;
 	

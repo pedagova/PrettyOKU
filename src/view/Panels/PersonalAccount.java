@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 import controller.Controler;
 
-public class PersonalAccount extends JPanel {
+public class PersonalAccount extends Panel {
 
 	/**
 	 * 
@@ -34,10 +34,9 @@ public class PersonalAccount extends JPanel {
 	private ImageIcon imageIcon3;
 	private ImageIcon imageIcon5;
 
-	private Controler ctrl;
 
 	public PersonalAccount(Controler ctrl) {
-		this.ctrl = ctrl;
+		super(ctrl);
 		this.initComponents();
 		this.initGUI();
 	}

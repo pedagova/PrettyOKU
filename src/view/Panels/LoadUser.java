@@ -2,7 +2,6 @@ package view.Panels;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -19,8 +18,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
@@ -31,14 +28,12 @@ import javax.swing.border.Border;
 
 import controller.Controler;
 
-public class LoadUser extends JPanel {
+public class LoadUser extends Panel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private Controler ctrl;
 
 	private final static String REGISTER_USER = "  Register user:";
 
@@ -58,8 +53,6 @@ public class LoadUser extends JPanel {
 
 	private Button enterAccount;
 
-	private Button obtainNewPass;
-
 	private Color color;
 
 	private Color backGround;
@@ -67,9 +60,9 @@ public class LoadUser extends JPanel {
 	private JPanel auxButtonPanel;
 
 	public LoadUser(Color backGround, Color color, Controler ctrl) {
+		super(ctrl);
 		this.color = color;
 		this.backGround = backGround;
-		this.ctrl = ctrl;
 		this.setOpaque(false);
 		this.initComponents();
 		this.initGUI();

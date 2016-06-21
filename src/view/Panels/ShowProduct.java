@@ -31,7 +31,7 @@ import exceptions.NotLoggedException;
 import model.Tags;
 import view.ViewUtilities;
 
-public class ShowProduct extends JPanel {
+public class ShowProduct extends Panel {
 
 	/**
 	 * 
@@ -64,19 +64,18 @@ public class ShowProduct extends JPanel {
 
 	private JTextField priceField;
 
-	private Controler ctrl;
 
 	private JPanel showProduct;
 
 	private Vector<String> tags;
 
 	public ShowProduct(ItemVO it, Controler ctrl) {
+		super(ctrl);
 		item = it;
 		tags = new Vector<String>();
 		for (Tags t : Tags.values()) {
 			tags.add(t.getName());
 		}
-		this.ctrl = ctrl;
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		initComponent();
 		initGUI();

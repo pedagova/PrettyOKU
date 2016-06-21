@@ -44,7 +44,7 @@ import exceptions.NotLoggedException;
 import model.Tags;
 import view.ViewUtilities;
 
-public class NewAddItem extends JPanel {
+public class NewAddItem extends Panel {
 
 	/**
 	 * 
@@ -79,15 +79,13 @@ public class NewAddItem extends JPanel {
 	
 	private JButton addItem;
 
-	private Controler ctrl;
-
 	public NewAddItem(Controler ctrl) {
+		super(ctrl);
 		imageString = Base64.encodeFromFile("src/images/empty.png");		
 		categories = new Vector<Tags>();
 		for(Tags t : Tags.values())
 			categories.add(t);
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.ctrl = ctrl;
 		initComponent();
 		initGUI();
 	}

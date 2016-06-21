@@ -10,17 +10,16 @@ import javax.swing.JPanel;
 import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 
-public class ItemsList extends JPanel{
+public class ItemsList extends Panel{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Controler ctrl;
 	
 	public ItemsList(List<ItemVO> list, Controler ctrl){
+		super(ctrl);
 		final double NUMCOLS = 4.0;
-		this.ctrl = ctrl;
 		setBackground(null);
 		GridLayout l;
 		if((list.size() / NUMCOLS < 3))

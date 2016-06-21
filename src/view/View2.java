@@ -1,16 +1,14 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import controller.Controler;
 import view.Panels.MainSwing;
 
@@ -21,9 +19,9 @@ public class View2 extends JFrame implements StandartInterface {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	MainSwing panel;
+	private MainSwing panel;
 
-	JScrollPane sp;
+	private JScrollPane sp;
 
 	@Override
 	public void start(Controler ctrl) {

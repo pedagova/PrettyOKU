@@ -9,14 +9,12 @@ import javax.swing.JPanel;
 
 import controller.Controler;
 
-public class UserLog extends JPanel {
+public class UserLog extends Panel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private Controler ctrl;
 	
 	private LoadUser logComponent;
 
@@ -29,7 +27,7 @@ public class UserLog extends JPanel {
 	private JPanel auxLog2;
 
 	public UserLog(Controler ctrl) {
-		this.ctrl = ctrl;
+		super(ctrl);
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.setBackground(Color.white);
 		
@@ -50,7 +48,7 @@ public class UserLog extends JPanel {
 		this.auxRegister2.add(Box.createRigidArea(new Dimension(1, 300)));
 
 		this.add(this.auxRegister2);
-		//this.auxRegister1.add(Box.createRigidArea(new Dimension(100, 800)));
+		
 
 		this.add(Box.createRigidArea(new Dimension(80, 1)));
 		this.auxLog1.add(logComponent);
@@ -62,7 +60,6 @@ public class UserLog extends JPanel {
 
 		this.add(this.auxLog2);
 		
-		//this.add(Box.createRigidArea(new Dimension(100, 500)));
 
 	}
 
@@ -88,14 +85,4 @@ public class UserLog extends JPanel {
 
 	}
 
-	/*public static void main(String[] args) {
-		JFrame frame = new JFrame("example");
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setBackground(new Color(0, 0, 0));
-		UserLog user = new UserLog();
-		user.setVisible(true);
-		frame.add(user);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}*/
 }

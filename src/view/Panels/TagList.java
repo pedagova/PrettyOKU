@@ -13,7 +13,7 @@ import controller.Controler;
 import model.Model;
 import view.View2;
 
-public class TagList extends JPanel {
+public class TagList extends Panel {
 
 	/**
 	 * 
@@ -25,6 +25,7 @@ public class TagList extends JPanel {
 	private String[] chain;
 
 	public TagList(Controler ctrl) {
+		super(ctrl);
 		this.initComponent(ctrl);
 		this.initGUI();
 
@@ -61,7 +62,6 @@ public class TagList extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ctrl.find(text.substring(11,text.length()));
-				System.err.println(text.substring(11,text.length()));
 			}
 		});
 		this.add(modalTextPane);

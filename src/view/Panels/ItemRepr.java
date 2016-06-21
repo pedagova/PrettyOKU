@@ -29,7 +29,7 @@ import controller.Controler;
 import dataAccessObjectDesingPattern.ItemVO;
 import view.ViewUtilities;
 
-public class ItemRepr extends JPanel {
+public class ItemRepr extends Panel {
 	/**
 	 * 
 	 */
@@ -54,13 +54,11 @@ public class ItemRepr extends JPanel {
 	// -------------Attributes---------------
 	private ItemVO item;
 	final private String font = "Cambria";
-	private Controler ctrl;
 	// ---------------------------------------
 
 	public ItemRepr(ItemVO it, Controler ctrl) {
-
+		super(ctrl);
 		this.item = it;
-		this.ctrl = ctrl;
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

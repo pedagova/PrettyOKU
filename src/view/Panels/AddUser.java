@@ -32,7 +32,7 @@ import javax.swing.SwingConstants;
 import controller.Controler;
 import dataAccessObjectDesingPattern.UserVO;
 
-public class AddUser extends JPanel {
+public class AddUser extends Panel {
 
 	/**
 	 * 
@@ -99,12 +99,11 @@ public class AddUser extends JPanel {
 	private JPanel foreName1Panel;
 	private JPanel foreName2Panel;
 
-	private Controler ctrl;
 
 	public AddUser(Color backGround, Color color, Controler ctrl) {
+		super(ctrl);
 		this.color = color;
 		this.backGround = backGround;
-		this.ctrl = ctrl;
 		this.initComponents();
 		this.initGUI();
 	}

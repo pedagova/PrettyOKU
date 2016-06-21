@@ -15,12 +15,7 @@ public class UserVO {
 
 	public UserVO(String name, String nick, String forename1, String forename2, char[] pass, String eMail,
 			String address) {
-		System.out.println(name);
-		System.out.println(nick);
-		System.out.println(forename1);
-		System.out.println(forename2);
-		System.out.println(eMail);
-		System.out.println(address);
+	
 		this.name = name;
 		this.pass = "";
 		for (char c : pass) {
